@@ -48,6 +48,15 @@
         ", XF86AudioPlay, exec, playerctl play-pause"
       ];
 
+      bezier = [
+        "easeInOut, 0.65, 0, 0.35, 1"
+      ];
+      animation = [
+        "workspaces, 1, 2, default"
+        "windows, 1, 2, easeInOut, popin"
+        "fade, 1, 2, easeInOut"
+      ];
+
       input = {
         kb_options = "caps:swapescape";
         kb_layout = "gb";
