@@ -5,6 +5,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -56,6 +57,18 @@
   # Configure console keymap
   console.keyMap = "uk";
 
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ethan = {
     isNormalUser = true;
@@ -66,10 +79,41 @@
     ];
   };
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
   home-manager = {
     extraSpecialArgs = {inherit inputs;};
     users = {
       "ethan" = import ./home.nix;
+    };
+  };
+
+  fonts = {
+    fontDir.enable = true; # Recommended for better font discovery
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      liberation_ttf
+      fira-code # Popular for monospace
+      # If you want Nerd Fonts (highly recommended for icons/glyphs)
+      # You can add individual ones:
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
+    ];
+
+    fontconfig = {
+      # You can set default fonts for different families here.
+      # This is often where you control system-wide font fallback.
+      defaultFonts = {
+        serif = ["Liberation Serif"];
+        sansSerif = ["FiraCode Nerd Font"];
+        monospace = ["Fira Code" "FiraCode Nerd Font"];
+      };
+      # You might also want to enable font hinting and antialiasing
+      # (often default, but good to know)
+      hinting.autohint = true;
+      antialias = true;
     };
   };
 
@@ -138,34 +182,5 @@
 
   programs.fish = {
     enable = true;
-  };
-
-  fonts = {
-    fontDir.enable = true; # Recommended for better font discovery
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      liberation_ttf
-      fira-code # Popular for monospace
-      # If you want Nerd Fonts (highly recommended for icons/glyphs)
-      # You can add individual ones:
-      nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono
-    ];
-
-    fontconfig = {
-      # You can set default fonts for different families here.
-      # This is often where you control system-wide font fallback.
-      defaultFonts = {
-        serif = ["Liberation Serif"];
-        sansSerif = ["FiraCode Nerd Font"];
-        monospace = ["Fira Code" "FiraCode Nerd Font"];
-      };
-      # You might also want to enable font hinting and antialiasing
-      # (often default, but good to know)
-      hinting.autohint = true;
-      antialias = true;
-    };
   };
 }
