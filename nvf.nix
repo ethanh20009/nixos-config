@@ -225,6 +225,9 @@
         lightbulb.enable = true;
         lspsaga.enable = false;
         trouble.enable = true;
+        mappings = {
+          openDiagnosticFloat = "<leader>cd";
+        };
       };
 
       visuals = {
