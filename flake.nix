@@ -18,6 +18,11 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # hyprpanel = {
     #   url = "github:Jas-SinghFSU/HyprPanel";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +32,7 @@
   outputs = {
     self,
     nixpkgs,
+    stylix,
     nvf,
     ...
   } @ inputs: {
@@ -36,6 +42,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         ./configuration.nix
+        stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
       ];
     };

@@ -17,6 +17,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # boot.kernelPackages = pkgs.linuxPackages_6_6;
+
   boot.initrd.luks.devices."luks-0c5be79b-08f2-482c-9329-6ed86912b93f".device = "/dev/disk/by-uuid/0c5be79b-08f2-482c-9329-6ed86912b93f";
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -107,8 +109,7 @@
       # This is often where you control system-wide font fallback.
       defaultFonts = {
         serif = ["Liberation Serif"];
-        sansSerif = ["FiraCode Nerd Font"];
-        monospace = ["Fira Code" "FiraCode Nerd Font"];
+        monospace = ["Fira Code Nerd Font" "FiraCode Nerd Font"];
       };
       # You might also want to enable font hinting and antialiasing
       # (often default, but good to know)
@@ -132,6 +133,7 @@
     pkgs.pavucontrol
     pkgs.wl-clipboard
     pkgs.gh
+    pkgs.btop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

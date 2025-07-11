@@ -13,12 +13,13 @@
         "0" = {
           left = ["dashboard" "workspaces"];
           middle = ["media"];
-          right = ["volume" "network" "systray" "notifications" "clock"];
+          right = ["volume" "network" "notifications" "battery" "systray" "clock"];
         };
       };
 
       bar.launcher.autoDetectIcon = true;
       bar.workspaces.show_icons = true;
+      bar.battery.label = true;
 
       menus.clock = {
         time = {

@@ -13,46 +13,11 @@
   imports = [
     inputs.nvf.homeManagerModules.default
     ./hyprpanel.nix
+    ./hyprland.nix
     ./nvf.nix
   ];
 
   programs.firefox.enable = true;
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = {
-      "$mod" = "SUPER";
-      "$browser" = "zen";
-      monitor = "eDP-1,preferred,auto,1";
-      bind =
-        [
-          "$mod, RETURN, exec, kitty"
-          "$mod, Q, killactive"
-          "$mod, B, exec, $browser"
-          "$mod, H, movefocus, l"
-          "$mod, L, movefocus, r"
-          "$mod, K, movefocus, u"
-          "$mod, J, movefocus, d"
-        ]
-        ++ (
-          # workspaces
-          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-          builtins.concatLists (builtins.genList (
-              i: let
-                ws = i + 1;
-              in [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-              ]
-            )
-            9)
-        );
-
-      input = {
-        kb_options = "caps:swapescape";
-        kb_layout = "gb";
-      };
-    };
-  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -82,6 +47,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    pkgs.power-profiles-daemon
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -136,6 +102,7 @@
     enable = true;
     shellAliases = {
       "v" = "nvim";
+      "bt" = "btop";
     };
   };
 
@@ -176,6 +143,32 @@
       #   ];
       # in
       #   (builtins.concatStringsSep "," mappings) + " Symbols Nerd Font";
+    };
+  };
+  home.pointerCursor = {
+    gtk.enable = true;
+    # x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 16;
+  };
+
+  gtk = {
+    enable = true;
+
+    theme = {
+      package = pkgs.flat-remix-gtk;
+      name = "Flat-Remix-GTK-Grey-Darkest";
+    };
+
+    iconTheme = {
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+
+    font = {
+      name = "Sans";
+      size = 11;
     };
   };
 }
