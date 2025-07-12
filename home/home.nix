@@ -12,9 +12,8 @@
 
   imports = [
     inputs.nvf.homeManagerModules.default
-    ./hyprpanel.nix
-    ./hyprland.nix
-    ./nvf.nix
+    ../modules/hyprland/hyprland.nix
+    ../modules/nvf/nvf.nix
   ];
 
   programs.direnv = {

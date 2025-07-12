@@ -38,10 +38,10 @@
   } @ inputs: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.amdLaptop = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
-        ./configuration.nix
+        ./hosts/amdLaptop/configuration.nix
         stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
       ];
