@@ -9,6 +9,7 @@
     settings.vim = {
       extraPackages = [
         pkgs.angular-language-server
+        pkgs.vtsls
       ];
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
@@ -188,6 +189,44 @@
           action = "<cmd>Oil<CR>";
           desc = "Oil";
         }
+        {
+          key = "<C-d>";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "<C-d>zz";
+          desc = "Center after scroll";
+        }
+        {
+          key = "<C-u>";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "<C-u>zz";
+          desc = "Center after scroll";
+        }
+        {
+          key = "]d";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "function() vim.diagnostic.goto_next() end";
+          desc = "Next Diagnostic";
+          lua = true;
+        }
+        {
+          key = "[d";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "function() vim.diagnostic.goto_prev() end";
+          desc = "Prev Diagnostic";
+          lua = true;
+        }
       ];
       theme = {
         enable = true;
@@ -215,7 +254,6 @@
 
         nix.enable = true;
         markdown.enable = true;
-        ts.enable = true;
         rust = {
           enable = true;
           crates = {
@@ -256,6 +294,7 @@
 
         servers = {
           angularls = {};
+          vtsls = {};
         };
       };
 

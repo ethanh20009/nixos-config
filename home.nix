@@ -91,6 +91,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     TEST = "Hello";
+    DIRENV_LOG_FORMAT = "";
   };
 
   # Let Home Manager install and manage itself.
