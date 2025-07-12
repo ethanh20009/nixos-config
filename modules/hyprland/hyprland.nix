@@ -26,10 +26,16 @@
           "$mod, RETURN, exec, kitty"
           "$mod, Q, killactive"
           "$mod, B, exec, $browser"
+
           "$mod, H, movefocus, l"
           "$mod, L, movefocus, r"
           "$mod, K, movefocus, u"
           "$mod, J, movefocus, d"
+          "SHIFT+$mod, H, movewindow, l"
+          "SHIFT+$mod, L, movewindow, r"
+          "SHIFT+$mod, K, movewindow, u"
+          "SHIFT+$mod, J, movewindow, d"
+
           "$mod, SPACE, exec, rofi -show drun"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
@@ -54,6 +60,9 @@
       bindl = [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ", XF86AudioPlay, exec, playerctl play-pause"
+      ];
+      bindm = [
+        "$mod, mouse:272, movewindow"
       ];
 
       bezier = [
