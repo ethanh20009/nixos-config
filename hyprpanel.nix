@@ -1,6 +1,7 @@
 {inputs, ...}: {
   programs.hyprpanel = {
     enable = true;
+    systemd.enable = true;
     # Configure bar layouts for monitors.
     # See 'https://hyprpanel.com/configuration/panel.html'.
     # Default: null

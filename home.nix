@@ -17,6 +17,12 @@
     ./nvf.nix
   ];
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    config.hide_env_diff = true;
+  };
+
   programs.firefox.enable = true;
 
   # This value determines the Home Manager release that your configuration is
@@ -48,6 +54,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     pkgs.power-profiles-daemon
+    pkgs.nil
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -82,7 +89,8 @@
   #  /etc/profiles/per-user/ethan/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
+    TEST = "Hello";
   };
 
   # Let Home Manager install and manage itself.
@@ -103,8 +111,13 @@
     shellAliases = {
       "v" = "nvim";
       "bt" = "btop";
+      "c" = "clear";
     };
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+    '';
   };
+  home.shell.enableFishIntegration = true;
 
   programs.starship.enable = true;
 
@@ -170,5 +183,8 @@
       name = "Sans";
       size = 11;
     };
+  };
+  programs.bash = {
+    enable = true;
   };
 }

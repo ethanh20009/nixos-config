@@ -57,10 +57,27 @@
         "fade, 1, 2, easeInOut"
       ];
 
+      workspace = [
+        "w[tv1], gapsout:0, gapsin:0"
+        "f[1], gapsout:0, gapsin:0"
+      ];
+      windowrule = [
+        "bordersize 0, floating:0, onworkspace:w[tv1]"
+        "rounding 0, floating:0, onworkspace:w[tv1]"
+        "bordersize 0, floating:0, onworkspace:f[1]"
+        "rounding 0, floating:0, onworkspace:f[1]"
+      ];
+      layerrule = [
+        "blur, bar-0"
+      ];
+
       input = {
         kb_options = "caps:swapescape";
         kb_layout = "gb";
       };
+
+      "exec-once" = [
+      ];
     };
   };
 }

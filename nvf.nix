@@ -7,6 +7,9 @@
   programs.nvf = {
     enable = true;
     settings.vim = {
+      extraPackages = [
+        pkgs.angular-language-server
+      ];
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
         pkgs.vimPlugins.plenary-nvim # required dependency
@@ -212,6 +215,28 @@
 
         nix.enable = true;
         markdown.enable = true;
+        ts.enable = true;
+        rust = {
+          enable = true;
+          crates = {
+            enable = true;
+            codeActions = true;
+          };
+          format.enable = true;
+          format.type = "rustfmt";
+          lsp = {
+            enable = true;
+            opts = "
+            ['rust-analyzer'] = {
+              cargo = {allFeature = true},
+              checkOnSave = true;
+              procMacro = {
+                enable =true;
+              },
+            },
+            ";
+          };
+        };
       };
       # clipboard = {
       #   enable = true;
@@ -227,6 +252,10 @@
         trouble.enable = true;
         mappings = {
           openDiagnosticFloat = "<leader>cd";
+        };
+
+        servers = {
+          angularls = {};
         };
       };
 
