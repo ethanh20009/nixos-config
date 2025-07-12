@@ -134,6 +134,7 @@
     pkgs.wl-clipboard
     pkgs.gh
     pkgs.btop
+    pkgs.discord
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
