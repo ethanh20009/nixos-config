@@ -6,6 +6,9 @@
 }: {
   imports = [
     ./hyprpanel.nix
+    ./hyprlock.nix
+    ./hypridle.nix
+    # ./hyprpaper.nix
   ];
 
   wayland.windowManager.hyprland = {
