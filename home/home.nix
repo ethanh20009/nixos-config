@@ -10,6 +10,8 @@
   home.username = "ethan";
   home.homeDirectory = "/home/ethan";
 
+  stylix.enable = true;
+
   imports = [
     inputs.nvf.homeManagerModules.default
     ../modules/hyprland/hyprland.nix
@@ -23,6 +25,14 @@
   };
 
   programs.firefox.enable = true;
+
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+    extraConfig = {
+      show-icons = true;
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -125,11 +135,11 @@
     enable = true;
     settings = {
       confirm_os_window_close = 0;
-      dynamic_background_opacity = true;
+      dynamic_background_opacity = false;
       enable_audio_bell = false;
       mouse_hide_wait = "-1.0";
       window_padding_width = 10;
-      background_opacity = "0.5";
+      background_opacity = "0.7";
       background_blur = 5;
       font_family = "Fira Code Nerd Font Mono"; # Use the exact name of the font
       font_size = 12.0;
@@ -169,20 +179,20 @@
   gtk = {
     enable = true;
 
-    theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Grey-Darkest";
-    };
+    # theme = {
+    #   package = pkgs.flat-remix-gtk;
+    #   name = "Flat-Remix-GTK-Grey-Darkest";
+    # };
 
-    iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-
-    font = {
-      name = "Sans";
-      size = 11;
-    };
+    # iconTheme = {
+    #   package = pkgs.adwaita-icon-theme;
+    #   name = "Adwaita";
+    # };
+    #
+    # font = {
+    #   name = "Sans";
+    #   size = 11;
+    # };
   };
   programs.bash = {
     enable = true;

@@ -7,6 +7,8 @@
   imports = [
     ./alpha.nix
   ];
+
+  stylix.targets.nvf.enable = false;
   programs.nvf = {
     enable = true;
     settings.vim = {
@@ -196,6 +198,33 @@
           desc = "Prev Diagnostic";
           lua = true;
         }
+        {
+          key = "<leader>gv";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "<cmd>DiffviewOpen<CR>";
+          desc = "Diffview";
+        }
+        {
+          key = "<leader>gd";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "<cmd>DiffviewClose<CR>";
+          desc = "Diffview close";
+        }
+        {
+          key = "<leader>e";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "<cmd>Neotree toggle<CR>";
+          desc = "Neotree";
+        }
       ];
       theme = {
         enable = true;
@@ -355,7 +384,7 @@
       statusline = {
         lualine = {
           enable = true;
-          theme = "tokyonight";
+          # theme = "tokyonight";
         };
       };
       dashboard = {

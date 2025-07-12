@@ -30,6 +30,7 @@
           "$mod, L, movefocus, r"
           "$mod, K, movefocus, u"
           "$mod, J, movefocus, d"
+          "$mod, SPACE, exec, rofi -show drun"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
         ]
@@ -74,6 +75,9 @@
         "bordersize 0, floating:0, onworkspace:f[1]"
         "rounding 0, floating:0, onworkspace:f[1]"
       ];
+      decoration = {
+        blur.passes = 2;
+      };
       layerrule = [
         "blur, bar-0"
       ];

@@ -13,6 +13,11 @@
     ./hardware-configuration.nix
   ];
 
+  stylix.enable = true;
+  stylix.image = ../../wallpapers/colorful-planets.jpg;
+  stylix.polarity = "dark";
+  stylix.targets.nvf.enable = false;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
