@@ -124,6 +124,7 @@
       "v" = "nvim";
       "bt" = "btop";
       "c" = "clear";
+      "l" = "eza -l";
     };
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
@@ -161,5 +162,10 @@
   };
   programs.bash = {
     enable = true;
+  };
+
+  programs.eza = {
+    enable = true;
+    enableFishIntegration = true;
   };
 }
