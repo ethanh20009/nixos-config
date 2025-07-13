@@ -57,14 +57,14 @@
           desc = "File Browser";
         }
         {
-          key = "<leader>fg";
+          key = "<leader>sg";
           mode = "n";
           silent = true;
           action = "<cmd>Telescope live_grep<CR>";
           desc = "Find files with Contents FZF";
         }
         {
-          key = "<leader>nn";
+          key = "<leader>e";
           mode = "n";
           silent = true;
           action = "<cmd>Neotree toggle<CR>";
@@ -215,15 +215,6 @@
           silent = true;
           action = "<cmd>DiffviewClose<CR>";
           desc = "Diffview close";
-        }
-        {
-          key = "<leader>e";
-          mode = [
-            "n"
-          ];
-          silent = true;
-          action = "<cmd>Neotree toggle<CR>";
-          desc = "Neotree";
         }
       ];
       theme = {
