@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -65,6 +66,8 @@
       bindm = [
         "$mod, mouse:272, movewindow"
       ];
+
+      general."col.inactive_border" = lib.mkForce "0xff444444";
 
       bezier = [
         "easeInOut, 0.65, 0, 0.35, 1"
