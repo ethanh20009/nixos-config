@@ -230,6 +230,7 @@
         enable = true;
         name = "tokyonight";
         style = "storm";
+        transparent = true;
       };
       tabline = {
         nvimBufferline = {
