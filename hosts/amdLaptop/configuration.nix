@@ -140,6 +140,7 @@
     pkgs.gh
     pkgs.btop
     pkgs.discord
+    (flameshot.override {enableWlrSupport = true;})
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -191,6 +192,14 @@
   programs.fish = {
     enable = true;
   };
+
+  programs.thunar.enable = true;
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+  ];
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
 
   virtualisation.docker.enable = true;
 }

@@ -37,6 +37,7 @@
           "SHIFT+$mod, J, movewindow, d"
 
           "$mod, SPACE, exec, rofi -show drun"
+          "$mod, PRTSCR, exec, flameshot gui"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
         ]

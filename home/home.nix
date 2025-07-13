@@ -184,10 +184,10 @@
     #   name = "Flat-Remix-GTK-Grey-Darkest";
     # };
 
-    # iconTheme = {
-    #   package = pkgs.adwaita-icon-theme;
-    #   name = "Adwaita";
-    # };
+    iconTheme = {
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
+    };
     #
     # font = {
     #   name = "Sans";
