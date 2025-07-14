@@ -66,6 +66,7 @@
     pkgs.power-profiles-daemon
     pkgs.nil
     pkgs.gemini-cli
+    pkgs.python314Full
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
