@@ -23,6 +23,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # boot.kernelPackages = pkgs.linuxPackages_6_6;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.initrd.luks.devices."luks-0c5be79b-08f2-482c-9329-6ed86912b93f".device = "/dev/disk/by-uuid/0c5be79b-08f2-482c-9329-6ed86912b93f";
   networking.hostName = "nixos"; # Define your hostname.
@@ -80,7 +81,7 @@
   users.users.ethan = {
     isNormalUser = true;
     description = "Ethan";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.fish;
     packages = with pkgs; [
     ];
@@ -140,6 +141,7 @@
     pkgs.gh
     pkgs.btop
     pkgs.discord
+    pkgs.brightnessctl
     (flameshot.override {enableWlrSupport = true;})
   ];
 
