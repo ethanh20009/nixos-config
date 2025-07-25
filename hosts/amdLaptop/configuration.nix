@@ -147,6 +147,7 @@
     (flameshot.override {enableWlrSupport = true;})
     pkgs.postman
     pkgs.brave
+    pkgs.usbutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

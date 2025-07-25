@@ -15,6 +15,8 @@
       extraPackages = [
         pkgs.angular-language-server
         pkgs.vtsls
+        pkgs.nodePackages.vscode-langservers-extracted
+        pkgs.prettierd
       ];
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
@@ -314,6 +316,25 @@
           };
         };
       };
+      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        angular
+        typescript
+        html
+      ];
+      formatter.conform-nvim = {
+        enable = true;
+        setupOpts.formatters_by_ft = {
+          htmlangular = [
+            "prettierd"
+          ];
+          html = [
+            "prettierd"
+          ];
+          typescript = [
+            "prettierd"
+          ];
+        };
+      };
       languages = {
         enableFormat = true;
         enableTreesitter = true;
@@ -366,6 +387,12 @@
         servers = {
           angularls = {};
           vtsls = {};
+          html = {
+            filetypes = [
+              "htmlangular"
+              "html"
+            ];
+          };
         };
       };
 
