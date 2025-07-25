@@ -20,7 +20,7 @@
 
     settings = {
       "$mod" = "SUPER";
-      "$browser" = "zen";
+      "$browser" = "brave";
       monitor = "eDP-1,preferred,auto,1";
       bind =
         [
@@ -76,7 +76,7 @@
       ];
       animation = [
         "workspaces, 1, 2, default"
-        "windows, 1, 2, easeInOut, popin"
+        "windows, 1, 2, default, popin"
         "fade, 1, 2, easeInOut"
       ];
 

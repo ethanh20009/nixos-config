@@ -21,6 +21,19 @@
         pkgs.vimPlugins.plenary-nvim # required dependency
       ];
 
+      luaConfigRC.virtualText = ''
+        vim.diagnostic.config({virtual_text = true})
+      '';
+
+      luaConfigRC.removeDefaultBinds = ''
+        vim.keymap.del("n", "gri")
+        vim.keymap.del("n", "grr")
+        vim.keymap.del("n", "gra")
+        vim.keymap.del("n", "grn")
+        vim.keymap.del("n", "grc")
+        vim.keymap.del("n", "grm")
+      '';
+
       options = {
         tabstop = 2;
         shiftwidth = 2;
@@ -212,15 +225,79 @@
           mode = [
             "n"
           ];
-          silent = true;
           action = "<cmd>DiffviewClose<CR>";
           desc = "Diffview close";
         }
+        {
+          key = "<leader>ud";
+          mode = "n";
+          lua = true;
+          action = ''
+            function()
+              local new_config = not vim.diagnostic.config().virtual_text
+              vim.diagnostic.config({virtual_text = new_config})
+            end
+          '';
+          desc = "Toggle Virtual Lines";
+        }
+        {
+          key = "gr";
+          mode = "n";
+          action = "<cmd>Telescope lsp_references<CR>";
+          desc = "References";
+        }
+        {
+          key = "gI";
+          mode = "n";
+          action = "<cmd>Telescope lsp_implementations<CR>";
+          desc = "Implementations";
+        }
+        {
+          key = "<leader>cr";
+          mode = "n";
+          lua = true;
+          action = ''
+            function()
+              vim.lsp.buf.rename()
+            end
+          '';
+          desc = "LSP Rename";
+        }
+        # {
+        #   key = "grr";
+        #   mode = "n";
+        #   action = "";
+        # }
+        # {
+        #   key = "gra";
+        #   mode = "n";
+        #   action = "";
+        # }
+        # {
+        #   key = "gri";
+        #   mode = "n";
+        #   action = "";
+        # }
+        # {
+        #   key = "grn";
+        #   mode = "n";
+        #   action = "";
+        # }
+        # {
+        #   key = "grc";
+        #   mode = "n";
+        #   action = "";
+        # }
+        # {
+        #   key = "grm";
+        #   mode = "n";
+        #   action = "";
+        # }
       ];
       theme = {
         enable = true;
         name = "tokyonight";
-        style = "storm";
+        style = "moon";
         transparent = true;
       };
       tabline = {
@@ -280,6 +357,10 @@
         trouble.enable = true;
         mappings = {
           openDiagnosticFloat = "<leader>cd";
+          goToType = null;
+          goToDefinition = null;
+          goToDeclaration = null;
+          codeAction = null;
         };
 
         servers = {
@@ -301,6 +382,7 @@
         # Fun
         cellular-automaton.enable = false;
       };
+      diagnostics.config.virtual_text = true;
       autopairs.nvim-autopairs.enable = true;
 
       session.nvim-session-manager = {

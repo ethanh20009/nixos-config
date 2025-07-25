@@ -63,7 +63,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    pkgs.power-profiles-daemon
     pkgs.nil
     pkgs.gemini-cli
     pkgs.python314Full

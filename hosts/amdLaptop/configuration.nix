@@ -65,17 +65,19 @@
   # Configure console keymap
   console.keyMap = "uk";
 
-  services.auto-cpufreq.enable = true;
-  services.auto-cpufreq.settings = {
-    battery = {
-      governor = "powersave";
-      turbo = "never";
-    };
-    charger = {
-      governor = "performance";
-      turbo = "auto";
-    };
-  };
+  # services.auto-cpufreq.enable = true;
+  # services.auto-cpufreq.settings = {
+  #   battery = {
+  #     governor = "powersave";
+  #     turbo = "never";
+  #   };
+  #   charger = {
+  #     governor = "performance";
+  #     turbo = "auto";
+  #   };
+  # };
+  powerManagement.powertop.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ethan = {
@@ -143,6 +145,8 @@
     pkgs.discord
     pkgs.brightnessctl
     (flameshot.override {enableWlrSupport = true;})
+    pkgs.postman
+    pkgs.brave
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -180,10 +184,10 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  # };
 
   programs.hyprland = {
     enable = true;

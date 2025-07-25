@@ -8,7 +8,7 @@
       dashboard.button("g", "  Live grep", ":Telescope live_grep<CR>"),
       dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
       dashboard.button("p", "  Projects", ":Telescope projects<CR>"),
-      dashboard.button("s", "  Previous Session", ":SessionManager load_last_session<CR>"),
+      dashboard.button("s", "  Previous Session", ":SessionManager load_current_dir_session<CR>"),
       dashboard.button("q", "  Quit", ":qa<CR>")
     }
 
