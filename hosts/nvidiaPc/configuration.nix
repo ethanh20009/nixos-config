@@ -11,6 +11,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/options.nix
   ];
 
   stylix.enable = true;
@@ -74,7 +75,10 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      myConfig = config.myConfig;
+    };
     users = {
       "ethan" = import ../../home/home.nix;
     };
@@ -197,4 +201,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+
+  myConfig.hyprland.secondMonitor = true;
 }

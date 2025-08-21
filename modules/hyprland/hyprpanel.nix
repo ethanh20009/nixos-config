@@ -1,4 +1,31 @@
-{inputs, ...}: {
+{
+  inputs,
+  config,
+  myConfig,
+  ...
+}: let
+  barLayouts =
+    if myConfig.hyprland.secondMonitor
+    then {
+      "0" = {
+        left = ["dashboard" "workspaces"];
+        middle = ["media"];
+        right = ["volume" "network" "notifications" "hypridle" "systray" "clock"];
+      };
+      "1" = {
+        left = ["dashboard" "workspaces"];
+        middle = ["media"];
+        right = ["volume" "network" "notifications" "hypridle" "systray" "clock"];
+      };
+    }
+    else {
+      "0" = {
+        left = ["dashboard" "workspaces"];
+        middle = ["media"];
+        right = ["volume" "network" "notifications" "hypridle" "battery" "systray" "clock"];
+      };
+    };
+in {
   programs.hyprpanel = {
     enable = true;
     systemd.enable = true;
@@ -10,14 +37,7 @@
     # See 'https://hyprpanel.com/configuration/settings.html'.
     # Default: <same as gui>
     settings = {
-      "bar.layouts" = {
-        "0" = {
-          left = ["dashboard" "workspaces"];
-          middle = ["media"];
-          right = ["volume" "network" "notifications" "battery" "systray" "clock"];
-        };
-      };
-
+      "bar.layouts" = barLayouts;
       bar.launcher.autoDetectIcon = true;
       bar.workspaces.show_icons = true;
       bar.battery.label = true;
