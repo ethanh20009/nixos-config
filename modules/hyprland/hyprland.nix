@@ -21,7 +21,11 @@
     settings = {
       "$mod" = "SUPER";
       "$browser" = "brave";
-      monitor = "eDP-1,preferred,auto,1";
+      monitor = [
+        "DP-1,highrr,auto,1"
+        "DP-2,highrr,auto-left,1"
+        "eDP-1,preferred,auto,1"
+      ];
       bind =
         [
           "$mod, RETURN, exec, kitty"
@@ -80,10 +84,24 @@
         "fade, 1, 2, easeInOut"
       ];
 
-      workspace = [
-        "w[tv1], gapsout:0, gapsin:0"
-        "f[1], gapsout:0, gapsin:0"
-      ];
+      workspace =
+        [
+          "w[tv1], gapsout:0, gapsin:0"
+          "f[1], gapsout:0, gapsin:0"
+        ]
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+          builtins.concatLists (builtins.genList (
+              i: let
+                ws = i + 1;
+              in [
+                "${toString ws}, monitor:DP-1"
+                "${toString (ws + 5)}, monitor:DP-2"
+              ]
+            )
+            4)
+        );
       windowrule = [
         "bordersize 0, floating:0, onworkspace:w[tv1]"
         "rounding 0, floating:0, onworkspace:w[tv1]"

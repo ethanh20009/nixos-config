@@ -46,5 +46,14 @@
         inputs.home-manager.nixosModules.default
       ];
     };
+
+    nixosConfigurations.nvidiaPc = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/nvidiaPc/configuration.nix
+        stylix.nixosModules.stylix
+        inputs.home-manager.nixosModules.default
+      ];
+    };
   };
 }
