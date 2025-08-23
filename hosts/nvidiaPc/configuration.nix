@@ -23,6 +23,13 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
+  boot.loader.systemd-boot.windows = {
+    "11" = {
+      title = "Windows 11";
+      efiDeviceHandle = "HD3b";
+    };
+  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
