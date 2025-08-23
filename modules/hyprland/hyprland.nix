@@ -3,8 +3,16 @@
   pkgs,
   inputs,
   lib,
+  myConfig,
   ...
-}: {
+}: let
+  touchpadDevices =
+    map (device_name: {
+      name = device_name;
+      accel_profile = "adaptive";
+    })
+    myConfig.hyprland.touchpadDevices;
+in {
   imports = [
     ./hyprpanel.nix
     ./hyprlock.nix
@@ -90,8 +98,7 @@
           "f[1], gapsout:0, gapsin:0"
         ]
         ++ (
-          # workspaces
-          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+          # binds workspaces 1-5, 5-10 to DP-1, DP-2
           builtins.concatLists (builtins.genList (
               i: let
                 ws = i + 1;
@@ -118,7 +125,10 @@
       input = {
         kb_options = "caps:swapescape";
         kb_layout = "gb";
+        accel_profile = "flat";
       };
+
+      device = touchpadDevices;
 
       "exec-once" = [
       ];

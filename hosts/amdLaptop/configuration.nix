@@ -11,6 +11,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/default_pkgs.nix
   ];
 
   stylix.enable = true;
@@ -131,25 +132,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    pkgs.kitty
-    pkgs.firefox
-    pkgs.playerctl
-    inputs.zen-browser.packages."${system}".default
-    pkgs.pavucontrol
-    pkgs.wl-clipboard
-    pkgs.gh
-    pkgs.btop
-    pkgs.discord
-    pkgs.brightnessctl
-    (flameshot.override {enableWlrSupport = true;})
-    pkgs.postman
-    pkgs.brave
-    pkgs.usbutils
-  ];
-
+  environment.systemPackages = config.myConfig.defaultPackages;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

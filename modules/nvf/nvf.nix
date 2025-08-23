@@ -42,6 +42,7 @@
         smartindent = true;
         clipboard = "unnamedplus";
       };
+      undoFile.enable = true;
       keymaps = [
         {
           key = "<leader>ff";

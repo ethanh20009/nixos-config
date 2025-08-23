@@ -12,6 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/options.nix
+    ../../modules/default_pkgs.nix
   ];
 
   stylix.enable = true;
@@ -129,21 +130,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    pkgs.kitty
-    pkgs.firefox
-    pkgs.playerctl
-    pkgs.pavucontrol
-    pkgs.wl-clipboard
-    pkgs.gh
-    pkgs.btop
-    pkgs.discord
-    pkgs.brightnessctl
-    (flameshot.override {enableWlrSupport = true;})
-    pkgs.postman
-    pkgs.brave
-    pkgs.usbutils
-  ];
+  environment.systemPackages = config.myConfig.defaultPackages;
 
   programs.hyprland.enable = true;
   programs.git = {
@@ -202,5 +189,11 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  myConfig.hyprland.secondMonitor = true;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  myConfig.hyprland = {
+    secondMonitor = true;
+  };
 }
