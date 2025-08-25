@@ -40,6 +40,7 @@ in {
       "bar.layouts" = barLayouts;
       bar.launcher.autoDetectIcon = true;
       bar.workspaces.show_icons = true;
+      bar.workspaces.ignored = "-99";
       bar.battery.label = true;
 
       menus.clock = {

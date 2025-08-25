@@ -18,6 +18,7 @@
     pkgs.postman
     pkgs.brave
     pkgs.usbutils
+    postgresql
   ];
 in {
   # This part declares the option

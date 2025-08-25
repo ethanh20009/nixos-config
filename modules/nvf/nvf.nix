@@ -21,6 +21,9 @@
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
         pkgs.vimPlugins.plenary-nvim # required dependency
+        pkgs.vimPlugins.vim-dadbod
+        pkgs.vimPlugins.vim-dadbod-ui
+        pkgs.vimPlugins.vim-dadbod-completion
       ];
 
       luaConfigRC.virtualText = ''
@@ -342,6 +345,7 @@
         enableExtraDiagnostics = true;
 
         nix.enable = true;
+        scala.enable = true;
         markdown.enable = true;
         rust = {
           enable = true;

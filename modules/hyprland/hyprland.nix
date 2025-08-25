@@ -49,6 +49,8 @@ in {
           "SHIFT+$mod, K, movewindow, u"
           "SHIFT+$mod, J, movewindow, d"
 
+          "$mod, V, togglespecialworkspace"
+
           "$mod, SPACE, exec, rofi -show drun -display-drun \"\""
           "$mod, Print, exec, flameshot gui"
           ", XF86AudioNext, exec, playerctl next"
@@ -90,12 +92,16 @@ in {
         "workspaces, 1, 2, default"
         "windows, 1, 2, default, popin"
         "fade, 1, 2, easeInOut"
+        "specialWorkspaceIn, 1, 2, default, slidefadevert -100%"
+        "specialWorkspaceOut, 1, 2, default, slidefadevert -100%"
       ];
 
       workspace =
         [
           "w[tv1], gapsout:0, gapsin:0"
           "f[1], gapsout:0, gapsin:0"
+
+          "s[1], gapsout:50, gapsin:50"
         ]
         ++ (
           # binds workspaces 1-5, 5-10 to DP-1, DP-2
@@ -114,6 +120,9 @@ in {
         "rounding 0, floating:0, onworkspace:w[tv1]"
         "bordersize 0, floating:0, onworkspace:f[1]"
         "rounding 0, floating:0, onworkspace:f[1]"
+
+        "bordersize 2, floating:0, onworkspace:s[1]"
+        "rounding 10, floating:0, onworkspace:s[1]"
       ];
       decoration = {
         blur.passes = 2;
