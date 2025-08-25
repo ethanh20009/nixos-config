@@ -235,6 +235,21 @@
           desc = "Diffview close";
         }
         {
+          key = "<leader>gm";
+          mode = "n";
+          action = ''
+            function()
+              local file = io.popen("git merge-base HEAD master", "r")
+              if not file then return end
+              local output = file:read("*a"):gsub("[\n\r]$", "")
+              file:close()
+              vim.cmd(":DiffviewOpen --staged " .. output)
+            end
+          '';
+          lua = true;
+          desc = "Compare with branch";
+        }
+        {
           key = "<leader>ud";
           mode = "n";
           lua = true;
@@ -269,36 +284,12 @@
           '';
           desc = "LSP Rename";
         }
-        # {
-        #   key = "grr";
-        #   mode = "n";
-        #   action = "";
-        # }
-        # {
-        #   key = "gra";
-        #   mode = "n";
-        #   action = "";
-        # }
-        # {
-        #   key = "gri";
-        #   mode = "n";
-        #   action = "";
-        # }
-        # {
-        #   key = "grn";
-        #   mode = "n";
-        #   action = "";
-        # }
-        # {
-        #   key = "grc";
-        #   mode = "n";
-        #   action = "";
-        # }
-        # {
-        #   key = "grm";
-        #   mode = "n";
-        #   action = "";
-        # }
+        {
+          key = "<leader>D";
+          mode = "n";
+          action = "<cmd>DBUIToggle<CR>";
+          desc = "Toggle Dadbod UI";
+        }
       ];
       theme = {
         enable = true;
