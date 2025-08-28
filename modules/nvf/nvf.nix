@@ -26,6 +26,11 @@
         pkgs.vimPlugins.vim-dadbod-completion
       ];
 
+      luaConfigRC.dbui = ''
+        vim.g.db_ui_execute_on_save = 0
+        vim.g.db_ui_auto_execute_table_helpers = 1
+      '';
+
       luaConfigRC.virtualText = ''
         vim.diagnostic.config({virtual_text = true})
       '';
@@ -203,7 +208,7 @@
             "n"
           ];
           silent = true;
-          action = "function() vim.diagnostic.goto_next() end";
+          action = "function() vim.diagnostic.jump({count=1, float=true}) end";
           desc = "Next Diagnostic";
           lua = true;
         }
@@ -213,8 +218,28 @@
             "n"
           ];
           silent = true;
-          action = "function() vim.diagnostic.goto_prev() end";
+          action = "function() vim.diagnostic.jump({count=-1, float=true}) end";
           desc = "Prev Diagnostic";
+          lua = true;
+        }
+        {
+          key = "]e";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "function() vim.diagnostic.jump({count=1, float=true, severity=vim.diagnostic.severity.ERROR}) end";
+          desc = "Next Error";
+          lua = true;
+        }
+        {
+          key = "[e";
+          mode = [
+            "n"
+          ];
+          silent = true;
+          action = "function() vim.diagnostic.jump({count=-1, float=true, severity=vim.diagnostic.severity.ERROR}) end";
+          desc = "Prev Error";
           lua = true;
         }
         {
@@ -289,6 +314,12 @@
           mode = "n";
           action = "<cmd>DBUIToggle<CR>";
           desc = "Toggle Dadbod UI";
+        }
+        {
+          key = "<leader>bo";
+          mode = "n";
+          action = "<cmd>BufferLineCloseOthers<CR>";
+          desc = "Close others";
         }
       ];
       theme = {
