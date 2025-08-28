@@ -518,9 +518,22 @@
       dashboard = {
         alpha.enable = true;
       };
+      mini.surround = {
+        enable = true;
+        setupOpts = {
+          mappings = {
+            add = "gsa";
+            delete = "gsd";
+            find = "gsf";
+            find_left = "gsF";
+            highlight = "gsh";
+            replace = "gsr";
+            update_n_lines = "gsn";
+          };
+        };
+      };
       utility = {
         diffview-nvim.enable = true;
-        surround.enable = true;
         oil-nvim.enable = true;
 
         motion.flash-nvim = {
