@@ -29,6 +29,7 @@ in {
     settings = {
       "$mod" = "SUPER";
       "$browser" = "brave";
+      "$files" = "thunar";
       monitor = [
         "DP-1,highrr,auto,1"
         "DP-2,highrr,auto-left,1"
@@ -39,6 +40,7 @@ in {
           "$mod, RETURN, exec, kitty"
           "$mod, Q, killactive"
           "$mod, B, exec, $browser"
+          "$mod, E, exec, $files"
 
           "$mod, H, movefocus, l"
           "$mod, L, movefocus, r"

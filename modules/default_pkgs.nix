@@ -19,6 +19,7 @@
     pkgs.brave
     pkgs.usbutils
     postgresql
+    gthumb
   ];
 in {
   # This part declares the option
