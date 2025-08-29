@@ -147,21 +147,10 @@
 
   gtk = {
     enable = true;
-
-    # theme = {
-    #   package = pkgs.flat-remix-gtk;
-    #   name = "Flat-Remix-GTK-Grey-Darkest";
-    # };
-
     iconTheme = {
       package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
     };
-    #
-    # font = {
-    #   name = "Sans";
-    #   size = 11;
-    # };
   };
   programs.bash = {
     enable = true;
@@ -170,5 +159,22 @@
   programs.eza = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  systemd.user.services.kill-brave-on-shutdown = {
+    Unit = {
+      Description = "Kill Brave browser processes before shutdown/reboot";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
+    Service = {
+      Type = "oneshot";
+      stopWhenUnneeded = true;
+      ExecStart = "${pkgs.coreutils}/bin/true";
+      ExecStop = "${pkgs.killall}/bin/killall brave";
+      RemainAfterExit = true;
+      TimeoutStopSec = "3s";
+    };
   };
 }
