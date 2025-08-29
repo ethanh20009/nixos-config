@@ -17,6 +17,7 @@
         pkgs.vtsls
         pkgs.nodePackages.vscode-langservers-extracted
         pkgs.prettierd
+        pkgs.ripgrep
       ];
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
@@ -25,6 +26,11 @@
         pkgs.vimPlugins.vim-dadbod-ui
         pkgs.vimPlugins.vim-dadbod-completion
       ];
+      extraPlugins = with pkgs.vimPlugins; {
+        grug-far = {
+          package = grug-far-nvim;
+        };
+      };
 
       luaConfigRC.dbui = ''
         vim.g.db_ui_execute_on_save = 0
@@ -60,34 +66,6 @@
           desc = "Find files with names";
         }
         {
-          key = "<leader>fp";
-          mode = "n";
-          silent = true;
-          action = "<cmd>Telescope projects<CR>";
-          desc = "Find Projects";
-        }
-        {
-          key = "<leader>fm";
-          mode = "n";
-          silent = true;
-          action = "<cmd>Telescope media_files<CR>";
-          desc = "Find Media Files";
-        }
-        {
-          key = "<leader>fb";
-          mode = "n";
-          silent = true;
-          action = "<cmd>Telescope file_browser<CR>";
-          desc = "File Browser";
-        }
-        {
-          key = "<leader>sg";
-          mode = "n";
-          silent = true;
-          action = "<cmd>Telescope live_grep<CR>";
-          desc = "Find files with Contents FZF";
-        }
-        {
           key = "<leader>e";
           mode = "n";
           silent = true;
@@ -95,11 +73,11 @@
           desc = "Toggle Neotree filesystem show";
         }
         {
-          key = "<K>";
+          key = "<leader>sr";
           mode = "n";
           silent = true;
-          action = "<cmd>vim.lsp.buf.hover<CR>";
-          desc = "Hover Documentation";
+          action = "<cmd>GrugFar<CR>";
+          desc = "Grug Search Replace";
         }
         {
           key = "gd";
@@ -395,7 +373,14 @@
       #   enable = true;
       #   providers.wl-copy.enable = true;
       # };
-      telescope.enable = true;
+      telescope = {
+        enable = true;
+        mappings = {
+          gitStatus = "<leader>gs";
+          liveGrep = "<leader>sg";
+        };
+      };
+
       lsp = {
         enable = true;
         formatOnSave = true;
