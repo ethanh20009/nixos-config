@@ -1,5 +1,10 @@
 {lib, ...}: {
   options.myConfig = {
+    browser = lib.mkOption {
+      type = lib.types.str;
+      default = "firefox";
+      description = "System default browser";
+    };
     hyprland = {
       secondMonitor = lib.mkOption {
         type = lib.types.bool;

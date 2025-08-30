@@ -160,21 +160,4 @@
     enable = true;
     enableFishIntegration = true;
   };
-
-  systemd.user.services.kill-brave-on-shutdown = {
-    Unit = {
-      Description = "Kill Brave browser processes before shutdown/reboot";
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
-    };
-    Service = {
-      Type = "oneshot";
-      stopWhenUnneeded = true;
-      ExecStart = "${pkgs.coreutils}/bin/true";
-      ExecStop = "${pkgs.killall}/bin/killall brave";
-      RemainAfterExit = true;
-      TimeoutStopSec = "3s";
-    };
-  };
 }

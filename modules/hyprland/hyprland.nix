@@ -28,7 +28,7 @@ in {
 
     settings = {
       "$mod" = "SUPER";
-      "$browser" = "brave";
+      "$browser" = myConfig.browser;
       "$files" = "thunar";
       monitor = [
         "DP-1,highrr,auto,1"
