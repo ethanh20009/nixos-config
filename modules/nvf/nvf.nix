@@ -55,6 +55,7 @@
         shiftwidth = 2;
         smartindent = true;
         clipboard = "unnamedplus";
+        winborder = "single";
       };
       undoFile.enable = true;
       keymaps = [
@@ -306,6 +307,7 @@
         style = "moon";
         transparent = true;
       };
+
       tabline = {
         nvimBufferline = {
           enable = true;
