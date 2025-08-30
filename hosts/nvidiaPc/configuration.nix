@@ -20,14 +20,14 @@
   stylix.polarity = "dark";
   stylix.targets.nvf.enable = false;
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  # boot.loader.systemd-boot.edk2-uefi-shell.enable = true;
-  boot.loader.systemd-boot.windows = {
-    "11" = {
-      title = "Windows 11";
-      efiDeviceHandle = "HD3b";
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot.enable = false;
+    grub = {
+      enable = true;
+      devices = ["nodev"];
+      efiSupport = true;
+      useOSProber = true;
     };
   };
 
