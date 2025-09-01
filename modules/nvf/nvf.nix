@@ -30,7 +30,40 @@
         grug-far = {
           package = grug-far-nvim;
         };
+        crates = {
+          package = crates-nvim;
+          setup = ''
+            require('crates').setup({
+              completion = {
+                crates = {
+                  enabled = true,
+                },
+              },
+              lsp = {
+                enabled = true,
+                actions = true,
+                completion = true,
+                hover = true,
+              },
+            })
+          '';
+        };
+        luasnip = {
+          package = luasnip;
+          setup = ''
+            require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip").filetype_extend("htmlangular", { "html" })
+          '';
+        };
       };
+
+      luaConfigRC.angular = ''
+        vim.filetype.add({
+          pattern = {
+            [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+          },
+        })
+      '';
 
       luaConfigRC.dbui = ''
         vim.g.db_ui_execute_on_save = 0
@@ -85,6 +118,13 @@
           mode = "n";
           silent = true;
           action = "<cmd>lua vim.lsp.buf.definition()<CR>";
+          desc = "Go to Definition";
+        }
+        {
+          key = "gy";
+          mode = "n";
+          silent = true;
+          action = "<cmd>Telescope lsp_type_definitions<CR>";
           desc = "Go to Definition";
         }
         {
@@ -460,7 +500,7 @@
           enable = true;
           event = ["TextYankPost"];
           pattern = ["*"];
-          command = "silent! lua vim.hl.on_yank {higroup='Visual', timeout=100}";
+          command = "silent! lua vim.hl.on_yank {higroup='IncSearch', timeout=100}";
         }
       ];
 
@@ -470,6 +510,7 @@
           friendly-snippets.enable = true;
           setupOpts = {
             keymap.preset = "default";
+            snippets = {preset = "luasnip";};
           };
         };
         nvim-cmp.enable = false;
