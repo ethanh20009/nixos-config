@@ -511,6 +511,13 @@
           setupOpts = {
             keymap.preset = "default";
             snippets = {preset = "luasnip";};
+            sources = {
+              providers = {
+                buffer = {
+                  score_offset = -10;
+                };
+              };
+            };
           };
         };
         nvim-cmp.enable = false;
