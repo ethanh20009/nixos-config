@@ -389,6 +389,7 @@
         nix.enable = true;
         scala.enable = true;
         markdown.enable = true;
+        tailwind.enable = true;
         rust = {
           enable = true;
           crates = {
