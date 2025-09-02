@@ -85,6 +85,8 @@
         tabstop = 2;
         shiftwidth = 2;
         smartindent = true;
+        ignorecase = true;
+        smartcase = true;
         clipboard = "unnamedplus";
         winborder = "single";
       };
