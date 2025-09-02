@@ -78,9 +78,7 @@
         vim.keymap.del("n", "gri")
         vim.keymap.del("n", "grr")
         vim.keymap.del("n", "gra")
-        vim.keymap.del("n", "grn")
         vim.keymap.del("n", "grc")
-        vim.keymap.del("n", "grm")
       '';
 
       options = {
@@ -528,6 +526,25 @@
         };
       };
       # treesitter.context.enable = true;
+      treesitter.mappings = {
+        incrementalSelection = {
+          incrementByNode = "<C-n>";
+          decrementByNode = "<C-p>";
+        };
+      };
+      treesitter.textobjects = {
+        enable = true;
+        setupOpts = {
+          select = {
+            enable = true;
+            lookahead = true;
+            keymaps = {
+              af = "@function.outer";
+              "if" = "@function.inner";
+            };
+          };
+        };
+      };
       binds = {
         whichKey.enable = true;
         cheatsheet.enable = true;
