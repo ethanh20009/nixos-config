@@ -20,6 +20,7 @@
     pkgs.usbutils
     postgresql
     gthumb
+    ripgrep
   ];
 in {
   # This part declares the option
