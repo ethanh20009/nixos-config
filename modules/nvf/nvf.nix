@@ -145,6 +145,13 @@ in {
           desc = "LSP Code Action (Visual)";
         }
         {
+          key = "<C-k>";
+          mode = "i";
+          silent = true;
+          action = "<cmd>lua vim.lsp.buf.signature_help()<CR>";
+          desc = "Signature help";
+        }
+        {
           key = "<leader>sm";
           mode = "n";
           silent = true;
@@ -580,8 +587,9 @@ in {
         noice = {
           enable = true;
           setupOpts = {
-            lsp.hover = {
-              enabled = false;
+            lsp = {
+              hover.enabled = false;
+              signature.enabled = false;
             };
             routes = [
               {
