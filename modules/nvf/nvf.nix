@@ -576,6 +576,33 @@ in {
         }
       ];
 
+      ui = {
+        noice = {
+          enable = true;
+          setupOpts = {
+            lsp.hover = {
+              enabled = false;
+            };
+            routes = [
+              {
+                filter = {
+                  event = "notify";
+                  find = "Could not find source";
+                };
+                opts = {skip = true;};
+              }
+              {
+                filter = {
+                  event = "notify";
+                  find = "Request textDocument/inlayHint failed";
+                };
+                opts = {skip = true;};
+              }
+            ];
+          };
+        };
+      };
+
       autocomplete = {
         blink-cmp = {
           enable = true;
