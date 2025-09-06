@@ -306,6 +306,29 @@
           desc = "Toggle Virtual Lines";
         }
         {
+          key = "<leader>uh";
+          mode = "n";
+          lua = true;
+          action = ''
+            function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            end
+          '';
+          desc = "Toggle Virtual Lines";
+        }
+        {
+          key = ">";
+          mode = "v";
+          action = ">gv";
+          desc = "indent";
+        }
+        {
+          key = "<";
+          mode = "v";
+          action = "<gv";
+          desc = "unindent";
+        }
+        {
           key = "gr";
           mode = "n";
           action = "<cmd>Telescope lsp_references<CR>";
@@ -437,6 +460,7 @@
 
       lsp = {
         enable = true;
+        inlayHints.enable = true;
         formatOnSave = true;
         lspkind.enable = false;
         lightbulb.enable = true;
@@ -452,7 +476,33 @@
 
         servers = {
           angularls = {};
-          vtsls = {};
+          vtsls = {
+            settings = {
+              vtsls = {
+                enableMoveToFileCodeAction = true;
+                autoUseWorkspaceTsdk = true;
+                experimental = {
+                  maxInlayHintLength = 30;
+                  completion = {
+                    enableServerSideFuzzyMatch = true;
+                  };
+                };
+              };
+              typescript = {
+                inlayHints = {
+                  parameterNames = {enabled = "all";};
+                  parameterTypes = {enabled = true;};
+                  variableTypes = {enabled = true;};
+                  propertyDeclarationTypes = {enabled = true;};
+                  functionLikeReturnTypes = {enabled = true;};
+                  enumMemberValues = {enabled = true;};
+                };
+                updateImportsOnFileMove = {
+                  enabled = "always";
+                };
+              };
+            };
+          };
           html = {
             filetypes = [
               "htmlangular"
