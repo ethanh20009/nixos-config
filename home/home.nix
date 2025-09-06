@@ -70,6 +70,7 @@
     python314Full
     rainfrog
     devenv
+    hyprshot
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -14,7 +14,6 @@
     pkgs.btop
     pkgs.discord
     pkgs.brightnessctl
-    (flameshot.override {enableWlrSupport = true;})
     pkgs.postman
     pkgs.brave
     pkgs.usbutils
