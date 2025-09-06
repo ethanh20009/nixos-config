@@ -54,7 +54,7 @@ in {
           "$mod, V, togglespecialworkspace"
 
           "$mod, SPACE, exec, rofi -show drun -display-drun \"\""
-          "$mod, Print, exec, flameshot gui"
+          "$mod+SHIFT, S, exec, flameshot gui"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
         ]

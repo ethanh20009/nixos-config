@@ -11,7 +11,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/default_pkgs.nix
+    ../../modules/shared-system.nix
   ];
 
   stylix.enable = true;

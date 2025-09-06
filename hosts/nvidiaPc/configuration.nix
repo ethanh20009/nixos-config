@@ -12,7 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/options.nix
-    ../../modules/default_pkgs.nix
+    ../../modules/shared-system.nix
   ];
 
   stylix.enable = true;
@@ -137,7 +137,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = config.myConfig.defaultPackages;
+  environment.systemPackages = config.myConfig.defaultPackages ++ [inputs.audselect_rs.packages.${pkgs.system}.default];
 
   programs.hyprland.enable = true;
   programs.git = {

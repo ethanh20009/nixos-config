@@ -69,6 +69,7 @@
     gemini-cli
     python314Full
     rainfrog
+    devenv
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -128,6 +129,7 @@
       "bt" = "btop";
       "c" = "clear";
       "l" = "eza -l";
+      "aud" = "audselect_rs";
     };
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
