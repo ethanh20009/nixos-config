@@ -2,8 +2,11 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
-}: {
+}: let
+  inherit (lib.generators) mkLuaInline;
+in {
   imports = [
     ./alpha.nix
   ];
@@ -475,7 +478,14 @@
         };
 
         servers = {
-          angularls = {};
+          angularls = {
+            on_attach = mkLuaInline ''
+              function (client, bufnr)
+                 default_on_attach(client, bufnr)
+                 client.server_capabilities.renameProvider = false
+              end
+            '';
+          };
           vtsls = {
             settings = {
               vtsls = {
