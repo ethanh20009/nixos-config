@@ -587,9 +587,12 @@ in {
         noice = {
           enable = true;
           setupOpts = {
+            presets = {
+              lsp_doc_border = true;
+            };
             lsp = {
               hover.enabled = false;
-              signature.enabled = false;
+              signature.enabled = true;
             };
             routes = [
               {
