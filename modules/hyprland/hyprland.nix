@@ -106,7 +106,7 @@ in {
           "s[1], gapsout:50, gapsin:50"
         ]
         ++ (
-          # binds workspaces 1-5, 5-10 to DP-1, DP-2
+          # binds workspaces 1-5, 6-10 to DP-1, DP-2
           builtins.concatLists (builtins.genList (
               i: let
                 ws = i + 1;
@@ -115,7 +115,7 @@ in {
                 "${toString (ws + 5)}, monitor:DP-2"
               ]
             )
-            4)
+            5)
         );
       windowrule = [
         "bordersize 0, floating:0, onworkspace:w[tv1]"
