@@ -373,6 +373,12 @@ in {
           action = "<cmd>BufferLineCloseOthers<CR>";
           desc = "Close others";
         }
+        {
+          key = "<esc>";
+          mode = ["n" "i" "v"];
+          action = "<cmd>noh<CR><esc>";
+          desc = "Clear highlight";
+        }
       ];
       theme = {
         enable = true;
