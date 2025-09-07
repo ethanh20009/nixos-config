@@ -129,8 +129,10 @@
     modesetting.enable = true;
     powerManagement.enable = true;
     open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
+
+  environment.variables.LIBVA_DRIVER_NAME = "nvidia";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -203,6 +205,19 @@
   # For NVF
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
+  # Image hosting
+  services.immich = {
+    enable = true;
+    port = 2283;
+    openFirewall = true;
+    host = "0.0.0.0";
+    machine-learning.enable = true;
+    machine-learning.environment = {
+      HF_XET_CACHE = "/var/cache/immich/huggingface-xet";
+    };
+    accelerationDevices = null;
+  };
+  users.users.immich.extraGroups = ["video" "render"];
   myConfig.hyprland = {
     secondMonitor = true;
   };
