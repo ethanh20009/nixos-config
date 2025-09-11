@@ -180,13 +180,6 @@ in {
           action = "<cmd>q<CR>";
           desc = "Close Split";
         }
-        # {
-        #   key = "<leader>ht";
-        #   mode = "n";
-        #   silent = true;
-        #   action = "<cmd>Hardtime toggle<CR>";
-        #   desc = "Toggle HardTime";
-        # }
         {
           key = "<leader>tc";
           mode = "n";
@@ -365,12 +358,25 @@ in {
           key = "<leader>D";
           mode = "n";
           action = "<cmd>DBUIToggle<CR>";
+          silent = true;
           desc = "Toggle Dadbod UI";
         }
         {
           key = "<leader>bo";
           mode = "n";
-          action = "<cmd>BufferLineCloseOthers<CR>";
+          action = ''
+            function()
+              local bufs=vim.api.nvim_list_bufs()
+              local current_buf=vim.api.nvim_get_current_buf()
+              for _,i in ipairs(bufs) do
+                  if i~=current_buf then
+                      vim.api.nvim_buf_delete(i,{})
+                  end
+              end
+            end
+          '';
+          lua = true;
+          silent = true;
           desc = "Close others";
         }
         {

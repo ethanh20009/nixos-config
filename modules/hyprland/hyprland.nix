@@ -30,6 +30,7 @@ in {
       "$mod" = "SUPER";
       "$browser" = myConfig.browser;
       "$files" = "thunar";
+      "$term" = myConfig.terminal;
       monitor = [
         "DP-1,highrr,auto,1"
         "DP-2,highrr,auto-left,1"
@@ -37,7 +38,7 @@ in {
       ];
       bind =
         [
-          "$mod, RETURN, exec, kitty"
+          "$mod, RETURN, exec, $term"
           "$mod, Q, killactive"
           "$mod, B, exec, $browser"
           "$mod, E, exec, $files"

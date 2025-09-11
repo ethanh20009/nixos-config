@@ -18,6 +18,7 @@
     ../modules/hyprland/hyprland.nix
     ../modules/nvf/nvf.nix
     ../modules/kitty/kitty.nix
+    ../modules/kitty/wezterm.nix
   ];
 
   programs.direnv = {

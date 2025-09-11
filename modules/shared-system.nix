@@ -20,15 +20,18 @@
     postgresql
     gthumb
     ripgrep
+    wezterm
+    zip
   ];
 in {
   # This part declares the option
-  options.myConfig.defaultPackages = lib.mkOption {
-    type = lib.types.listOf lib.types.package;
-    default = [];
-    description = "Packages to install by default on the system.";
+  options.myConfig = {
+    defaultPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [];
+      description = "Packages to install by default on the system.";
+    };
   };
-
   # This part sets the value of the option
   config = {
     myConfig.defaultPackages = myPackages;

@@ -18,5 +18,10 @@
         Will use adaptive accel profile.";
       };
     };
+    terminal = lib.mkOption {
+      type = lib.types.str;
+      default = "wezterm";
+      description = "Default terminal application to call";
+    };
   };
 }
