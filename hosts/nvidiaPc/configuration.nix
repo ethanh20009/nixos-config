@@ -123,6 +123,7 @@
   # Nvidia stuff
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
   };
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
@@ -133,6 +134,7 @@
   };
 
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
+  environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

@@ -6,6 +6,7 @@
   programs.wezterm = lib.mkForce {
     enable = true;
     extraConfig = ''
+      local act = wezterm.action
       return {
         font = wezterm.font("Fira Code Nerd Font Mono"),
         font_size = 12.0,
@@ -15,6 +16,7 @@
         default_cursor_style = "SteadyBar",
         warn_about_missing_glyphs = false,
         keys = {
+          { key = 'Backspace', mods = 'CTRL', action = act.SendKey {key = 'w', mods = 'CTRL'} },
         }
       }
     '';

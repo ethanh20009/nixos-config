@@ -76,7 +76,7 @@
     # '')
     nil
     gemini-cli
-    python314Full
+    python314
     rainfrog
     devenv
     hyprshot
