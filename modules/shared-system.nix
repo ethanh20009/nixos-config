@@ -11,7 +11,6 @@
     pkgs.pavucontrol
     pkgs.wl-clipboard
     pkgs.gh
-    pkgs.btop
     pkgs.discord
     pkgs.brightnessctl
     pkgs.postman
