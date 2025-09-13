@@ -21,6 +21,7 @@ in {
         pkgs.nodePackages.vscode-langservers-extracted
         pkgs.prettierd
         pkgs.ripgrep
+        pkgs.lazygit
       ];
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
@@ -366,13 +367,7 @@ in {
           mode = "n";
           action = ''
             function()
-              local bufs=vim.api.nvim_list_bufs()
-              local current_buf=vim.api.nvim_get_current_buf()
-              for _,i in ipairs(bufs) do
-                  if i~=current_buf then
-                      vim.api.nvim_buf_delete(i,{})
-                  end
-              end
+              Snacks.bufdelete.other(opts)
             end
           '';
           lua = true;
@@ -384,6 +379,17 @@ in {
           mode = ["n" "i" "v"];
           action = "<cmd>noh<CR><esc>";
           desc = "Clear highlight";
+        }
+        {
+          key = "<leader>gg";
+          mode = ["n"];
+          action = ''
+            function()
+              Snacks.lazygit()
+            end
+          '';
+          lua = true;
+          desc = "Lazygit";
         }
       ];
       theme = {
@@ -682,7 +688,6 @@ in {
       terminal = {
         toggleterm = {
           enable = true;
-          lazygit.enable = true;
         };
       };
       statusline = {
@@ -709,6 +714,13 @@ in {
         };
       };
       utility = {
+        snacks-nvim = {
+          enable = true;
+          setupOpts = {
+            bigfile.enabled = true;
+            lazygit.configure = true;
+          };
+        };
         diffview-nvim.enable = true;
         oil-nvim.enable = true;
 
