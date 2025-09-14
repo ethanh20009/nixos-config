@@ -7,7 +7,10 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  # Define your custom nvibrant package
+  nvibrant_git = pkgs.callPackage (../../pkgs/nvibrant-git/default.nix) {};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -127,6 +130,7 @@
   };
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
+    nvidiaSettings = true;
     modesetting.enable = true;
     powerManagement.enable = true;
     open = true;
@@ -141,7 +145,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = config.myConfig.defaultPackages ++ [inputs.audselect_rs.packages.${pkgs.system}.default];
+  environment.systemPackages =
+    config.myConfig.defaultPackages
+    ++ [
+      inputs.audselect_rs.packages.${pkgs.system}.default
+    ]
+    ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 
   programs.hyprland.enable = true;
   programs.git = {

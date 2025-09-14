@@ -23,5 +23,11 @@
       default = "wezterm";
       description = "Default terminal application to call";
     };
+
+    nvibrant.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Used to disable dithering";
+    };
   };
 }
