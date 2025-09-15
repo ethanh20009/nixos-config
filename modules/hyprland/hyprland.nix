@@ -53,6 +53,7 @@ in {
           "SHIFT+$mod, J, movewindow, d"
 
           "$mod, V, togglespecialworkspace"
+          "$mod, F, fullscreen"
 
           "$mod, SPACE, exec, rofi -show drun -display-drun \"\""
           "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only"

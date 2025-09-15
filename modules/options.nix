@@ -20,7 +20,7 @@
     };
     terminal = lib.mkOption {
       type = lib.types.str;
-      default = "wezterm";
+      default = "kitty";
       description = "Default terminal application to call";
     };
 
