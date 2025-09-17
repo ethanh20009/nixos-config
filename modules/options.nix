@@ -24,6 +24,20 @@
       description = "Default terminal application to call";
     };
 
+    work = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Flags if configuration is for work";
+    };
+
+    extras = {
+      deno.enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable Deno";
+      };
+    };
+
     nvibrant.enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

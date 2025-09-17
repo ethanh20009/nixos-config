@@ -1,28 +1,31 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
-  myPackages = with pkgs; [
-    killall
-    pkgs.kitty
-    pkgs.firefox
-    pkgs.playerctl
-    pkgs.pavucontrol
-    pkgs.wl-clipboard
-    pkgs.gh
-    pkgs.discord
-    pkgs.brightnessctl
-    pkgs.postman
-    pkgs.brave
-    pkgs.usbutils
-    postgresql
-    gthumb
-    ripgrep
-    wezterm
-    zip
-    jq
-  ];
+  myPackages = with pkgs;
+    [
+      killall
+      pkgs.kitty
+      pkgs.firefox
+      pkgs.playerctl
+      pkgs.pavucontrol
+      pkgs.wl-clipboard
+      pkgs.gh
+      pkgs.discord
+      pkgs.brightnessctl
+      pkgs.postman
+      pkgs.brave
+      pkgs.usbutils
+      postgresql
+      gthumb
+      ripgrep
+      wezterm
+      zip
+      jq
+    ]
+    ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
   # This part declares the option
   options.myConfig = {

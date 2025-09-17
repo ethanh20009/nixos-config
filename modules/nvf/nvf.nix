@@ -3,9 +3,27 @@
   pkgs,
   inputs,
   lib,
+  myConfig,
   ...
 }: let
   inherit (lib.generators) mkLuaInline;
+  json-ls-settings = lib.optionalAttrs myConfig.work {
+    settings = {
+      json = {
+        schemas = [
+          {
+            fileMatch = ["**/solution-origin/workflows-v2/*/steps/*/definition.json"];
+            url = "file:///home/ethan/schemas/origin/step.schema.json";
+            description = "Workflow step schema";
+          }
+        ];
+        validate = {enable = true;};
+        format = {
+          enable = true;
+        };
+      };
+    };
+  };
 in {
   imports = [
     ./alpha.nix
@@ -417,6 +435,7 @@ in {
         angular
         typescript
         html
+        json
       ];
       formatter.conform-nvim = {
         enable = true;
@@ -502,49 +521,54 @@ in {
           codeAction = null;
         };
 
-        servers = {
-          angularls = {
-            on_attach = mkLuaInline ''
-              function (client, bufnr)
-                 default_on_attach(client, bufnr)
-                 client.server_capabilities.renameProvider = false
-              end
-            '';
-          };
-          vtsls = {
-            settings = {
-              vtsls = {
-                enableMoveToFileCodeAction = true;
-                autoUseWorkspaceTsdk = true;
-                experimental = {
-                  maxInlayHintLength = 30;
-                  completion = {
-                    enableServerSideFuzzyMatch = true;
+        servers =
+          {
+            angularls = {
+              on_attach = mkLuaInline ''
+                function (client, bufnr)
+                   default_on_attach(client, bufnr)
+                   client.server_capabilities.renameProvider = false
+                end
+              '';
+            };
+            vtsls = {
+              settings = {
+                vtsls = {
+                  enableMoveToFileCodeAction = true;
+                  autoUseWorkspaceTsdk = true;
+                  experimental = {
+                    maxInlayHintLength = 30;
+                    completion = {
+                      enableServerSideFuzzyMatch = true;
+                    };
+                  };
+                };
+                typescript = {
+                  inlayHints = {
+                    parameterNames = {enabled = "all";};
+                    parameterTypes = {enabled = true;};
+                    variableTypes = {enabled = true;};
+                    propertyDeclarationTypes = {enabled = true;};
+                    functionLikeReturnTypes = {enabled = true;};
+                    enumMemberValues = {enabled = true;};
+                  };
+                  updateImportsOnFileMove = {
+                    enabled = "always";
                   };
                 };
               };
-              typescript = {
-                inlayHints = {
-                  parameterNames = {enabled = "all";};
-                  parameterTypes = {enabled = true;};
-                  variableTypes = {enabled = true;};
-                  propertyDeclarationTypes = {enabled = true;};
-                  functionLikeReturnTypes = {enabled = true;};
-                  enumMemberValues = {enabled = true;};
-                };
-                updateImportsOnFileMove = {
-                  enabled = "always";
-                };
-              };
             };
+            html = {
+              filetypes = [
+                "htmlangular"
+                "html"
+              ];
+            };
+            jsonls = json-ls-settings;
+          }
+          // lib.optionalAttrs myConfig.extras.deno.enable {
+            denols = {};
           };
-          html = {
-            filetypes = [
-              "htmlangular"
-              "html"
-            ];
-          };
-        };
       };
 
       visuals = {

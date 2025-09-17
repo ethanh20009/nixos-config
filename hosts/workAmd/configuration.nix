@@ -225,7 +225,11 @@
     127.0.0.1 collect.flexys.dev collaborate.flexys.dev keycloak.flexys.dev engine.flexys.dev schema-registry brand1.flexys.dev brand2.flexys.dev broker keycloak
   '';
 
-  myConfig.hyprland = {
-    secondMonitor = true;
+  myConfig = {
+    hyprland = {
+      secondMonitor = true;
+    };
+    extras.deno.enable = true;
+    work = true;
   };
 }
