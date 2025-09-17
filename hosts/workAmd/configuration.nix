@@ -39,6 +39,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = with pkgs; [
+    networkmanager-openvpn
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -145,7 +148,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = config.myConfig.defaultPackages ++ (with pkgs; [slack]);
+  environment.systemPackages = config.myConfig.defaultPackages ++ (with pkgs; [slack google-cloud-sdk networkmanagerapplet]);
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -171,7 +174,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -210,6 +213,10 @@
   virtualisation.docker.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  networking.extraHosts = ''
+    127.0.0.1 collect.flexys.dev collaborate.flexys.dev keycloak.flexys.dev engine.flexys.dev schema-registry brand1.flexys.dev brand2.flexys.dev broker keycloak
+  '';
 
   myConfig.hyprland = {
     secondMonitor = true;

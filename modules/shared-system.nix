@@ -21,6 +21,7 @@
     ripgrep
     wezterm
     zip
+    jq
   ];
 in {
   # This part declares the option
