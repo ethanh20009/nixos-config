@@ -58,5 +58,14 @@
         inputs.home-manager.nixosModules.default
       ];
     };
+
+    nixosConfigurations.workAmd = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/workAmd/configuration.nix
+        stylix.nixosModules.stylix
+        inputs.home-manager.nixosModules.default
+      ];
+    };
   };
 }

@@ -31,10 +31,14 @@ in {
       "$browser" = myConfig.browser;
       "$files" = "thunar";
       "$term" = myConfig.terminal;
+
+      "$mon1" = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. G27QC 0x00000A46";
+      "$mon2" = "desc:Microstep MSI G24C4 0x00000336";
       monitor = [
-        "DP-1,highrr,auto,1"
-        "DP-2,highrr,auto-left,1"
-        "eDP-1,preferred,auto,1"
+        "$mon1,highrr,0x0,1"
+        "$mon2,highrr,-1920x0,1"
+        "eDP-1,preferred,2560x200,1"
+        ", preferred, auto, 1"
       ];
       bind =
         [
@@ -113,8 +117,8 @@ in {
               i: let
                 ws = i + 1;
               in [
-                "${toString ws}, monitor:DP-1"
-                "${toString (ws + 5)}, monitor:DP-2"
+                "${toString ws}, monitor:$mon1"
+                "${toString (ws + 5)}, monitor:$mon2"
               ]
             )
             5)
