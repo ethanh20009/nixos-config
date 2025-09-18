@@ -54,54 +54,78 @@ in {
         };
         crates = {
           package = crates-nvim;
-          setup = ''
-            require('crates').setup({
-              completion = {
-                crates = {
-                  enabled = true,
+          setup =
+            /*
+            lua
+            */
+            ''
+              require('crates').setup({
+                completion = {
+                  crates = {
+                    enabled = true,
+                  },
                 },
-              },
-              lsp = {
-                enabled = true,
-                actions = true,
-                completion = true,
-                hover = true,
-              },
-            })
-          '';
+                lsp = {
+                  enabled = true,
+                  actions = true,
+                  completion = true,
+                  hover = true,
+                },
+              })
+            '';
         };
         luasnip = {
           package = luasnip;
-          setup = ''
-            require("luasnip.loaders.from_vscode").lazy_load()
-            require("luasnip").filetype_extend("htmlangular", { "html" })
-          '';
+          setup =
+            /*
+            lua
+            */
+            ''
+              require("luasnip.loaders.from_vscode").lazy_load()
+              require("luasnip").filetype_extend("htmlangular", { "html" })
+            '';
         };
       };
 
-      luaConfigRC.angular = ''
-        vim.filetype.add({
-          pattern = {
-            [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
-          },
-        })
-      '';
+      luaConfigRC.angular =
+        /*
+        lua
+        */
+        ''
+          vim.filetype.add({
+            pattern = {
+              [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+            },
+          })
+        '';
 
-      luaConfigRC.dbui = ''
-        vim.g.db_ui_execute_on_save = 0
-        vim.g.db_ui_auto_execute_table_helpers = 1
-      '';
+      luaConfigRC.dbui =
+        /*
+        lua
+        */
+        ''
+          vim.g.db_ui_execute_on_save = 0
+          vim.g.db_ui_auto_execute_table_helpers = 1
+        '';
 
-      luaConfigRC.virtualText = ''
-        vim.diagnostic.config({virtual_text = true})
-      '';
+      luaConfigRC.virtualText =
+        /*
+        lua
+        */
+        ''
+          vim.diagnostic.config({virtual_text = true})
+        '';
 
-      luaConfigRC.removeDefaultBinds = ''
-        vim.keymap.del("n", "gri")
-        vim.keymap.del("n", "grr")
-        vim.keymap.del("n", "gra")
-        vim.keymap.del("n", "grc")
-      '';
+      luaConfigRC.removeDefaultBinds =
+        /*
+        lua
+        */
+        ''
+          vim.keymap.del("n", "gri")
+          vim.keymap.del("n", "grr")
+          vim.keymap.del("n", "gra")
+          vim.keymap.del("n", "grc")
+        '';
 
       options = {
         tabstop = 2;
@@ -303,15 +327,19 @@ in {
         {
           key = "<leader>gm";
           mode = "n";
-          action = ''
-            function()
-              local file = io.popen("git merge-base HEAD master", "r")
-              if not file then return end
-              local output = file:read("*a"):gsub("[\n\r]$", "")
-              file:close()
-              vim.cmd(":DiffviewOpen --staged " .. output)
-            end
-          '';
+          action =
+            /*
+            lua
+            */
+            ''
+              function()
+                local file = io.popen("git merge-base HEAD master", "r")
+                if not file then return end
+                local output = file:read("*a"):gsub("[\n\r]$", "")
+                file:close()
+                vim.cmd(":DiffviewOpen --staged " .. output)
+              end
+            '';
           lua = true;
           desc = "Compare with branch";
         }
@@ -524,12 +552,17 @@ in {
         servers =
           {
             angularls = {
-              on_attach = mkLuaInline ''
-                function (client, bufnr)
-                   default_on_attach(client, bufnr)
-                   client.server_capabilities.renameProvider = false
-                end
-              '';
+              on_attach =
+                mkLuaInline
+                /*
+                lua
+                */
+                ''
+                  function (client, bufnr)
+                     default_on_attach(client, bufnr)
+                     client.server_capabilities.renameProvider = false
+                  end
+                '';
             };
             vtsls = {
               settings = {
