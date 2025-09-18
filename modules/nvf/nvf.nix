@@ -600,7 +600,17 @@ in {
             jsonls = json-ls-settings;
           }
           // lib.optionalAttrs myConfig.extras.deno.enable {
-            denols = {};
+            denols = {
+              root_dir =
+                /*
+                lua
+                */
+                ''
+                  require("lspconfig").util.root_pattern({ "deno.json", "deno.jsonc" });
+                '';
+              single_file_support = false;
+              settings = {};
+            };
           };
       };
 
