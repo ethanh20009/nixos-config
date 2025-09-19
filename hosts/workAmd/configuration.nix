@@ -228,6 +228,7 @@
   myConfig = {
     hyprland = {
       secondMonitor = true;
+      touchpadDevices = ["syna801a:00-06cb:cec6-touchpad"];
     };
     extras.deno.enable = true;
     work = true;
