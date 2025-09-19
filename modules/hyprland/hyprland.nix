@@ -60,7 +60,7 @@ in {
           "$mod, F, fullscreen"
 
           "$mod, SPACE, exec, rofi -show drun -display-drun \"\""
-          "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only"
+          "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only -z"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
         ]
