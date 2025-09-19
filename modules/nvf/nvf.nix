@@ -565,6 +565,7 @@ in {
               on_attach = function (client, bufnr)
                  default_on_attach(client, bufnr)
                  client.server_capabilities.renameProvider = false
+                 client.server_capabilities.referencesProvider = false
               end
             }
           '';
