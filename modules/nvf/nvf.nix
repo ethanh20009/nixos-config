@@ -125,6 +125,8 @@ in {
           vim.keymap.del("n", "grr")
           vim.keymap.del("n", "gra")
           vim.keymap.del("n", "grc")
+          vim.keymap.del("n", "grn")
+          vim.keymap.del("n", "grt")
         '';
 
       options = {
@@ -381,7 +383,10 @@ in {
         {
           key = "gr";
           mode = "n";
-          action = "<cmd>Telescope lsp_references<CR>";
+          action = ''
+            function() Snacks.picker.lsp_references() end
+          '';
+          lua = true;
           desc = "References";
         }
         {
@@ -549,21 +554,23 @@ in {
           codeAction = null;
         };
 
+        lspconfig.sources.angularls =
+          /*
+          lua
+          */
+          ''
+            lspconfig.angularls.setup {
+              capabilities = capabilities,
+              root_dir = lspconfig.util.root_pattern('angular.json'),
+              on_attach = function (client, bufnr)
+                 default_on_attach(client, bufnr)
+                 client.server_capabilities.renameProvider = false
+              end
+            }
+          '';
+
         servers =
           {
-            angularls = {
-              on_attach =
-                mkLuaInline
-                /*
-                lua
-                */
-                ''
-                  function (client, bufnr)
-                     default_on_attach(client, bufnr)
-                     client.server_capabilities.renameProvider = false
-                  end
-                '';
-            };
             vtsls = {
               settings = {
                 vtsls = {
