@@ -76,6 +76,20 @@ in {
               ]
             )
             9)
+        )
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+          builtins.concatLists (builtins.genList (
+              i: let
+                fkey = i + 1;
+                ws = i + 11;
+              in [
+                "$mod, F${toString fkey}, workspace, ${toString ws}"
+                "$mod SHIFT, code:1${toString fkey}, movetoworkspace, ${toString ws}"
+              ]
+            )
+            4)
         );
       bindr = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -122,6 +136,7 @@ in {
               in [
                 "${toString ws}, monitor:$mon1"
                 "${toString (ws + 5)}, monitor:$mon2"
+                "${toString (ws + 10)}, monitor:eDP-1"
               ]
             )
             5)

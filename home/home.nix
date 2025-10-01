@@ -126,6 +126,11 @@
     enable = true;
     userName = "Ethan Howard";
     userEmail = "ethanh20009@outlook.com";
+    extraConfig = {
+      diff = {
+        algorithm = "patience";
+      };
+    };
   };
 
   programs.zoxide = {
