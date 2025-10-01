@@ -7,7 +7,9 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  cacert = builtins.readFile ../../secrets/ca.cert;
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -224,6 +226,9 @@
   networking.extraHosts = ''
     127.0.0.1 collect.flexys.dev collaborate.flexys.dev keycloak.flexys.dev engine.flexys.dev schema-registry brand1.flexys.dev brand2.flexys.dev broker keycloak
   '';
+  security.pki.certificates = [
+    cacert
+  ];
 
   myConfig = {
     hyprland = {
