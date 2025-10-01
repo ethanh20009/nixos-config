@@ -24,6 +24,7 @@
       wezterm
       zip
       jq
+      git-crypt
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {

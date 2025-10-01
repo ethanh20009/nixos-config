@@ -27,6 +27,21 @@
     config.hide_env_diff = true;
   };
 
+  programs.gpg = {
+    enable = true;
+  };
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true; # Optional, but generally useful
+
+    # Choose your pinentry flavor:
+    # If you use a graphical environment (Gnome, KDE, etc.)
+    pinentryPackage = pkgs.pinentry-qt; # or pkgs.pinentry-gtk2
+
+    # OR, if you are strictly terminal/SSH/headless:
+    # pinentryPackage = pkgs.pinentry-curses;
+  };
+
   programs.firefox.enable = true;
 
   programs.rofi = {
