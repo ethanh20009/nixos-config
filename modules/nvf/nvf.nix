@@ -469,6 +469,7 @@ in {
         typescript
         html
         json
+        javascript
       ];
       formatter.conform-nvim = {
         enable = true;
