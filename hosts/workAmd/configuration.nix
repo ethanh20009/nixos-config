@@ -18,7 +18,7 @@ in {
   ];
 
   stylix.enable = true;
-  stylix.image = ../../wallpapers/flexys-dark.jpg;
+  stylix.image = ../../wallpapers/colorful-planets.jpg;
   stylix.polarity = "dark";
   stylix.targets.nvf.enable = false;
 
@@ -206,6 +206,9 @@ in {
 
   programs.fish = {
     enable = true;
+    shellInit = ''
+      umask 0002
+    '';
   };
 
   programs.thunar.enable = true;

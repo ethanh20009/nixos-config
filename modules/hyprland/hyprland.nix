@@ -40,6 +40,9 @@ in {
         "eDP-1,preferred,2560x200,1"
         ", preferred, auto, 1"
       ];
+      dwindle = {
+        preserve_split = true;
+      };
       bind =
         [
           "$mod, RETURN, exec, $term"
@@ -55,6 +58,14 @@ in {
           "SHIFT+$mod, L, movewindow, r"
           "SHIFT+$mod, K, movewindow, u"
           "SHIFT+$mod, J, movewindow, d"
+          "CTRL+$mod, H, resizeactive, -10 0"
+          "CTRL+$mod, L, resizeactive, 10 0"
+          "CTRL+$mod, K, resizeactive, 0 -10"
+          "CTRL+$mod, J, resizeactive, 0 10"
+
+          "$mod SHIFT, P, swapsplit"
+          "$mod CTRL, P, togglesplit"
+          "$mod SHIFT, G, togglegroup"
 
           "$mod, V, togglespecialworkspace"
           "$mod, F, fullscreen"
@@ -106,6 +117,7 @@ in {
       ];
       bindm = [
         "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
       ];
 
       general."col.inactive_border" = lib.mkForce "0xff444444";
