@@ -18,7 +18,7 @@ in {
   ];
 
   stylix.enable = true;
-  stylix.image = ../../wallpapers/colorful-planets.jpg;
+  stylix.image = ../../wallpapers/flexys-dark.jpg;
   stylix.polarity = "dark";
   stylix.targets.nvf.enable = false;
 

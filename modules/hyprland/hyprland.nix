@@ -86,7 +86,7 @@ in {
                 ws = i + 11;
               in [
                 "$mod, F${toString fkey}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString fkey}, movetoworkspace, ${toString ws}"
+                "$mod SHIFT, F${toString fkey}, movetoworkspace, ${toString ws}"
               ]
             )
             4)
@@ -120,6 +120,10 @@ in {
         "specialWorkspaceIn, 1, 2, default, slidefadevert -100%"
         "specialWorkspaceOut, 1, 2, default, slidefadevert -100%"
       ];
+
+      misc = {
+        focus_on_activate = true;
+      };
 
       workspace =
         [
