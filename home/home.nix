@@ -46,7 +46,6 @@
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
     font = lib.mkForce "Fira code 12";
     extraConfig = {
       show-icons = true;

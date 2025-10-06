@@ -137,7 +137,9 @@ in {
         smartcase = true;
         clipboard = "unnamedplus";
         winborder = "single";
+        wrap = false;
       };
+
       undoFile.enable = true;
       keymaps = [
         {
