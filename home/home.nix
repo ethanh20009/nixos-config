@@ -12,7 +12,7 @@
   home.homeDirectory = "/home/ethan";
 
   stylix.enable = true;
-  stylix.colorGeneration.scheme = "fruit-salad";
+  stylix.colorGeneration.scheme = "content";
 
   imports = [
     inputs.nvf.homeManagerModules.default
