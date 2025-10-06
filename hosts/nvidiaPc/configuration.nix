@@ -19,7 +19,7 @@ in {
   ];
 
   stylix.enable = true;
-  stylix.image = ../../wallpapers/city.jpg;
+  stylix.image = ../../wallpapers/colorful-planets.jpg;
   stylix.colorGeneration.polarity = "dark";
   # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
   stylix.targets.nvf.enable = false;
