@@ -17,7 +17,7 @@
     };
 
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:nix-community/stylix?ref=pull/892/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # hyprpanel = {

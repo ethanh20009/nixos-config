@@ -19,8 +19,8 @@ in {
   ];
 
   stylix.enable = true;
-  stylix.image = ../../wallpapers/colorful-planets.jpg;
-  stylix.polarity = "dark";
+  stylix.image = ../../wallpapers/city.jpg;
+  stylix.colorGeneration.polarity = "dark";
   stylix.targets.nvf.enable = false;
 
   boot.loader = {
