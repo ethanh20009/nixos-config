@@ -79,7 +79,7 @@ in {
   users.users.ethan = {
     isNormalUser = true;
     description = "Ethan";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "adbusers"];
     shell = pkgs.fish;
     packages = with pkgs; [];
   };
@@ -187,6 +187,8 @@ in {
   ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
+
+  programs.adb.enable = true;
 
   # For hyprpanel
   services.upower.enable = true;
