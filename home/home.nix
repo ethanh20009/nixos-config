@@ -28,6 +28,8 @@
     config.hide_env_diff = true;
   };
 
+  programs.texlive.enable = true;
+
   programs.gpg = {
     enable = true;
   };
@@ -145,6 +147,7 @@
       diff = {
         algorithm = "patience";
       };
+      pull.rebase = true;
     };
   };
 
