@@ -47,10 +47,14 @@ in {
         pkgs.vimPlugins.vim-dadbod
         pkgs.vimPlugins.vim-dadbod-ui
         pkgs.vimPlugins.vim-dadbod-completion
+        pkgs.vimPlugins.vim-mustache-handlebars
       ];
       extraPlugins = with pkgs.vimPlugins; {
         grug-far = {
           package = grug-far-nvim;
+        };
+        vim-abolish = {
+          package = vim-abolish;
         };
         crates = {
           package = crates-nvim;
