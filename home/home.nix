@@ -20,6 +20,7 @@
     ../modules/nvf/nvf.nix
     ../modules/kitty/kitty.nix
     ../modules/kitty/wezterm.nix
+    ../modules/tex.nix
   ];
 
   programs.direnv = {
@@ -27,8 +28,6 @@
     nix-direnv.enable = true;
     config.hide_env_diff = true;
   };
-
-  programs.texlive.enable = true;
 
   programs.gpg = {
     enable = true;

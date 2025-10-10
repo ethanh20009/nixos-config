@@ -613,6 +613,25 @@ in {
               ];
             };
             jsonls = json-ls-settings;
+            ltex = {
+              filetypes = [
+                "bib"
+                "gitcommit"
+                "latex"
+                "mail"
+                "norg"
+                "org"
+                "pandoc"
+                "rst"
+                "tex"
+              ];
+              settings = {
+                ltex = {
+                  checkFrequency = "save";
+                  language = "en-GB";
+                };
+              };
+            };
           }
           // lib.optionalAttrs myConfig.extras.deno.enable {
             denols = {

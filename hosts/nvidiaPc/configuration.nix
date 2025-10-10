@@ -232,7 +232,10 @@ in {
     accelerationDevices = null;
   };
   users.users.immich.extraGroups = ["video" "render"];
-  myConfig.hyprland = {
-    secondMonitor = true;
+  myConfig = {
+    hyprland = {
+      secondMonitor = true;
+    };
+    tex.enable = true;
   };
 }

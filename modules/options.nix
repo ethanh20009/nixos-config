@@ -43,5 +43,13 @@
       default = false;
       description = "Used to disable dithering";
     };
+
+    tex.enable = lib.mkOption {
+      default = false;
+      type = lib.types.bool;
+      description = ''
+        Install Tex system wide
+      '';
+    };
   };
 }
