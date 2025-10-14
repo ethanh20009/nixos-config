@@ -157,6 +157,7 @@ in {
       google-cloud-sdk
       networkmanagerapplet
       getopt
+      google-chrome
     ]);
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -208,6 +209,7 @@ in {
     enable = true;
     shellInit = ''
       umask 0002
+      set -gx CHROME_BIN "${pkgs.google-chrome}/bin/google-chrome-stable"
     '';
   };
 
@@ -235,6 +237,9 @@ in {
 
   myConfig = {
     hyprland = {
+      primaryMonitor = {
+        "4k" = true;
+      };
       secondMonitor = true;
       touchpadDevices = ["syna801a:00-06cb:cec6-touchpad"];
     };

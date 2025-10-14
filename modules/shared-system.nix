@@ -25,6 +25,7 @@
       zip
       jq
       git-crypt
+      tldr
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {

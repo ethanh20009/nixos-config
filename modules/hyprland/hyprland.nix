@@ -12,6 +12,26 @@
       accel_profile = "adaptive";
     })
     myConfig.hyprland.touchpadDevices;
+
+  pMonitorHDR =
+    if myConfig.hyprland.primaryMonitor.hdr
+    then ",cm,hdr"
+    else "";
+
+  monitorConfig =
+    if myConfig.hyprland.primaryMonitor."4k"
+    then [
+      ("$mon1,preferred,0x0,1.5,bitdepth,10" + pMonitorHDR)
+      "$mon2,highrr,-1920x0,1"
+      "eDP-1,preferred,3840x200,1"
+      ", preferred, auto, 1"
+    ]
+    else [
+      ("$mon1,2560x1440@120.00,0x0,1,bitdepth,10" + pMonitorHDR)
+      "$mon2,highrr,-1920x0,1"
+      "eDP-1,preferred,2560x200,1"
+      ", preferred, auto, 1"
+    ];
 in {
   imports = [
     ./hyprpanel.nix
@@ -32,14 +52,9 @@ in {
       "$files" = "thunar";
       "$term" = myConfig.terminal;
 
-      "$mon1" = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. G27QC 0x00000A46";
+      "$mon1" = "desc:Microstep MAG 274U E16M CF0H105600717";
       "$mon2" = "desc:Microstep MSI G24C4 0x00000336";
-      monitor = [
-        "$mon1,highrr,0x0,1"
-        "$mon2,highrr,-1920x0,1"
-        "eDP-1,preferred,2560x200,1"
-        ", preferred, auto, 1"
-      ];
+      monitor = monitorConfig;
       dwindle = {
         preserve_split = true;
       };

@@ -6,6 +6,18 @@
       description = "System default browser";
     };
     hyprland = {
+      primaryMonitor = {
+        "4k" = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Use monitor as 4k";
+        };
+        hdr = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Use HDR";
+        };
+      };
       secondMonitor = lib.mkOption {
         type = lib.types.bool;
         default = false;

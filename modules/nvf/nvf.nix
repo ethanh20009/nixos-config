@@ -50,6 +50,17 @@ in {
         pkgs.vimPlugins.vim-mustache-handlebars
       ];
       extraPlugins = with pkgs.vimPlugins; {
+        # nvim-html-css = {
+        #   package = pkgs.vimUtils.buildVimPlugin {
+        #     name = "nvim-html-css";
+        #     src = pkgs.fetchFromGitHub {
+        #       owner = "Jezda1337";
+        #       repo = "nvim-html-css";
+        #       rev = "main";
+        #       sha256 = "sha256-7GdPWBexJ8JzO3GwrYudqGTW8fl38EY50fzCCDIEPe0=";
+        #     };
+        #   };
+        # };
         grug-far = {
           package = grug-far-nvim;
         };
@@ -500,6 +511,7 @@ in {
         scala.enable = true;
         markdown.enable = true;
         tailwind.enable = true;
+        css.enable = true;
         rust = {
           enable = true;
           crates = {
