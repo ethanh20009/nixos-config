@@ -29,6 +29,23 @@
         description = "List of touchpad devices from 'hyprctl devices'.
         Will use adaptive accel profile.";
       };
+      autostartApps = lib.mkOption {
+        type = lib.types.listOf (lib.types.submodule {
+          options = {
+            name = lib.mkOption {
+              type = lib.types.str;
+              description = "Program name.";
+            };
+            workspace = lib.mkOption {
+              type = lib.types.int;
+              description = "Workspace number.";
+            };
+          };
+        });
+        default = [];
+        description = "List of touchpad devices from 'hyprctl devices'.
+        Will use adaptive accel profile.";
+      };
     };
     terminal = lib.mkOption {
       type = lib.types.str;

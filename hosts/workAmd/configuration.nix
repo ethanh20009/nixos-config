@@ -242,6 +242,20 @@ in {
       };
       secondMonitor = true;
       touchpadDevices = ["syna801a:00-06cb:cec6-touchpad"];
+      autostartApps = [
+        {
+          name = "slack";
+          workspace = 6;
+        }
+        {
+          name = "$term";
+          workspace = 1;
+        }
+        {
+          name = "$browser";
+          workspace = 2;
+        }
+      ];
     };
     extras.deno.enable = true;
     work = true;

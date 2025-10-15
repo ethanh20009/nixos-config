@@ -32,6 +32,8 @@
       "eDP-1,preferred,2560x200,1"
       ", preferred, auto, 1"
     ];
+
+  autostartApps = map (appConfig: "[workspace ${toString appConfig.workspace} silent] ${appConfig.name}") myConfig.hyprland.autostartApps;
 in {
   imports = [
     ./hyprpanel.nix
@@ -197,8 +199,7 @@ in {
 
       device = touchpadDevices;
 
-      "exec-once" = [
-      ];
+      "exec-once" = autostartApps;
     };
   };
 }
