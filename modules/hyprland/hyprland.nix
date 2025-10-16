@@ -23,7 +23,7 @@
     then [
       ("$mon1,preferred,0x0,1.5,bitdepth,10" + pMonitorHDR)
       "$mon2,highrr,-1920x0,1"
-      "eDP-1,preferred,3840x200,1"
+      "eDP-1,preferred,2560x200,1"
       ", preferred, auto, 1"
     ]
     else [
