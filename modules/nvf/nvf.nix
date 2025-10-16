@@ -559,7 +559,7 @@ in {
 
       lsp = {
         enable = true;
-        inlayHints.enable = true;
+        inlayHints.enable = false;
         formatOnSave = true;
         lspkind.enable = false;
         lightbulb.enable = true;
