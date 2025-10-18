@@ -234,6 +234,9 @@ in {
   users.users.immich.extraGroups = ["video" "render"];
   myConfig = {
     hyprland = {
+      primaryMonitor = {
+        rr = 160.0;
+      };
       secondMonitor = true;
     };
     tex.enable = true;

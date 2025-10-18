@@ -12,6 +12,11 @@
           default = true;
           description = "Use monitor as 4k";
         };
+        rr = lib.mkOption {
+          type = lib.types.float;
+          default = 60.0;
+          description = "Refresh rate to use";
+        };
         hdr = lib.mkOption {
           type = lib.types.bool;
           default = false;

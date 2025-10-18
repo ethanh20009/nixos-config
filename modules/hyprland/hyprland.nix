@@ -21,13 +21,13 @@
   monitorConfig =
     if myConfig.hyprland.primaryMonitor."4k"
     then [
-      ("$mon1,preferred,0x0,1.5,bitdepth,10" + pMonitorHDR)
+      ("$mon1,3840x2160@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1.5,bitdepth,10" + pMonitorHDR)
       "$mon2,highrr,-1920x0,1"
       "eDP-1,preferred,2560x200,1"
       ", preferred, auto, 1"
     ]
     else [
-      ("$mon1,2560x1440@120.00,0x0,1,bitdepth,10" + pMonitorHDR)
+      ("$mon1,2560x1440@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1,bitdepth,10" + pMonitorHDR)
       "$mon2,highrr,-1920x0,1"
       "eDP-1,preferred,2560x200,1"
       ", preferred, auto, 1"
