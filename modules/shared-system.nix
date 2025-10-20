@@ -26,6 +26,7 @@
       jq
       git-crypt
       tldr
+      obsidian
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {

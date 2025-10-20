@@ -155,6 +155,18 @@ in {
         wrap = false;
       };
 
+      notes.obsidian = {
+        enable = true;
+        setupOpts = {
+          workspaces = [
+            {
+              name = "personal";
+              path = "~/personal";
+            }
+          ];
+        };
+      };
+
       undoFile.enable = true;
       keymaps = [
         {
