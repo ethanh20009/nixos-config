@@ -131,6 +131,11 @@ in {
           vim.diagnostic.config({virtual_text = true})
         '';
 
+      luaConfigRC.folds = ''
+        vim.o.foldlevel = 99
+        vim.o.foldlevelstart = 99
+      '';
+
       luaConfigRC.removeDefaultBinds =
         /*
         lua
