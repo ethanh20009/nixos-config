@@ -155,6 +155,10 @@ in {
         wrap = false;
       };
 
+      ui.nvim-ufo = {
+        enable = true;
+      };
+
       notes.obsidian = {
         enable = true;
         setupOpts = {
