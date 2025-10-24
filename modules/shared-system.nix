@@ -27,6 +27,7 @@
       git-crypt
       tldr
       obsidian
+      gpu-screen-recorder-gtk
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
@@ -45,6 +46,8 @@ in {
       extra-substituters = ["https://devenv.cachix.org"];
       extra-trusted-public-keys = ["devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" "nixpkgs-python.cachix.org-1:hxjI7pFxTyuTHn2NkvWCrAUcNZLNS3ZAvfYNuYifcEU="];
     };
+
+    programs.gpu-screen-recorder.enable = true;
 
     security.polkit.enable = true;
 

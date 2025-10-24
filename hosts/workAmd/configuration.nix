@@ -158,7 +158,22 @@ in {
       networkmanagerapplet
       getopt
       google-chrome
-    ]);
+      rocmPackages.rocm-smi
+    ])
+    ++ [
+      inputs.audselect_rs.packages.${pkgs.system}.default
+    ];
+
+  services.earlyoom = {
+    enable = true;
+    freeSwapThreshold = 2;
+    freeMemThreshold = 2;
+    extraArgs = [
+      "-g"
+      "--avoid=^(X|plasma.*|konsole|kwin|.?[Hh]ypr.*)$"
+      "--prefer=^(java)$"
+    ];
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -221,6 +236,18 @@ in {
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
 
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi #optional AMD hardware acceleration
+      obs-gstreamer
+      obs-vkcapture
+    ];
+  };
+
   # For hyprpanel
   services.upower.enable = true;
 
@@ -239,6 +266,7 @@ in {
     hyprland = {
       primaryMonitor = {
         "4k" = true;
+        rr = 160.0;
       };
       secondMonitor = true;
       touchpadDevices = ["syna801a:00-06cb:cec6-touchpad"];

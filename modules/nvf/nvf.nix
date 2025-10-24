@@ -781,6 +781,7 @@ in {
         };
       };
       # treesitter.context.enable = true;
+      treesitter.fold = true;
       treesitter.mappings = {
         incrementalSelection = {
           incrementByNode = "<C-n>";
