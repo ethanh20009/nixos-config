@@ -29,6 +29,8 @@
     config.hide_env_diff = true;
   };
 
+  home.file."personal/.keep".text = "";
+
   programs.gpg = {
     enable = true;
   };
