@@ -16,6 +16,10 @@
             url = "file:///home/ethan/schemas/origin/step.schema.json";
             description = "Workflow step schema";
           }
+          {
+            fileMatch = ["**/extension.schema.json"];
+            url = "https://json-schema.org/draft-07/schema#";
+          }
         ];
         validate = {enable = true;};
         format = {
