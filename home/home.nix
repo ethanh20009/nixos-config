@@ -167,9 +167,7 @@
     };
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
-      if test -f ~/.apikeys.fish
-          source ~/.apikeys.fish
-      end
+      test -f ~/.apikeys.fish; and source ~/.apikeys.fish
     '';
   };
   home.shell.enableFishIntegration = true;

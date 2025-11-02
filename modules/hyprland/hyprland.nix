@@ -42,11 +42,26 @@ in {
     # ./hyprpaper.nix
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      hyprland = {
+        default = ["hyprland" "gtk"];
+        "org.freedesktop.impl.portal.ScreenCast" = [
+          "gnome"
+        ];
+      };
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     # set the Hyprland and XDPH packages to null to use the ones from the NixOS module
     package = null;
-    portalPackage = null;
 
     settings = {
       "$mod" = "SUPER";
@@ -190,6 +205,9 @@ in {
       layerrule = [
         "blur, bar-0"
       ];
+      xwayland = {
+        "force_zero_scaling" = true;
+      };
 
       input = {
         kb_options = "caps:swapescape";

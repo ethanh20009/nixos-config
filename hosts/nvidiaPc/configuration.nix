@@ -101,7 +101,7 @@ in {
     packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       liberation_ttf
       fira-code # Popular for monospace
       # If you want Nerd Fonts (highly recommended for icons/glyphs)
@@ -189,6 +189,13 @@ in {
   services.tumbler.enable = true; # Thumbnail support for images
 
   programs.adb.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   # For hyprpanel
   services.upower.enable = true;
