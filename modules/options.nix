@@ -2,7 +2,7 @@
   options.myConfig = {
     browser = lib.mkOption {
       type = lib.types.str;
-      default = "firefox";
+      default = "brave --profile-directory=\"Default\" --hide-crash-restore-bubble --restore-last-session";
       description = "System default browser";
     };
     hyprland = {
