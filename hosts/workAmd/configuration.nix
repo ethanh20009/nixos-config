@@ -253,8 +253,6 @@ in {
 
   virtualisation.docker.enable = true;
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   networking.extraHosts = ''
     127.0.0.1 collect.flexys.dev collaborate.flexys.dev keycloak.flexys.dev engine.flexys.dev schema-registry brand1.flexys.dev brand2.flexys.dev broker keycloak
   '';
