@@ -12,6 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/shared-system.nix
+    ../../modules/options.nix
   ];
 
   stylix.enable = true;
@@ -93,7 +94,10 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      myConfig = config.myConfig;
+    };
     users = {
       "ethan" = import ../../home/home.nix;
     };
