@@ -8,6 +8,9 @@
 }: let
   inherit (lib.generators) mkLuaInline;
   json-ls-settings = lib.optionalAttrs myConfig.work {
+    init_options = {
+      provideFormatter = false;
+    };
     settings = {
       json = {
         schemas = [
@@ -23,7 +26,7 @@
         ];
         validate = {enable = true;};
         format = {
-          enable = true;
+          enable = false;
         };
       };
     };
@@ -523,6 +526,9 @@ in {
             "prettierd"
           ];
           typescript = [
+            "prettierd"
+          ];
+          json = [
             "prettierd"
           ];
         };
