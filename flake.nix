@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    private-config = {
+      url = "git+ssh://git@github.com/ethanh20009/nixos-private";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,6 +69,7 @@
         ./hosts/workAmd/configuration.nix
         stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
+        inputs.private-config.nixosModules.default
       ];
     };
   };

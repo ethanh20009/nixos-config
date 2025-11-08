@@ -40,7 +40,7 @@
 
     # Choose your pinentry flavor:
     # If you use a graphical environment (Gnome, KDE, etc.)
-    pinentryPackage = pkgs.pinentry-qt; # or pkgs.pinentry-gtk2
+    pinentry.package = pkgs.pinentry-qt; # or pkgs.pinentry-gtk2
 
     # OR, if you are strictly terminal/SSH/headless:
     # pinentryPackage = pkgs.pinentry-curses;
@@ -142,9 +142,9 @@
 
   programs.git = {
     enable = true;
-    userName = "Ethan Howard";
-    userEmail = "ethanh20009@outlook.com";
-    extraConfig = {
+    settings = {
+      user.name = "Ethan Howard";
+      user.email = "ethanh20009@outlook.com";
       diff = {
         algorithm = "patience";
       };

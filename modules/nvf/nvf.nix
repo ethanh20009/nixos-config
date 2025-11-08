@@ -6,24 +6,12 @@
   myConfig,
   ...
 }: let
-  inherit (lib.generators) mkLuaInline;
-  json-ls-settings = lib.optionalAttrs myConfig.work {
+  base-json-ls-settings = {
     init_options = {
       provideFormatter = false;
     };
     settings = {
       json = {
-        schemas = [
-          {
-            fileMatch = ["**/solution-origin/workflows-v2/*/steps/*/definition.json"];
-            url = "file:///home/ethan/schemas/origin/step.schema.json";
-            description = "Workflow step schema";
-          }
-          {
-            fileMatch = ["**/extension.schema.json"];
-            url = "https://json-schema.org/draft-07/schema#";
-          }
-        ];
         validate = {enable = true;};
         format = {
           enable = false;
@@ -655,7 +643,7 @@ in {
                 "html"
               ];
             };
-            jsonls = json-ls-settings;
+            jsonls = base-json-ls-settings;
             ltex = {
               filetypes = [
                 "bib"

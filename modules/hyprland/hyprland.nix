@@ -21,7 +21,7 @@
   monitorConfig =
     if myConfig.hyprland.primaryMonitor."4k"
     then [
-      ("$mon1,3840x2160@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1.5" + pMonitorHDR) # Set ',bitdepth,10' when Hyprland updates to fix screensharing. Already on master.
+      ("$mon1,3840x2160@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1.5,vrr,3" + pMonitorHDR) # Set ',bitdepth,10' when Hyprland updates to fix screensharing. Already on master.
       "$mon2,highrr,-1920x0,1"
       "eDP-1,preferred,2560x200,1"
       ", preferred, auto, 1"

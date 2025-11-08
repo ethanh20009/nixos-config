@@ -135,7 +135,7 @@ in {
     modesetting.enable = true;
     powerManagement.enable = true;
     open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
