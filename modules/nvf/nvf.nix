@@ -641,6 +641,7 @@ in {
               filetypes = [
                 "htmlangular"
                 "html"
+                "html.handlebars"
               ];
             };
             jsonls = base-json-ls-settings;
