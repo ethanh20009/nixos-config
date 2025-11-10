@@ -69,7 +69,7 @@
         ./hosts/workAmd/configuration.nix
         stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
-        inputs.private-config.nixosModules.default
+        inputs.private-config.nixosModules.work
       ];
     };
   };

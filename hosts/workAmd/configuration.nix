@@ -19,7 +19,7 @@ in {
 
   stylix.enable = true;
   stylix.image = ../../wallpapers/flexys-dark.jpg;
-  stylix.polarity = "dark";
+  stylix.colorGeneration.polarity = "dark";
   stylix.targets.nvf.enable = false;
 
   # Bootloader.
