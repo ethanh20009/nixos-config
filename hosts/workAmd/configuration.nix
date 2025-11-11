@@ -159,6 +159,7 @@ in {
       getopt
       google-chrome
       rocmPackages.rocm-smi
+      fx
     ])
     ++ [
       inputs.audselect_rs.packages.${pkgs.system}.default
