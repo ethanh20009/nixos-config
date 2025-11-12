@@ -108,7 +108,7 @@
     packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       liberation_ttf
       fira-code # Popular for monospace
       # If you want Nerd Fonts (highly recommended for icons/glyphs)
@@ -199,4 +199,8 @@
   services.upower.enable = true;
 
   virtualisation.docker.enable = true;
+
+  myConfig = {
+    tex.enable = true;
+  };
 }
