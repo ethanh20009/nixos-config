@@ -35,6 +35,7 @@ in {
         pkgs.prettierd
         pkgs.ripgrep
         pkgs.lazygit
+        pkgs.copilot-language-server
       ];
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
@@ -761,6 +762,29 @@ in {
                 opts = {skip = true;};
               }
             ];
+          };
+        };
+      };
+
+      assistant = {
+        copilot = {
+          enable = true;
+          cmp.enable = false;
+          setupOpts = {
+            suggestion = {
+              auto_trigger = false;
+            };
+            filetypes = {
+              sh = ''
+                sh = function ()
+                      if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
+                        -- disable for .env files
+                        return false
+                      end
+                      return true
+                    end,
+              '';
+            };
           };
         };
       };
