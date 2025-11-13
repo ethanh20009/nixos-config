@@ -243,6 +243,8 @@ in {
     hyprland = {
       primaryMonitor = {
         rr = 160.0;
+        vrr = 3;
+        tenbit = true;
       };
       secondMonitor = true;
     };

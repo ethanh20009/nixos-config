@@ -18,16 +18,23 @@
     then ",cm,hdr"
     else "";
 
+  pMonitorTenBit =
+    if myConfig.hyprland.primaryMonitor.tenbit
+    then ",bitdepth,10"
+    else "";
+
+  pMonitorVrr = ",vrr," + toString myConfig.hyprland.primaryMonitor.vrr;
+
   monitorConfig =
     if myConfig.hyprland.primaryMonitor."4k"
     then [
-      ("$mon1,3840x2160@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1.5,vrr,3,bitdepth,10" + pMonitorHDR)
+      ("$mon1,3840x2160@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1.5" + pMonitorVrr + pMonitorTenBit + pMonitorHDR)
       "$mon2,highrr,-1920x0,1"
       "eDP-1,preferred,2560x200,1"
       ", preferred, auto, 1"
     ]
     else [
-      ("$mon1,2560x1440@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1,bitdepth,10" + pMonitorHDR)
+      ("$mon1,2560x1440@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1" + pMonitorVrr + pMonitorTenBit + pMonitorHDR)
       "$mon2,highrr,-1920x0,1"
       "eDP-1,preferred,2560x200,1"
       ", preferred, auto, 1"

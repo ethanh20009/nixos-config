@@ -22,6 +22,16 @@
           default = false;
           description = "Use HDR";
         };
+        tenbit = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Use 10 bit";
+        };
+        vrr = lib.mkOption {
+          type = lib.types.int;
+          default = 0;
+          description = "VRR Mode: 0 - off, 1 - always, 2 - fullscreen, 3 - auto game detection (not always detects)";
+        };
       };
       secondMonitor = lib.mkOption {
         type = lib.types.bool;
