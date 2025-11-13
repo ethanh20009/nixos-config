@@ -41,6 +41,7 @@ in {
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
   networking.networkmanager.plugins = with pkgs; [
     networkmanager-openvpn
   ];
@@ -80,6 +81,11 @@ in {
 
       CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+      WIFI_PWR_ON_BAT = "off";
+      WIFI_PWR_ON_AC = "off";
+
+      USB_AUTOSUSPEND = 0;
 
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
