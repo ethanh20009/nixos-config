@@ -29,6 +29,7 @@
       obsidian
       gpu-screen-recorder-gtk
       fd
+      mpv
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {

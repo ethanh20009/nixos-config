@@ -775,8 +775,8 @@ in {
               auto_trigger = false;
             };
             filetypes = {
-              sh = ''
-                sh = function ()
+              sh = lib.generators.mkLuaInline ''
+                function ()
                       if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
                         -- disable for .env files
                         return false
