@@ -666,19 +666,17 @@ in {
               };
             };
           }
-          // lib.optionalAttrs myConfig.extras.deno.enable {
-            denols = {
-              root_dir =
-                /*
-                lua
-                */
-                ''
-                  require("lspconfig").util.root_pattern({ "deno.json", "deno.jsonc" });
-                '';
-              single_file_support = false;
-              settings = {};
-            };
-          };
+          # // lib.optionalAttrs myConfig.extras.deno.enable {
+          #   denols = {
+          #     root_markers = [
+          #       "deno.json"
+          #       "deno.jsonc"
+          #     ];
+          #     single_file_support = false;
+          #     settings = {};
+          #   };
+          # }
+          ;
       };
 
       visuals = {
