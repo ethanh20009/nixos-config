@@ -211,6 +211,7 @@ in {
         kb_options = "caps:swapescape";
         kb_layout = "gb";
         accel_profile = "flat";
+        sensitivity = "-0.3";
       };
 
       device = touchpadDevices;
