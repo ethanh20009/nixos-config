@@ -30,6 +30,7 @@
       gpu-screen-recorder-gtk
       fd
       mpv
+      nh
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
