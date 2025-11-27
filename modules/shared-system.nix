@@ -7,17 +7,17 @@
   myPackages = with pkgs;
     [
       killall
-      pkgs.kitty
-      pkgs.firefox
-      pkgs.playerctl
-      pkgs.pavucontrol
-      pkgs.wl-clipboard
-      pkgs.gh
-      pkgs.discord
-      pkgs.brightnessctl
-      pkgs.postman
-      pkgs.brave
-      pkgs.usbutils
+      kitty
+      firefox
+      playerctl
+      pavucontrol
+      wl-clipboard
+      gh
+      discord
+      brightnessctl
+      postman
+      brave
+      usbutils
       postgresql
       gthumb
       ripgrep
@@ -31,6 +31,7 @@
       fd
       mpv
       nh
+      lsof
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
