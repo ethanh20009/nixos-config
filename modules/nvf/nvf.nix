@@ -36,6 +36,8 @@ in {
         pkgs.ripgrep
         pkgs.lazygit
         pkgs.copilot-language-server
+        pkgs.lldb
+        pkgs.vscode-extensions.vadimcn.vscode-lldb
       ];
       startPlugins = [
         pkgs.vimPlugins.alpha-nvim
@@ -44,6 +46,7 @@ in {
         pkgs.vimPlugins.vim-dadbod-ui
         pkgs.vimPlugins.vim-dadbod-completion
         pkgs.vimPlugins.vim-mustache-handlebars
+        pkgs.vimPlugins.nvim-dap-lldb
       ];
       lazy.plugins = {
         "sidekick.nvim" = {
