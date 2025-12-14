@@ -646,9 +646,26 @@ in {
           ''
             lspconfig.angularls.setup {
               capabilities = capabilities,
-              root_dir = lspconfig.util.root_pattern('angular.json'),
+              root_dir = lspconfig.util.root_pattern('angular.json', 'project.json'),
+              on_new_config = function(new_config, new_root_dir)
+                local local_ngserver = vim.fs.joinpath(new_root_dir, 'node_modules', '@angular', 'language-server', 'bin', 'ngserver')
+                local node_modules = vim.fs.joinpath(new_root_dir, 'node_modules')
+
+                if vim.fn.filereadable(local_ngserver) == 1 then
+                  new_config.cmd = {
+                    local_ngserver,
+                    "--stdio",
+                    "--tsProbeLocations", node_modules,
+                    "--ngProbeLocations", node_modules,
+                  }
+                  vim.notify("AngularLS: Switched to local project version", vim.log.levels.INFO)
+                else
+                  vim.notify("AngularLS: Local server not found, using global", vim.log.levels.WARN)
+                end
+              end,
               on_attach = function (client, bufnr)
-                 default_on_attach(client, bufnr)
+                 -- Keep your existing on_attach logic
+                 if default_on_attach then default_on_attach(client, bufnr) end
                  client.server_capabilities.renameProvider = false
                  client.server_capabilities.referencesProvider = false
               end
