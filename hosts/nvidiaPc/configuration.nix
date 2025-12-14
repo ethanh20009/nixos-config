@@ -239,6 +239,13 @@ in {
     accelerationDevices = null;
   };
   users.users.immich.extraGroups = ["video" "render"];
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      btop = prev.btop.override {cudaSupport = true;};
+    })
+  ];
+
   myConfig = {
     hyprland = {
       primaryMonitor = {
