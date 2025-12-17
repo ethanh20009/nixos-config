@@ -580,9 +580,8 @@ in {
         css.enable = true;
         rust = {
           enable = true;
-          crates = {
-            enable = true;
-            codeActions = true;
+          extensions = {
+            crates-nvim.enable = true;
           };
           format.enable = true;
           format.type = "rustfmt";
@@ -638,7 +637,7 @@ in {
           goToDeclaration = null;
           codeAction = null;
         };
-
+        lspconfig.enable = true;
         lspconfig.sources.angularls =
           /*
           lua

@@ -150,6 +150,7 @@ in {
     config.myConfig.defaultPackages
     ++ [
       inputs.audselect_rs.packages.${pkgs.system}.default
+      pkgs.hydra-check
     ]
     ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 
