@@ -881,14 +881,27 @@ in {
           setupOpts = {
             keymap.preset = "default";
             snippets = {preset = "luasnip";};
-            fuzzy.implementation = "prefer_rust_with_warning";
-            # sources = {
-            #   providers = {
-            #     buffer = {
-            #       score_offset = -10;
-            #     };
-            #   };
-            # };
+            fuzzy = {
+              implementation = "prefer_rust_with_warning";
+              sorts = [
+                "exact"
+                "score"
+                "sort_text"
+              ];
+            };
+            sources = {
+              default = [
+                "buffer"
+                "lsp"
+                "snippets"
+                "path"
+              ];
+              providers = {
+                buffer = {
+                  score_offset = -10;
+                };
+              };
+            };
           };
         };
         nvim-cmp.enable = false;
