@@ -173,8 +173,10 @@ in {
 
   services.earlyoom = {
     enable = true;
-    freeSwapThreshold = 2;
-    freeMemThreshold = 2;
+    freeSwapThreshold = 5;
+    freeSwapKillThreshold = 5;
+    freeMemThreshold = 4;
+    freeMemKillThreshold = 4;
     extraArgs = [
       "-g"
       "--avoid=^(X|plasma.*|konsole|kwin|.?[Hh]ypr.*)$"

@@ -43,7 +43,7 @@
   autostartApps = map (appConfig: "[workspace ${toString appConfig.workspace} silent] ${appConfig.name}") myConfig.hyprland.autostartApps;
 in {
   imports = [
-    ./hyprpanel.nix
+    ./celestia.nix
     ./hyprlock.nix
     ./hypridle.nix
     # ./hyprpaper.nix
@@ -100,7 +100,7 @@ in {
           "$mod, V, togglespecialworkspace"
           "$mod, F, fullscreen"
 
-          "$mod, SPACE, exec, rofi -show drun -display-drun \"\""
+          "$mod, SPACE, exec, caelestia shell drawers toggle launcher"
           "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only -z"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"

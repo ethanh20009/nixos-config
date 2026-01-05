@@ -29,6 +29,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     audselect_rs = {
       url = "github:ethanh20009/audselect_rs"; # <-- New GitHub path
       # You can optionally specify a branch, e.g., "github:YourUsername/YourRepoName/my-branch"
