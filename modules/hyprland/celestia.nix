@@ -16,8 +16,17 @@
       environment = [];
     };
     settings = {
+      general = {
+        idle = {
+          lockBeforeSleep = false;
+          inhibitWhenAudio = false;
+          timeouts = [
+          ];
+        };
+      };
       paths = {
         wallpaperDir = ../../wallpapers;
+        sessionGif = ../../wallpapers/coding-animated.gif;
       };
       bar = {
         clock = {

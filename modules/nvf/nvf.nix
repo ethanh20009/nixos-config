@@ -186,7 +186,6 @@ in {
           vim.keymap.del("n", "gri")
           vim.keymap.del("n", "grr")
           vim.keymap.del("n", "gra")
-          vim.keymap.del("n", "grc")
           vim.keymap.del("n", "grn")
           vim.keymap.del("n", "grt")
         '';
@@ -570,7 +569,7 @@ in {
       };
       languages = {
         enableFormat = true;
-        enableTreesitter = true;
+        enableTreesitter = false;
         enableExtraDiagnostics = true;
 
         nix.enable = true;

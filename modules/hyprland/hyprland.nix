@@ -101,6 +101,7 @@ in {
           "$mod, F, fullscreen"
 
           "$mod, SPACE, exec, caelestia shell drawers toggle launcher"
+          "$mod, N, exec, caelestia shell drawers toggle sidebar"
           "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only -z"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
@@ -189,20 +190,17 @@ in {
             5)
         );
       windowrule = [
-        "bordersize 0, floating:0, onworkspace:w[tv1]"
-        "rounding 0, floating:0, onworkspace:w[tv1]"
-        "bordersize 0, floating:0, onworkspace:f[1]"
-        "rounding 0, floating:0, onworkspace:f[1]"
+        "border_size 0, match:float 0, match:workspace w[tv1]"
+        "rounding 0, match:float 0, match:workspace w[tv1]"
+        "border_size 0, match:float 0, match:workspace f[1]"
+        "rounding 0, match:float 0, match:workspace f[1]"
 
-        "bordersize 2, floating:0, onworkspace:s[1]"
-        "rounding 10, floating:0, onworkspace:s[1]"
+        "border_size 2, match:float 0, match:workspace s[1]"
+        "rounding 10, match:float 0, match:workspace s[1]"
       ];
       decoration = {
-        blur.passes = 2;
+        rounding = 10;
       };
-      layerrule = [
-        "blur, bar-0"
-      ];
       xwayland = {
         "force_zero_scaling" = true;
       };
