@@ -543,12 +543,13 @@ in {
           };
         };
       };
-      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [
+      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.parsers; [
         angular
         typescript
         html
         json
         javascript
+        rust
       ];
       formatter.conform-nvim = {
         enable = true;
@@ -912,12 +913,8 @@ in {
       };
       # treesitter.context.enable = true;
       treesitter.fold = true;
-      treesitter.mappings = {
-        incrementalSelection = {
-          incrementByNode = "<C-n>";
-          decrementByNode = "<C-p>";
-        };
-      };
+      treesitter.highlight.enable = true;
+      treesitter.indent.enable = true;
       treesitter.textobjects = {
         enable = false;
         setupOpts = {
