@@ -100,6 +100,7 @@ in {
           "$mod, V, togglespecialworkspace"
           "$mod, F, fullscreen"
 
+          "$mod, N, exec, caelestia shell drawers toggle sidebar"
           "$mod, SPACE, exec, caelestia shell drawers toggle launcher"
           "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only -z"
           ", XF86AudioNext, exec, playerctl next"
