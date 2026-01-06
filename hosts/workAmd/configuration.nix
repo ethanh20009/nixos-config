@@ -17,6 +17,9 @@ in {
     ../../modules/shared-system.nix
   ];
 
+  # For NVF
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+
   stylix.enable = true;
   stylix.image = ../../wallpapers/flexys-dark.jpg;
   stylix.colorGeneration.polarity = "dark";

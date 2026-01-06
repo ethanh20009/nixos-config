@@ -543,7 +543,7 @@ in {
           };
         };
       };
-      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter-parsers; [
         angular
         typescript
         html
@@ -569,7 +569,7 @@ in {
       };
       languages = {
         enableFormat = true;
-        enableTreesitter = false;
+        enableTreesitter = true;
         enableExtraDiagnostics = true;
 
         nix.enable = true;
@@ -919,7 +919,7 @@ in {
         };
       };
       treesitter.textobjects = {
-        enable = true;
+        enable = false;
         setupOpts = {
           select = {
             enable = true;
