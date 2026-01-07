@@ -24,6 +24,7 @@
           ];
         };
       };
+      background.enabled = false;
       paths = {
         wallpaperDir = ../../wallpapers;
         sessionGif = ../../wallpapers/coding-animated.gif;
