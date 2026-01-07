@@ -16,7 +16,7 @@
     # hyprland.url = "github:hyprwm/Hyprland";
 
     nvf = {
-      url = "github:notashelf/nvf?ref=pull/1318/head";
+      url = "github:notashelf/nvf?ref=pull/1316/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
