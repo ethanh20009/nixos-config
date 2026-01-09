@@ -39,15 +39,29 @@ in {
         pkgs.lldb
         pkgs.vscode-extensions.vadimcn.vscode-lldb
       ];
-      startPlugins = [
-        pkgs.vimPlugins.alpha-nvim
-        pkgs.vimPlugins.plenary-nvim # required dependency
-        pkgs.vimPlugins.vim-dadbod
-        pkgs.vimPlugins.vim-dadbod-ui
-        pkgs.vimPlugins.vim-dadbod-completion
-        pkgs.vimPlugins.vim-mustache-handlebars
-        pkgs.vimPlugins.nvim-dap-lldb
-      ];
+      startPlugins =
+        [
+          pkgs.vimPlugins.alpha-nvim
+          pkgs.vimPlugins.plenary-nvim # required dependency
+          pkgs.vimPlugins.vim-dadbod
+          pkgs.vimPlugins.vim-dadbod-ui
+          pkgs.vimPlugins.vim-dadbod-completion
+          pkgs.vimPlugins.vim-mustache-handlebars
+          pkgs.vimPlugins.nvim-dap-lldb
+        ]
+        ++ (with pkgs.vimPlugins.nvim-treesitter.queries; [
+          angular
+          typescript
+          html
+          html_tags
+          ecma
+          css
+          rust
+          javascript
+          lua
+          nix
+        ]);
+
       lazy.plugins = {
         "sidekick.nvim" = {
           package = pkgs.vimPlugins.sidekick-nvim;
@@ -543,14 +557,31 @@ in {
           };
         };
       };
-      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+
+      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.grammarPlugins; [
+        nix
+        lua
         angular
-        typescript
         html
         json
         javascript
         rust
+        typescript
       ];
+
+      luaConfigRC.treesitter =
+        /*
+        lua
+        */
+        ''
+          local ts_group = vim.api.nvim_create_augroup("TreesitterAutoStart", { clear = true })
+          vim.api.nvim_create_autocmd('FileType', {
+            group = ts_group,
+            pattern = { 'nix', 'lua', 'angular', 'typescript', 'ts', 'javascript', 'html', 'json', 'rust', 'js', 'htmlangular' },
+            callback = function() pcall(vim.treesitter.start) end,
+          })
+        '';
+
       formatter.conform-nvim = {
         enable = true;
         setupOpts.formatters_by_ft = {
@@ -568,6 +599,9 @@ in {
           ];
         };
       };
+
+      treesitter.enable = true;
+
       languages = {
         enableFormat = true;
         enableTreesitter = true;
@@ -916,7 +950,7 @@ in {
       treesitter.highlight.enable = true;
       treesitter.indent.enable = true;
       treesitter.textobjects = {
-        enable = true;
+        enable = false;
         setupOpts = {
           select = {
             enable = true;
