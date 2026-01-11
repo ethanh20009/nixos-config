@@ -154,6 +154,7 @@ in {
             ''
               require("luasnip.loaders.from_vscode").lazy_load()
               require("luasnip").filetype_extend("htmlangular", { "html" })
+              require("luasnip.loaders.from_vscode").lazy_load({ paths = { "${./snippets}" } })
             '';
         };
       };
@@ -930,7 +931,14 @@ in {
                 "snippets"
                 "path"
               ];
+              per_filetype = {
+                sql = ["snippets" "dadbod" "buffer"];
+              };
               providers = {
+                dadbod = {
+                  name = "Dadbod";
+                  module = "vim_dadbod_completion.blink";
+                };
                 buffer = {
                   score_offset = -10;
                 };

@@ -1,0 +1,12 @@
+{
+  "if": {
+    "prefix": "if",
+    "body": "@if (${1:expression}) {$2}",
+    "description": "Angular if expression"
+  },
+  "for": {
+    "prefix": "for",
+    "body": "@for (${1:item} of ${2:items}; track ${3:item}) {$4}",
+    "description": "Angular for expression"
+  }
+}
