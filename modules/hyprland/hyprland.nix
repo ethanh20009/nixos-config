@@ -55,6 +55,18 @@ in {
       xdg-desktop-portal-hyprland
     ];
   };
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = ["${myConfig.wallpaper}"];
+      wallpaper = [
+        {
+          monitor = "";
+          path = "${myConfig.wallpaper}";
+        }
+      ];
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;

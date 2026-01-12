@@ -5,6 +5,11 @@
       default = "brave --profile-directory=\"Default\" --hide-crash-restore-bubble --restore-last-session";
       description = "System default browser";
     };
+    wallpaper = lib.mkOption {
+      type = lib.types.path;
+      default = ../wallpapers/colorful-planets.jpg;
+      description = "Wallpaper";
+    };
     hyprland = {
       primaryMonitor = {
         "4k" = lib.mkOption {

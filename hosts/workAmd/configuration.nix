@@ -21,7 +21,6 @@ in {
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
   stylix.enable = true;
-  stylix.image = ../../wallpapers/flexys-dark.jpg;
   stylix.colorGeneration.polarity = "dark";
   stylix.targets.nvf.enable = false;
 
@@ -273,6 +272,7 @@ in {
   ];
 
   myConfig = {
+    wallpaper = ../../wallpapers/flexys-dark.jpg;
     hyprland = {
       primaryMonitor = {
         "4k" = true;

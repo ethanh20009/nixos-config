@@ -12,6 +12,7 @@
   home.homeDirectory = "/home/ethan";
 
   stylix.enable = true;
+  stylix.image = myConfig.wallpaper;
   stylix.colorGeneration.scheme = "fidelity";
 
   imports = [

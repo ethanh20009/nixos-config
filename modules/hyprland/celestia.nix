@@ -16,6 +16,7 @@
       environment = [];
     };
     settings = {
+      background.enabled = false;
       general = {
         idle = {
           lockBeforeSleep = false;
