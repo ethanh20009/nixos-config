@@ -48,6 +48,7 @@ in {
           pkgs.vimPlugins.vim-dadbod-completion
           pkgs.vimPlugins.vim-mustache-handlebars
           pkgs.vimPlugins.nvim-dap-lldb
+          pkgs.vimPlugins.markdown-preview-nvim
         ]
         ++ (with pkgs.vimPlugins.nvim-treesitter.queries; [
           angular
