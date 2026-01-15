@@ -16,7 +16,7 @@
     # hyprland.url = "github:hyprwm/Hyprland";
 
     nvf = {
-      url = "github:NotAShelf/nvf?ref=pull/1316/head";
+      url = "github:NotAShelf/nvf";
     };
 
     stylix = {

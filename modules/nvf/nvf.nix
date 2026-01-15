@@ -100,6 +100,20 @@ in {
               mode = "n";
               action = ":Sidekick cli send prompt=diagnostic name=${tool}<CR>";
             }
+            {
+              key = "<leader>aa";
+              action =
+                /*
+                lua
+                */
+                ''
+                  function()
+                    require("sidekick.cli").send({ msg = "{selection}" })
+                  end
+                '';
+              mode = "x";
+              lua = true;
+            }
           ];
           # setupOpts = {
           #   nes.enabled = false;
