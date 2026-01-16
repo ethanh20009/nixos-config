@@ -61,6 +61,7 @@ in {
           javascript
           lua
           nix
+          glimmer
         ]);
 
       lazy.plugins = {
@@ -583,6 +584,7 @@ in {
         javascript
         rust
         typescript
+        glimmer
       ];
 
       luaConfigRC.treesitter =
@@ -591,10 +593,16 @@ in {
         */
         ''
           local ts_group = vim.api.nvim_create_augroup("TreesitterAutoStart", { clear = true })
+          local standard_indent = { 'nix', 'lua', 'html.handlebars', 'handlebars'}
           vim.api.nvim_create_autocmd('FileType', {
+            pattern = { 'nix', 'lua', 'angular', 'typescript', 'ts', 'javascript', 'html', 'json', 'rust', 'js', 'htmlangular', 'html.handlebars', 'handlebars' },
             group = ts_group,
-            pattern = { 'nix', 'lua', 'angular', 'typescript', 'ts', 'javascript', 'html', 'json', 'rust', 'js', 'htmlangular' },
-            callback = function() pcall(vim.treesitter.start) end,
+            callback = function()
+              pcall(vim.treesitter.start)
+              if vim.tbl_contains(standard_indent, vim.bo.filetype) then
+                vim.bo.indentexpr = ""
+              end
+            end,
           })
         '';
 
