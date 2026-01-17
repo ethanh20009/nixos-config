@@ -62,6 +62,8 @@ in {
           lua
           nix
           glimmer
+          tsx
+          jsx
         ]);
 
       lazy.plugins = {
@@ -585,6 +587,7 @@ in {
         rust
         typescript
         glimmer
+        tsx
       ];
 
       luaConfigRC.treesitter =
@@ -595,7 +598,7 @@ in {
           local ts_group = vim.api.nvim_create_augroup("TreesitterAutoStart", { clear = true })
           local standard_indent = { 'nix', 'lua', 'html.handlebars', 'handlebars'}
           vim.api.nvim_create_autocmd('FileType', {
-            pattern = { 'nix', 'lua', 'angular', 'typescript', 'ts', 'javascript', 'html', 'json', 'rust', 'js', 'htmlangular', 'html.handlebars', 'handlebars' },
+            pattern = { 'nix', 'lua', 'angular', 'typescript', 'ts', 'javascript', 'html', 'json', 'rust', 'js', 'htmlangular', 'html.handlebars', 'handlebars', 'jsx', 'tsx' },
             group = ts_group,
             callback = function()
               pcall(vim.treesitter.start)

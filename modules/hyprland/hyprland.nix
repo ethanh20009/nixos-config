@@ -29,14 +29,14 @@
     if myConfig.hyprland.primaryMonitor."4k"
     then [
       ("$mon1,3840x2160@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1.5" + pMonitorVrr + pMonitorTenBit + pMonitorHDR)
-      "$mon2,highrr,-1920x0,1"
-      "eDP-1,preferred,2560x200,1"
+      "$mon2,highrr,2560x200,1"
+      "eDP-1,preferred,-1920x0,1"
       ", preferred, auto, 1"
     ]
     else [
       ("$mon1,2560x1440@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1" + pMonitorVrr + pMonitorTenBit + pMonitorHDR)
-      "$mon2,highrr,-1920x0,1"
-      "eDP-1,preferred,2560x200,1"
+      "$mon2,highrr,2560x200,1"
+      "eDP-1,preferred,-1920x0,1"
       ", preferred, auto, 1"
     ];
 
