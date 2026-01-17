@@ -209,7 +209,15 @@ in {
 
         "border_size 2, match:float 0, match:workspace s[1]"
         "rounding 10, match:float 0, match:workspace s[1]"
+
+        "match:class steam_app.*, content game"
       ];
+      render = {
+        direct_scanout = 2;
+      };
+      cursor = {
+        min_refresh_rate = 50;
+      };
       decoration = {
         rounding = 10;
       };
