@@ -133,8 +133,30 @@ in {
     nvidiaSettings = true;
     modesetting.enable = true;
     powerManagement.enable = true;
+    nvidiaPersistenced = true;
     open = true;
     package = config.boot.kernelPackages.nvidiaPackages.production;
+  };
+
+  systemd.services.nvidia-gpu-lock = {
+    description = "Lock NVIDIA GPU clocks";
+    # Run after the driver is likely loaded, but before graphical session usage peaks
+    after = ["systemd-modules-load.service"];
+    wantedBy = ["multi-user.target"];
+
+    # Make the nvidia-smi command available to the script
+    path = [config.hardware.nvidia.package];
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      # -lgc <minClock>,<maxClock>
+      ExecStart = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -lgc 2105,3105";
+
+      # unlock clocks on shutdown/stop so the next boot is clean
+      ExecStop = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -rgc";
+      RemainAfterExit = true;
+    };
   };
 
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
