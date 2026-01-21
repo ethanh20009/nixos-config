@@ -172,6 +172,7 @@ in {
             ''
               require("luasnip.loaders.from_vscode").lazy_load()
               require("luasnip").filetype_extend("htmlangular", { "html" })
+              require("luasnip").filetype_extend("tsx", { "html" })
               require("luasnip.loaders.from_vscode").lazy_load({ paths = { "${./snippets}" } })
             '';
         };
@@ -622,6 +623,12 @@ in {
             "prettierd"
           ];
           json = [
+            "prettierd"
+          ];
+          jsx = [
+            "prettierd"
+          ];
+          tsx = [
             "prettierd"
           ];
         };
