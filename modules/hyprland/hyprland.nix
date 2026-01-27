@@ -31,12 +31,14 @@
       ("$mon1,3840x2160@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1.5" + pMonitorVrr + pMonitorTenBit + pMonitorHDR)
       "$mon2,highrr,2560x200,1"
       "eDP-1,preferred,-1920x0,1"
+      "desc:AMZ FireTV,3840x2160@60,auto,1"
       ", preferred, auto, 1"
     ]
     else [
       ("$mon1,2560x1440@${toString myConfig.hyprland.primaryMonitor.rr},0x0,1" + pMonitorVrr + pMonitorTenBit + pMonitorHDR)
       "$mon2,highrr,2560x200,1"
       "eDP-1,preferred,-1920x0,1"
+      "desc:AMZ FireTV,3840x2160@60,auto,1"
       ", preferred, auto, 1"
     ];
 
@@ -212,11 +214,17 @@ in {
         "rounding 10, match:float 0, match:workspace s[1]"
 
         "match:class steam_app.*, content game"
+        "match:class steam_app.*, immediate yes"
       ];
+      general = {
+        allow_tearing = true;
+      };
       render = {
         direct_scanout = 2;
       };
       cursor = {
+        no_hardware_cursors = false;
+        use_cpu_buffer = true;
         min_refresh_rate = 50;
       };
       decoration = {
