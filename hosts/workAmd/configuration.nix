@@ -120,8 +120,20 @@ in {
       inherit inputs;
       myConfig = config.myConfig;
     };
-    users = {
-      "ethan" = import ../../home/home.nix;
+
+    users."ethan" = {pkgs, ...}: {
+      # 1. Import the shared shared configuration here
+      imports = [../../home/home.nix];
+
+      # 2. Add your host-specific overrides/extensions here
+      xdg.desktopEntries.slack = {
+        name = "Slack";
+        exec = "slack --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland %U";
+        icon = "slack";
+        terminal = false;
+        categories = ["Network" "InstantMessaging"];
+        mimeType = ["x-scheme-handler/slack"];
+      };
     };
   };
 

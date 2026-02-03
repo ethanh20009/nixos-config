@@ -51,6 +51,11 @@ in {
     # ./hyprpaper.nix
   ];
 
+  xdg.configFile."hypr/xdph.conf".text = ''
+    screencopy {
+      allow_token_by_default = true
+    }
+  '';
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [

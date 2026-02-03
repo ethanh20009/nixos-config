@@ -622,6 +622,9 @@ in {
           typescript = [
             "prettierd"
           ];
+          javascript = [
+            "prettierd"
+          ];
           json = [
             "prettierd"
           ];
@@ -629,6 +632,12 @@ in {
             "prettierd"
           ];
           tsx = [
+            "prettierd"
+          ];
+          markdown = [
+            "prettierd"
+          ];
+          md = [
             "prettierd"
           ];
         };
@@ -643,7 +652,10 @@ in {
 
         nix.enable = true;
         scala.enable = true;
-        markdown.enable = true;
+        markdown = {
+          enable = true;
+          format.type = "prettierd";
+        };
         tailwind.enable = true;
         css.enable = true;
         rust = {
