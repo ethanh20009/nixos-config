@@ -42,7 +42,13 @@
       ", preferred, auto, 1"
     ];
 
-  autostartApps = map (appConfig: "[workspace ${toString appConfig.workspace} silent] ${appConfig.name}") myConfig.hyprland.autostartApps;
+  autostartApps = map (appConfig: let
+    workspaceString =
+      if appConfig.special
+      then "special"
+      else toString appConfig.workspace;
+  in "[workspace ${workspaceString} silent] ${appConfig.name}")
+  myConfig.hyprland.autostartApps;
 in {
   imports = [
     ./celestia.nix

@@ -39,32 +39,16 @@ in {
         pkgs.lldb
         pkgs.vscode-extensions.vadimcn.vscode-lldb
       ];
-      startPlugins =
-        [
-          pkgs.vimPlugins.alpha-nvim
-          pkgs.vimPlugins.plenary-nvim # required dependency
-          pkgs.vimPlugins.vim-dadbod
-          pkgs.vimPlugins.vim-dadbod-ui
-          pkgs.vimPlugins.vim-dadbod-completion
-          pkgs.vimPlugins.vim-mustache-handlebars
-          pkgs.vimPlugins.nvim-dap-lldb
-          pkgs.vimPlugins.markdown-preview-nvim
-        ]
-        ++ (with pkgs.vimPlugins.nvim-treesitter.queries; [
-          angular
-          typescript
-          html
-          html_tags
-          ecma
-          css
-          rust
-          javascript
-          lua
-          nix
-          glimmer
-          tsx
-          jsx
-        ]);
+      startPlugins = [
+        pkgs.vimPlugins.alpha-nvim
+        pkgs.vimPlugins.plenary-nvim # required dependency
+        pkgs.vimPlugins.vim-dadbod
+        pkgs.vimPlugins.vim-dadbod-ui
+        pkgs.vimPlugins.vim-dadbod-completion
+        pkgs.vimPlugins.vim-mustache-handlebars
+        pkgs.vimPlugins.nvim-dap-lldb
+        pkgs.vimPlugins.markdown-preview-nvim
+      ];
 
       lazy.plugins = {
         "sidekick.nvim" = {
@@ -591,25 +575,6 @@ in {
         tsx
       ];
 
-      luaConfigRC.treesitter =
-        /*
-        lua
-        */
-        ''
-          local ts_group = vim.api.nvim_create_augroup("TreesitterAutoStart", { clear = true })
-          local standard_indent = { 'nix', 'lua', 'html.handlebars', 'handlebars'}
-          vim.api.nvim_create_autocmd('FileType', {
-            pattern = { 'nix', 'lua', 'angular', 'typescript', 'ts', 'javascript', 'html', 'json', 'rust', 'js', 'htmlangular', 'html.handlebars', 'handlebars', 'jsx', 'tsx' },
-            group = ts_group,
-            callback = function()
-              pcall(vim.treesitter.start)
-              if vim.tbl_contains(standard_indent, vim.bo.filetype) then
-                vim.bo.indentexpr = ""
-              end
-            end,
-          })
-        '';
-
       formatter.conform-nvim = {
         enable = true;
         setupOpts.formatters_by_ft = {
@@ -689,16 +654,29 @@ in {
           gitStatus = "<leader>gs";
           liveGrep = "<leader>sg";
         };
+        # extensions = [
+        #   {
+        #     name = "live_grep_args";
+        #     packages = [pkgs.vimPlugins.telescope-live-grep-args-nvim];
+        #     setup = {};
+        #   }
+        # ];
         setupOpts = {
-          defaults.vimgrep_arguments = [
-            "${pkgs.ripgrep}/bin/rg"
-            "--color=never"
-            "--no-heading"
-            "--with-filename"
-            "--line-number"
-            "--column"
-            "--smart-case"
-          ];
+          defaults = {
+            layout_config.horizontal = {
+              prompt_position = "top";
+            };
+            sorting_strategy = "ascending";
+            vimgrep_arguments = [
+              "${pkgs.ripgrep}/bin/rg"
+              "--color=never"
+              "--no-heading"
+              "--with-filename"
+              "--line-number"
+              "--column"
+              "--smart-case"
+            ];
+          };
         };
       };
 

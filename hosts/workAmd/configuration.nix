@@ -180,6 +180,9 @@ in {
       google-chrome
       rocmPackages.rocm-smi
       fx
+      claude-code
+      socat
+      bubblewrap
     ])
     ++ [
       inputs.audselect_rs.packages.${pkgs.system}.default
@@ -304,6 +307,10 @@ in {
         {
           name = "$browser";
           workspace = 2;
+        }
+        {
+          name = "spotify";
+          special = true;
         }
       ];
     };

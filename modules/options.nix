@@ -60,6 +60,11 @@
               type = lib.types.int;
               description = "Workspace number.";
             };
+            special = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = "Override and launch on special workspace";
+            };
           };
         });
         default = [];
