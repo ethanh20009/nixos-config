@@ -6,6 +6,10 @@
   myConfig,
   ...
 }: let
+  nvf-pkgs = import inputs.nvf.inputs.nixpkgs {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
   base-json-ls-settings = {
     init_options = {
       provideFormatter = false;
@@ -29,25 +33,25 @@ in {
     enable = true;
     settings.vim = {
       extraPackages = [
-        pkgs.angular-language-server
-        pkgs.vtsls
-        pkgs.nodePackages.vscode-langservers-extracted
-        pkgs.prettierd
-        pkgs.ripgrep
-        pkgs.lazygit
-        pkgs.copilot-language-server
-        pkgs.lldb
-        pkgs.vscode-extensions.vadimcn.vscode-lldb
+        nvf-pkgs.angular-language-server
+        nvf-pkgs.vtsls
+        nvf-pkgs.nodePackages.vscode-langservers-extracted
+        nvf-pkgs.prettierd
+        nvf-pkgs.ripgrep
+        nvf-pkgs.lazygit
+        nvf-pkgs.copilot-language-server
+        nvf-pkgs.lldb
+        nvf-pkgs.vscode-extensions.vadimcn.vscode-lldb
       ];
       startPlugins = [
-        pkgs.vimPlugins.alpha-nvim
-        pkgs.vimPlugins.plenary-nvim # required dependency
-        pkgs.vimPlugins.vim-dadbod
-        pkgs.vimPlugins.vim-dadbod-ui
-        pkgs.vimPlugins.vim-dadbod-completion
-        pkgs.vimPlugins.vim-mustache-handlebars
-        pkgs.vimPlugins.nvim-dap-lldb
-        pkgs.vimPlugins.markdown-preview-nvim
+        nvf-pkgs.vimPlugins.alpha-nvim
+        nvf-pkgs.vimPlugins.plenary-nvim # required dependency
+        nvf-pkgs.vimPlugins.vim-dadbod
+        nvf-pkgs.vimPlugins.vim-dadbod-ui
+        nvf-pkgs.vimPlugins.vim-dadbod-completion
+        nvf-pkgs.vimPlugins.vim-mustache-handlebars
+        nvf-pkgs.vimPlugins.nvim-dap-lldb
+        nvf-pkgs.vimPlugins.markdown-preview-nvim
       ];
 
       lazy.plugins = {
@@ -562,7 +566,7 @@ in {
         };
       };
 
-      treesitter.grammars = with pkgs.vimPlugins.nvim-treesitter.grammarPlugins; [
+      treesitter.grammars = with nvf-pkgs.vimPlugins.nvim-treesitter.grammarPlugins; [
         nix
         lua
         angular
@@ -571,7 +575,6 @@ in {
         javascript
         rust
         typescript
-        glimmer
         tsx
       ];
 
