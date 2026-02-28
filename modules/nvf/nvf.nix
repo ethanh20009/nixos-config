@@ -609,6 +609,9 @@ in {
           md = [
             "prettierd"
           ];
+          typescriptreact = [
+            "prettierd"
+          ];
         };
       };
 

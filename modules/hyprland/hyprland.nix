@@ -223,16 +223,24 @@ in {
         "rounding 10, match:float 0, match:workspace s[1]"
 
         "match:class steam_app.*, content game"
+        "match:title Terraria.*, content game"
         "match:class steam_app.*, immediate yes"
+
+        # Split fiction
+        "match:class steam_app_2001120, immediate no"
+        # Star Wars
+        "match:class steam_app_920210, immediate no"
       ];
       general = {
         allow_tearing = true;
       };
       render = {
         direct_scanout = 2;
+        cm_fs_passthrough = 1;
+        cm_auto_hdr = 1;
       };
       cursor = {
-        no_hardware_cursors = false;
+        no_hardware_cursors = 0;
         use_cpu_buffer = true;
         min_refresh_rate = 50;
       };

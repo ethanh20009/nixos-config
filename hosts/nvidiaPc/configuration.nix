@@ -78,7 +78,7 @@ in {
   users.users.ethan = {
     isNormalUser = true;
     description = "Ethan";
-    extraGroups = ["networkmanager" "wheel" "docker" "adbusers"];
+    extraGroups = ["networkmanager" "wheel" "docker" "adbusers" "gamemode"];
     shell = pkgs.fish;
     packages = with pkgs; [];
   };
@@ -172,6 +172,9 @@ in {
     ++ [
       inputs.audselect_rs.packages.${pkgs.system}.default
       pkgs.hydra-check
+      pkgs.protonup-qt
+      pkgs.gamescope-wsi
+      pkgs.mangohud
     ]
     ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 
@@ -179,6 +182,11 @@ in {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
+  };
+  programs.gamemode.enable = true;
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -272,6 +280,7 @@ in {
         rr = 160.0;
         vrr = 3;
         tenbit = true;
+        hdr = false;
       };
       secondMonitor = true;
     };

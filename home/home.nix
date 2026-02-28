@@ -46,6 +46,7 @@
     # OR, if you are strictly terminal/SSH/headless:
     # pinentryPackage = pkgs.pinentry-curses;
   };
+  services.gnome-keyring.enable = true;
 
   programs.firefox.enable = true;
 
@@ -99,6 +100,8 @@
     rainfrog
     devenv
     hyprshot
+    gcr
+    seahorse
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
