@@ -129,8 +129,6 @@ in {
           "$mod, N, exec, caelestia shell drawers toggle sidebar"
           "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only -z"
           "$mod+CTRL, S, exec, hyprshot -m region -z"
-          ", XF86AudioNext, exec, playerctl next"
-          ", XF86AudioPrev, exec, playerctl previous"
         ]
         ++ (
           # workspaces
