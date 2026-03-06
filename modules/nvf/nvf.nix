@@ -26,6 +26,7 @@
 in {
   imports = [
     ./alpha.nix
+    ./handlebars.nix
   ];
 
   stylix.targets.nvf.enable = false;
