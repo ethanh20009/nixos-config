@@ -175,6 +175,7 @@ in {
       pkgs.protonup-qt
       pkgs.gamescope-wsi
       pkgs.mangohud
+      pkgs.goverlay
     ]
     ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 
@@ -182,6 +183,7 @@ in {
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
+    lfs.enable = true;
   };
   programs.gamemode.enable = true;
   programs.gamescope = {

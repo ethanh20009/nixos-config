@@ -232,7 +232,7 @@ in {
         "match:class steam_app_920210, immediate no"
       ];
       general = {
-        allow_tearing = true;
+        allow_tearing = false;
       };
       render = {
         direct_scanout = 2;
@@ -241,6 +241,7 @@ in {
       };
       cursor = {
         no_hardware_cursors = 0;
+        no_break_fs_vrr = 0;
         use_cpu_buffer = true;
         min_refresh_rate = 50;
       };
