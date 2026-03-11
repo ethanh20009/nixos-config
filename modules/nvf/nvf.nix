@@ -577,6 +577,7 @@ in {
         rust
         typescript
         tsx
+        yaml
       ];
 
       formatter.conform-nvim = {
