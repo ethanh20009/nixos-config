@@ -27,6 +27,7 @@ in {
   imports = [
     ./alpha.nix
     ./handlebars.nix
+    ./companion.nix
   ];
 
   stylix.targets.nvf.enable = false;
@@ -55,63 +56,6 @@ in {
         nvf-pkgs.vimPlugins.markdown-preview-nvim
       ];
 
-      lazy.plugins = {
-        "sidekick.nvim" = {
-          package = pkgs.vimPlugins.sidekick-nvim;
-          setupModule = "sidekick";
-          lazy = true;
-          event = [
-            {
-              event = "User";
-              pattern = "LazyFile";
-            }
-          ];
-          setupOpts = {
-            nes.enabled = false;
-          };
-          keys = let
-            tool = "gemini";
-          in [
-            {
-              key = "<leader>at";
-              mode = "n";
-              action = ":Sidekick cli toggle name=${tool}<CR>";
-            }
-            {
-              key = "<leader>aa";
-              mode = "n";
-              action = ":Sidekick cli send prompt=file name=${tool}<CR>";
-            }
-            {
-              key = "<leader>ap";
-              mode = "n";
-              action = ":Sidekick cli prompt name=${tool}<CR>";
-            }
-            {
-              key = "<leader>ad";
-              mode = "n";
-              action = ":Sidekick cli send prompt=diagnostic name=${tool}<CR>";
-            }
-            {
-              key = "<leader>aa";
-              action =
-                /*
-                lua
-                */
-                ''
-                  function()
-                    require("sidekick.cli").send({ msg = "{selection}" })
-                  end
-                '';
-              mode = "x";
-              lua = true;
-            }
-          ];
-          # setupOpts = {
-          #   nes.enabled = false;
-          # };
-        };
-      };
       extraPlugins = with pkgs.vimPlugins; {
         # nvim-html-css = {
         #   package = pkgs.vimUtils.buildVimPlugin {

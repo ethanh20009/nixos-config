@@ -130,6 +130,8 @@ in {
           "$mod+SHIFT, S, exec, hyprshot -m region --clipboard-only -z"
           "$mod+CTRL, S, exec, hyprshot -m region -z"
           "$mod+ALT, S, exec, hyprshot -m window -z"
+
+          "$mod+ALT, P, exec, hyprpicker | wl-copy"
         ]
         ++ (
           # workspaces

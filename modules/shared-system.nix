@@ -34,6 +34,9 @@
       lsof
       moreutils
       spotify
+      hyprpicker
+      easyeffects
+      qpwgraph
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {

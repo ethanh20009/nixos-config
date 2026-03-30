@@ -280,7 +280,7 @@ in {
   virtualisation.docker.enable = true;
 
   networking.extraHosts = ''
-    127.0.0.1 collect.flexys.dev collaborate.flexys.dev keycloak.flexys.dev engine.flexys.dev schema-registry brand1.flexys.dev brand2.flexys.dev broker keycloak
+    127.0.0.1 collect.flexys.dev collaborate.flexys.dev keycloak.flexys.dev engine.flexys.dev schema-registry brand1.flexys.dev brand2.flexys.dev branda.flexys.dev brandb.flexys.dev broker keycloak
   '';
   security.pki.certificates = [
     cacert
@@ -316,5 +316,8 @@ in {
     };
     extras.deno.enable = true;
     work = true;
+    nvf = {
+      companion = "claude";
+    };
   };
 }
