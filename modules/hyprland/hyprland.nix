@@ -194,6 +194,8 @@ in {
 
       misc = {
         focus_on_activate = true;
+        enable_swallow = true;
+        swallow_regex = "$term";
       };
 
       workspace =

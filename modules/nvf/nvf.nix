@@ -653,32 +653,35 @@ in {
           lua
           */
           ''
-            lspconfig.angularls.setup {
-              capabilities = capabilities,
-              root_dir = lspconfig.util.root_pattern('angular.json', 'project.json'),
-              on_new_config = function(new_config, new_root_dir)
-                local local_ngserver = vim.fs.joinpath(new_root_dir, 'node_modules', '@angular', 'language-server', 'bin', 'ngserver')
-                local node_modules = vim.fs.joinpath(new_root_dir, 'node_modules')
+            vim.api.nvim_create_autocmd("FileType", {
+              pattern = {"typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular"},
+              callback = function(ev)
+                local root_dir = vim.fs.root(ev.buf, {"angular.json", "project.json"})
+                if not root_dir then return end
 
+                local local_ngserver = vim.fs.joinpath(root_dir, "node_modules", "@angular", "language-server", "bin", "ngserver")
+                local node_modules = vim.fs.joinpath(root_dir, "node_modules")
+
+                local cmd
                 if vim.fn.filereadable(local_ngserver) == 1 then
-                  new_config.cmd = {
-                    local_ngserver,
-                    "--stdio",
-                    "--tsProbeLocations", node_modules,
-                    "--ngProbeLocations", node_modules,
-                  }
-                  vim.notify("AngularLS: Switched to local project version", vim.log.levels.INFO)
+                  cmd = {local_ngserver, "--stdio", "--tsProbeLocations", node_modules, "--ngProbeLocations", node_modules}
                 else
-                  vim.notify("AngularLS: Local server not found, using global", vim.log.levels.WARN)
+                  cmd = {"ngserver", "--stdio", "--tsProbeLocations", node_modules, "--ngProbeLocations", node_modules}
                 end
+
+                vim.lsp.start({
+                  name = "angularls",
+                  cmd = cmd,
+                  root_dir = root_dir,
+                  capabilities = capabilities,
+                  on_attach = function(client, bufnr)
+                    if default_on_attach then default_on_attach(client, bufnr) end
+                    client.server_capabilities.renameProvider = false
+                    client.server_capabilities.referencesProvider = false
+                  end,
+                })
               end,
-              on_attach = function (client, bufnr)
-                 -- Keep your existing on_attach logic
-                 if default_on_attach then default_on_attach(client, bufnr) end
-                 client.server_capabilities.renameProvider = false
-                 client.server_capabilities.referencesProvider = false
-              end
-            }
+            })
           '';
 
         servers =
@@ -1013,10 +1016,10 @@ in {
             move_cursor_up = "<C-k>";
             move_cursor_previous = "<C-\\>";
 
-            resize_down = "<A-j>";
-            resize_left = "<A-h>";
-            resize_right = "<A-l>";
-            resize_up = "<A-k>";
+            resize_down = "<C-J>";
+            resize_left = "<C-H>";
+            resize_right = "<C-L>";
+            resize_up = "<C-K>";
 
             swap_buf_down = "<leader><leader>j";
             swap_buf_left = "<leader><leader>h";
