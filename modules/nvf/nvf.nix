@@ -45,7 +45,7 @@ in {
         nvf-pkgs.lldb
         nvf-pkgs.vscode-extensions.vadimcn.vscode-lldb
         nvf-pkgs.pyright
-        nvf-pkgs.ruff
+        nvf-pkgs.black
       ];
       startPlugins = [
         nvf-pkgs.vimPlugins.alpha-nvim
@@ -531,7 +531,7 @@ in {
         enable = true;
         setupOpts.formatters_by_ft = {
           python = [
-            "ruff"
+            "black"
           ];
           htmlangular = [
             "prettierd"
