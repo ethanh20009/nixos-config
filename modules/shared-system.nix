@@ -37,6 +37,7 @@
       hyprpicker
       easyeffects
       qpwgraph
+      ldacbt
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
@@ -68,6 +69,15 @@ in {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
+      # settings = {
+      #   General = {
+      #     FastConnectable = true;
+      #     Experimental = true;
+      #   };
+      #   Policy = {
+      #     AutoEnable = false;
+      #   };
+      # };
     };
   };
 }

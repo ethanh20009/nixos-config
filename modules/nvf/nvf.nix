@@ -44,6 +44,8 @@ in {
         nvf-pkgs.copilot-language-server
         nvf-pkgs.lldb
         nvf-pkgs.vscode-extensions.vadimcn.vscode-lldb
+        nvf-pkgs.pyright
+        nvf-pkgs.ruff
       ];
       startPlugins = [
         nvf-pkgs.vimPlugins.alpha-nvim
@@ -522,11 +524,15 @@ in {
         typescript
         tsx
         yaml
+        python
       ];
 
       formatter.conform-nvim = {
         enable = true;
         setupOpts.formatters_by_ft = {
+          python = [
+            "ruff"
+          ];
           htmlangular = [
             "prettierd"
           ];
@@ -581,7 +587,7 @@ in {
             crates-nvim.enable = true;
           };
           format.enable = true;
-          format.type = "rustfmt";
+          format.type = ["rustfmt"];
           lsp = {
             enable = true;
             opts = "
@@ -743,6 +749,11 @@ in {
                 "htmlangular"
                 "html"
                 "html.handlebars"
+              ];
+            };
+            pyright = {
+              filetypes = [
+                "python"
               ];
             };
             jsonls = base-json-ls-settings;
