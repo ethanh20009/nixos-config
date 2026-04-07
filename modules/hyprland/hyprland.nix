@@ -118,9 +118,9 @@ in {
           "CTRL+$mod, K, resizeactive, 0 -10"
           "CTRL+$mod, J, resizeactive, 0 10"
 
-          "$mod SHIFT, P, swapsplit"
-          "$mod CTRL, P, togglesplit"
-          "$mod SHIFT, G, togglegroup"
+          "SHIFT+$mod, P, layoutmsg, swapsplit"
+          "CTRL+$mod, P, layoutmsg, togglesplit"
+          "SHIFT+$mod, G, layoutmsg, togglegroup"
 
           "$mod, V, togglespecialworkspace"
           "$mod, F, fullscreen"
@@ -196,6 +196,7 @@ in {
         focus_on_activate = true;
         enable_swallow = true;
         swallow_regex = "$term";
+        swallow_exception_regex = "npm test.*";
       };
 
       workspace =
