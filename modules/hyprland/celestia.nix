@@ -19,9 +19,17 @@
       background.enabled = false;
       general = {
         idle = {
-          lockBeforeSleep = false;
-          inhibitWhenAudio = false;
+          lockBeforeSleep = true;
+          inhibitWhenAudio = true;
           timeouts = [
+            {
+              timeout = 300;
+              idleAction = "lock";
+            }
+            {
+              timeout = 360;
+              idleAction = "systemctl suspend";
+            }
           ];
         };
       };

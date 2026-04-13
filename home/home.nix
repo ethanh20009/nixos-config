@@ -172,6 +172,7 @@
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
       test -f ~/.apikeys.fish; and source ~/.apikeys.fish
+      set -gx NIXPKGS_ALLOW_UNFREE 1
     '';
   };
   home.shell.enableFishIntegration = true;

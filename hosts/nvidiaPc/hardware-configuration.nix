@@ -28,11 +28,11 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
-  fileSystems."/mnt/crucial-four" = {
-    device = "/dev/disk/by-uuid/69ea7995-afc7-4a0d-b2da-4f9174dc9c99";
-    fsType = "ext4";
-    options = ["nofail"];
-  };
+  # fileSystems."/mnt/crucial-four" = {
+  #   device = "/dev/disk/by-uuid/69ea7995-afc7-4a0d-b2da-4f9174dc9c99";
+  #   fsType = "ext4";
+  #   options = ["nofail"];
+  # };
 
   swapDevices = [];
 

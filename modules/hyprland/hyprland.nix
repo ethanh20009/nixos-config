@@ -52,8 +52,8 @@
 in {
   imports = [
     ./celestia.nix
-    ./hyprlock.nix
-    ./hypridle.nix
+    # ./hyprlock.nix
+    # ./hypridle.nix
     # ./hyprpaper.nix
   ];
 
