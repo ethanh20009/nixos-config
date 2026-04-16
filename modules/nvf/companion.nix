@@ -90,7 +90,7 @@ in {
               terminal_cmd = "/run/current-system/sw/bin/claude";
               diff_opts = {
                 open_in_new_tab = true;
-                keep_terminal_focus = true;
+                keep_terminal_focus = false;
               };
             };
             keys = [
@@ -122,7 +122,7 @@ in {
               {
                 key = "<C-h>";
                 mode = "t";
-                action = "<C-\\><C-n><C-w>h";
+                action = "<C-\\><C-n><C-w>h<Esc>";
               }
             ];
           };

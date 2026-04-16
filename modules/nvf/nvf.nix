@@ -490,6 +490,27 @@ in {
           lua = true;
           desc = "Lazygit";
         }
+        {
+          key = "<leader><tab>]";
+          mode = "n";
+          silent = true;
+          action = "<cmd>tabnext<CR>";
+          desc = "Next Tab";
+        }
+        {
+          key = "<leader><tab>[";
+          mode = "n";
+          silent = true;
+          action = "<cmd>tabprev<CR>";
+          desc = "Prev Tab";
+        }
+        {
+          key = "<leader><tab>d";
+          mode = "n";
+          silent = true;
+          action = "<cmd>tabclose<CR>";
+          desc = "Close Tab";
+        }
       ];
       theme = {
         enable = true;
