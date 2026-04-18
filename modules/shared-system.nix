@@ -38,10 +38,14 @@
       easyeffects
       qpwgraph
       ldacbt
+      claude-code
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
-  # This part declares the option
+  imports = [
+    ./ollama-cuda.nix
+  ];
+
   options.myConfig = {
     defaultPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
@@ -49,7 +53,7 @@ in {
       description = "Packages to install by default on the system.";
     };
   };
-  # This part sets the value of the option
+
   config = {
     myConfig.defaultPackages = myPackages;
     nix.settings = {

@@ -28,7 +28,7 @@
             }
             {
               timeout = 360;
-              idleAction = "systemctl suspend";
+              idleAction = ["systemctl" "suspend"];
             }
           ];
         };

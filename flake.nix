@@ -23,19 +23,21 @@
       url = "github:nix-community/stylix?ref=pull/892/head";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # hyprpanel = {
     #   url = "github:Jas-SinghFSU/HyprPanel";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
     caelestia-shell = {
-      url = "github:caelestia-dots/shell";
+      # TODO: switch to the main branch once the PR reaches unstable (https://github.com/caelestia-dots/shell/issues/1401)
+      # url = "github:caelestia-dots/shell";
+      url = "github:caelestia-dots/shell/v1.5.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     audselect_rs = {
-      url = "github:ethanh20009/audselect_rs"; # <-- New GitHub path
-      # You can optionally specify a branch, e.g., "github:YourUsername/YourRepoName/my-branch"
+      url = "github:ethanh20009/audselect_rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

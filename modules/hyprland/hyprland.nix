@@ -197,6 +197,7 @@ in {
         enable_swallow = true;
         swallow_regex = "$term";
         swallow_exception_regex = "npm test.*";
+        middle_click_paste = false;
       };
 
       workspace =

@@ -288,4 +288,6 @@ in {
     };
     tex.enable = true;
   };
+
+  programs.ollama-cuda.enable = true;
 }
