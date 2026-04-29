@@ -39,6 +39,7 @@
       qpwgraph
       ldacbt
       claude-code
+      ncdu
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
