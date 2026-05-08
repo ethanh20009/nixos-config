@@ -30,9 +30,7 @@
     # };
 
     caelestia-shell = {
-      # TODO: switch to the main branch once the PR reaches unstable (https://github.com/caelestia-dots/shell/issues/1401)
-      # url = "github:caelestia-dots/shell";
-      url = "github:caelestia-dots/shell/v1.5.2";
+      url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
