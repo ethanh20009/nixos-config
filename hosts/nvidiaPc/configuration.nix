@@ -10,6 +10,10 @@
 }: let
   # Define your custom nvibrant package
   nvibrant_git = pkgs.callPackage (../../pkgs/nvibrant-git/default.nix) {};
+  customEdid = pkgs.runCommandNoCC "custom-edid" {} ''
+    mkdir -p $out/lib/firmware/edid
+    cp ${./new-edid.bin} $out/lib/firmware/edid/msi-fourk.bin
+  '';
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -33,6 +37,10 @@ in {
       useOSProber = true;
     };
   };
+
+  # Vrr range override
+  # hardware.firmware = [customEdid];
+  # boot.kernelParams = [ "drm.edid_firmware=DP-1:edid/my-monitor.bin" ];
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -176,6 +184,7 @@ in {
       pkgs.gamescope-wsi
       pkgs.mangohud
       pkgs.goverlay
+      pkgs.redisinsight
     ]
     ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 

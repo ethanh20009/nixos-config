@@ -212,10 +212,14 @@ in {
           builtins.concatLists (builtins.genList (
               i: let
                 ws = i + 1;
+                default =
+                  if i == 0
+                  then ", default:true"
+                  else "";
               in [
-                "${toString ws}, monitor:$mon1"
-                "${toString (ws + 5)}, monitor:$mon2"
-                "${toString (ws + 10)}, monitor:eDP-1"
+                "${toString ws}, monitor:$mon1${default}"
+                "${toString (ws + 5)}, monitor:$mon2${default}"
+                "${toString (ws + 10)}, monitor:eDP-1${default}"
               ]
             )
             5)
@@ -239,7 +243,7 @@ in {
         "match:class steam_app_920210, immediate no"
       ];
       general = {
-        allow_tearing = false;
+        allow_tearing = true;
       };
       render = {
         direct_scanout = 2;

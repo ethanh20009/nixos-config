@@ -38,6 +38,7 @@
       easyeffects
       qpwgraph
       ldacbt
+      unzip
       claude-code
       ncdu
     ]
