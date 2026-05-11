@@ -29,7 +29,6 @@
       obsidian
       gpu-screen-recorder-gtk
       fd
-      mpv
       nh
       lsof
       moreutils
@@ -41,6 +40,7 @@
       unzip
       claude-code
       ncdu
+      nodejs
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
