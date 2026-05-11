@@ -480,6 +480,12 @@ in {
           desc = "Clear highlight";
         }
         {
+          key = "<MiddleMouse>";
+          mode = ["n" "i" "v"];
+          action = "<Nop>";
+          desc = "Disable middle click paste";
+        }
+        {
           key = "<leader>gg";
           mode = ["n"];
           action = ''
