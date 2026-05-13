@@ -105,13 +105,5 @@
         Install Tex system wide
       '';
     };
-
-    nvf = {
-      companion = lib.mkOption {
-        default = "gemini";
-        type = lib.types.str;
-        description = "Which code companion to use. Available: gemini, claude";
-      };
-    };
   };
 }

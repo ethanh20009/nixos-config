@@ -1,5 +1,4 @@
 {
-  myConfig,
   lib,
   config,
   pkgs,
@@ -7,10 +6,19 @@
 }: let
 in {
   options = {
+    myConfig = {
+      nvf = {
+        companion = lib.mkOption {
+          default = "gemini";
+          type = lib.types.enum ["gemini" "claude"];
+          description = "Which code companion to use. Available: gemini, claude";
+        };
+      };
+    };
   };
   config = lib.mkMerge [
     # Settings for SERVER mode
-    (lib.mkIf (myConfig.nvf.companion == "gemini") {
+    (lib.mkIf (config.myConfig.nvf.companion == "gemini") {
       programs.nvf.settings.vim = {
         lazy.plugins = {
           "sidekick.nvim" = {
@@ -73,7 +81,7 @@ in {
     })
 
     # Settings for CLIENT mode
-    (lib.mkIf (myConfig.nvf.companion == "claude") {
+    (lib.mkIf (config.myConfig.nvf.companion == "claude") {
       programs.nvf.settings.vim = {
         lazy.plugins = {
           "claudecode.nvim" = {

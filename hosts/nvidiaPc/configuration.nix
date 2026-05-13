@@ -99,7 +99,24 @@ in {
       myConfig = config.myConfig;
     };
     users = {
-      "ethan" = import ../../home/home.nix;
+      "ethan" = {
+        imports = [../../home/home.nix];
+        programs.fish.functions = lib.mkIf config.myConfig.nvf.companionLocal {
+          claude-local = {
+            description = "Run Claude Code with local LM Studio settings";
+            body = ''
+              # -l (local) ensures variables don't persist after the function ends
+              # -x (export) ensures they are passed to the claude process
+              set -lx ANTHROPIC_BASE_URL "http://localhost:1234"
+              set -lx ANTHROPIC_API_KEY "lm-studio"
+
+              # Use 'command' to ensure we call the binary and not the function itself
+              # We use the model name 'local-model' which LM Studio will map to your active loaded model
+              command claude --model local-model $argv
+            '';
+          };
+        };
+      };
     };
   };
 
@@ -185,6 +202,7 @@ in {
       pkgs.mangohud
       pkgs.goverlay
       pkgs.redisinsight
+      pkgs.lmstudio
     ]
     ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 
@@ -286,6 +304,7 @@ in {
   ];
 
   myConfig = {
+    nvf.companionLocal = true;
     hyprland = {
       primaryMonitor = {
         rr = 160.0;
