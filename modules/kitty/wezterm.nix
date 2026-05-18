@@ -1,24 +1,29 @@
 {
   config,
   lib,
+  myConfig,
   ...
-}: {
-  programs.wezterm = lib.mkForce {
-    enable = true;
-    extraConfig = ''
-      local act = wezterm.action
-      return {
-        font = wezterm.font("Fira Code Nerd Font Mono"),
-        font_size = 12.0,
-        window_background_opacity = 0.7,
-        enable_tab_bar = false,
-        front_end = "WebGpu",
-        default_cursor_style = "SteadyBar",
-        warn_about_missing_glyphs = false,
-        keys = {
-          { key = 'Backspace', mods = 'CTRL', action = act.SendKey {key = 'w', mods = 'CTRL'} },
+}: let
+  cfg = myConfig;
+in {
+  config = lib.mkIf (cfg.terminal == "wezterm") {
+    programs.wezterm = lib.mkForce {
+      enable = true;
+      extraConfig = ''
+        local act = wezterm.action
+        return {
+          font = wezterm.font("Fira Code Nerd Font Mono"),
+          font_size = 12.0,
+          window_background_opacity = 0.7,
+          enable_tab_bar = false,
+          front_end = "WebGpu",
+          default_cursor_style = "SteadyBar",
+          warn_about_missing_glyphs = false,
+          keys = {
+            { key = 'Backspace', mods = 'CTRL', action = act.SendKey {key = 'w', mods = 'CTRL'} },
+          }
         }
-      }
-    '';
+      '';
+    };
   };
 }

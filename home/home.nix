@@ -21,7 +21,7 @@
     ../modules/nvf/nvf.nix
     ../modules/kitty/kitty.nix
     ../modules/kitty/wezterm.nix
-    ../modules/tex.nix
+    ../modules/tex
   ];
 
   programs.direnv = {
@@ -168,6 +168,21 @@
       "c" = "clear";
       "l" = "eza -l";
       "aud" = "audselect_rs";
+    };
+    functions = lib.mkIf myConfig.nvf.companionLocal {
+      claude-local = {
+        description = "Run Claude Code with local LM Studio settings";
+        body = ''
+          # -l (local) ensures variables don't persist after the function ends
+          # -x (export) ensures they are passed to the claude process
+          set -lx ANTHROPIC_BASE_URL "http://localhost:1234"
+          set -lx ANTHROPIC_API_KEY "lm-studio"
+
+          # Use 'command' to ensure we call the binary and not the function itself
+          # We use the model name 'local-model' which LM Studio will map to your active loaded model
+          command claude --model local-model $argv
+        '';
+      };
     };
     interactiveShellInit = ''
       set fish_greeting # Disable greeting

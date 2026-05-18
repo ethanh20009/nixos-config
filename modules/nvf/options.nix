@@ -1,5 +1,10 @@
 {lib, ...}: {
   options.myConfig.nvf = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable NVF configuration";
+    };
     companionLocal = lib.mkOption {
       type = lib.types.bool;
       default = false;

@@ -5,6 +5,7 @@
   config,
   ...
 }: let
+  cfg = myConfig.tex;
   tex = pkgs.texlive.combine {
     inherit
       (pkgs.texlive)
@@ -24,20 +25,18 @@
       ;
   };
 in {
-  config = lib.mkMerge [
-    (lib.mkIf myConfig.tex.enable {
-      home.packages = with pkgs; [
-        tex
-        lmodern
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      tex
+      lmodern
+    ];
+    programs.nvf.settings.vim = {
+      extraPackages = [
+        pkgs.ltex-ls
       ];
-      programs.nvf.settings.vim = {
-        extraPackages = [
-          pkgs.ltex-ls
-        ];
-        startPlugins = [
-          pkgs.vimPlugins.vimtex
-        ];
-      };
-    })
-  ];
+      startPlugins = [
+        pkgs.vimPlugins.vimtex
+      ];
+    };
+  };
 }

@@ -16,16 +16,9 @@
   '';
 in {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/options.nix
-    ../../modules/shared-system.nix
+    ../../modules/core
   ];
-
-  stylix.enable = true;
-  stylix.colorGeneration.polarity = "dark";
-  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-  stylix.targets.nvf.enable = false;
 
   boot.loader = {
     efi.canTouchEfiVariables = true;
@@ -38,115 +31,10 @@ in {
     };
   };
 
-  # Vrr range override
-  # hardware.firmware = [customEdid];
-  # boot.kernelParams = [ "drm.edid_firmware=DP-1:edid/my-monitor.bin" ];
-
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/London";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
-  };
-
-  # Configure console keymap
-  console.keyMap = "uk";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ethan = {
-    isNormalUser = true;
-    description = "Ethan";
-    extraGroups = ["networkmanager" "wheel" "docker" "adbusers" "gamemode"];
-    shell = pkgs.fish;
-    packages = with pkgs; [];
-  };
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager = {
-    extraSpecialArgs = {
-      inherit inputs;
-      myConfig = config.myConfig;
-    };
-    users = {
-      "ethan" = {
-        imports = [../../home/home.nix];
-        programs.fish.functions = lib.mkIf config.myConfig.nvf.companionLocal {
-          claude-local = {
-            description = "Run Claude Code with local LM Studio settings";
-            body = ''
-              # -l (local) ensures variables don't persist after the function ends
-              # -x (export) ensures they are passed to the claude process
-              set -lx ANTHROPIC_BASE_URL "http://localhost:1234"
-              set -lx ANTHROPIC_API_KEY "lm-studio"
-
-              # Use 'command' to ensure we call the binary and not the function itself
-              # We use the model name 'local-model' which LM Studio will map to your active loaded model
-              command claude --model local-model $argv
-            '';
-          };
-        };
-      };
-    };
-  };
-
-  fonts = {
-    fontDir.enable = true; # Recommended for better font discovery
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-color-emoji
-      liberation_ttf
-      fira-code # Popular for monospace
-      # If you want Nerd Fonts (highly recommended for icons/glyphs)
-      # You can add individual ones:
-      nerd-fonts.fira-code
-      nerd-fonts.jetbrains-mono
-    ];
-
-    fontconfig = {
-      # You can set default fonts for different families here.
-      # This is often where you control system-wide font fallback.
-      defaultFonts = {
-        serif = ["Liberation Serif"];
-        monospace = ["Fira Code Nerd Font" "FiraCode Nerd Font"];
-      };
-      # You might also want to enable font hinting and antialiasing
-      # (often default, but good to know)
-      hinting.autohint = true;
-      antialias = true;
-    };
-  };
 
   # Nvidia stuff
   hardware.graphics = {
@@ -165,20 +53,14 @@ in {
 
   systemd.services.nvidia-gpu-lock = {
     description = "Lock NVIDIA GPU clocks";
-    # Run after the driver is likely loaded, but before graphical session usage peaks
     after = ["systemd-modules-load.service"];
     wantedBy = ["multi-user.target"];
-
-    # Make the nvidia-smi command available to the script
     path = [config.hardware.nvidia.package];
 
     serviceConfig = {
       Type = "oneshot";
       User = "root";
-      # -lgc <minClock>,<maxClock>
       ExecStart = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -lgc 2105,3105";
-
-      # unlock clocks on shutdown/stop so the next boot is clean
       ExecStop = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -rgc";
       RemainAfterExit = true;
     };
@@ -187,26 +69,17 @@ in {
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
   environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = [
+    inputs.audselect_rs.packages.${pkgs.system}.default
+    pkgs.hydra-check
+    pkgs.protonup-qt
+    pkgs.gamescope-wsi
+    pkgs.mangohud
+    pkgs.goverlay
+    pkgs.redisinsight
+    pkgs.lmstudio
+  ] ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages =
-    config.myConfig.defaultPackages
-    ++ [
-      inputs.audselect_rs.packages.${pkgs.system}.default
-      pkgs.hydra-check
-      pkgs.protonup-qt
-      pkgs.gamescope-wsi
-      pkgs.mangohud
-      pkgs.goverlay
-      pkgs.redisinsight
-      pkgs.lmstudio
-    ]
-    ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
-
-  programs.hyprland.enable = true;
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
@@ -218,67 +91,12 @@ in {
     capSysNice = true;
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  programs.fish = {
-    enable = true;
-  };
-
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs.xfce; [
-    thunar-archive-plugin
-    thunar-volman
-  ];
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
-  services.tumbler.enable = true; # Thumbnail support for images
-
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
   };
-
-  # For hyprpanel
-  services.upower.enable = true;
-
-  virtualisation.docker.enable = true;
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
-
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
 
   # For NVF
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];

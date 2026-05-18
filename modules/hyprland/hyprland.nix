@@ -57,34 +57,35 @@ in {
     # ./hyprpaper.nix
   ];
 
-  xdg.configFile."hypr/xdph.conf".text = ''
-    screencopy {
-      allow_token_by_default = true
-    }
-  '';
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-    ];
-  };
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = ["${myConfig.wallpaper}"];
-      wallpaper = [
-        {
-          monitor = "";
-          path = "${myConfig.wallpaper}";
-        }
+  config = lib.mkIf myConfig.hyprland.enable {
+    xdg.configFile."hypr/xdph.conf".text = ''
+      screencopy {
+        allow_token_by_default = true
+      }
+    '';
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
       ];
     };
-  };
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = ["${myConfig.wallpaper}"];
+        wallpaper = [
+          {
+            monitor = "";
+            path = "${myConfig.wallpaper}";
+          }
+        ];
+      };
+    };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    # set the Hyprland and XDPH packages to null to use the ones from the NixOS module
-    package = null;
+    wayland.windowManager.hyprland = {
+      enable = true;
+      # set the Hyprland and XDPH packages to null to use the ones from the NixOS module
+      package = null;
 
     settings = {
       "$mod" = "SUPER";
@@ -273,5 +274,6 @@ in {
 
       "exec-once" = autostartApps;
     };
+  };
   };
 }

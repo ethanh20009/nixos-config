@@ -30,10 +30,11 @@ in {
     ./companion.nix
   ];
 
-  stylix.targets.nvf.enable = false;
-  programs.nvf = {
-    enable = true;
-    settings.vim = {
+  config = lib.mkIf myConfig.nvf.enable {
+    stylix.targets.nvf.enable = false;
+    programs.nvf = {
+      enable = true;
+      settings.vim = {
       extraPackages = [
         nvf-pkgs.angular-language-server
         nvf-pkgs.vtsls
@@ -1078,4 +1079,5 @@ in {
       };
     };
   };
+};
 }
