@@ -247,7 +247,6 @@ in {
       };
       render = {
         direct_scanout = 2;
-        cm_fs_passthrough = 1;
         cm_auto_hdr = 1;
       };
       cursor = {
