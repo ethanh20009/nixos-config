@@ -118,6 +118,19 @@ in {
   nixpkgs.overlays = [
     (final: prev: {
       btop = prev.btop.override {cudaSupport = true;};
+
+      # Fix redisinsight pulling in insecure/EOL Node 20.
+      # This overlay forces Node 22 and removes 'devEngines' from package.json which
+      # causes modern npm to fail the build.
+      # TODO: Remove when redisinsight is updated upstream to use a secure Node version.
+      redisinsight = prev.redisinsight.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (lib.filter (p: !(lib.hasPrefix "nodejs" (p.name or ""))) (oldAttrs.nativeBuildInputs or [])) ++ [final.nodejs_22 final.jq];
+        postPatch = (oldAttrs.postPatch or "") + ''
+          if [ -f package.json ]; then
+            jq 'del(.devEngines)' package.json > package.json.tmp && mv package.json.tmp package.json
+          fi
+        '';
+      });
     })
   ];
 
