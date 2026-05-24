@@ -149,4 +149,5 @@ in {
   };
 
   programs.ollama-cuda.enable = true;
+  programs.antigravity-cli.enable = true;
 }

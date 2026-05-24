@@ -48,6 +48,7 @@
 in {
   imports = [
     ../ollama-cuda.nix
+    ../antigravity-cli.nix
     ../options.nix
   ];
 
