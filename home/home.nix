@@ -18,7 +18,7 @@
   imports = [
     inputs.nvf.homeManagerModules.default
     ../modules/hyprland/hyprland.nix
-    ../modules/nvf/nvf.nix
+    ../modules/nvf
     ../modules/kitty/kitty.nix
     ../modules/kitty/wezterm.nix
     ../modules/tex
