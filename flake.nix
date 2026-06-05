@@ -20,7 +20,8 @@
     };
 
     stylix = {
-      url = "github:nix-community/stylix?ref=pull/892/head";
+      # url = "github:nix-community/stylix?ref=pull/892/head";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

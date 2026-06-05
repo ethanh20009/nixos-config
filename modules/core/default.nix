@@ -73,8 +73,26 @@ in {
 
     stylix.image = config.myConfig.wallpaper;
     stylix.enable = true;
-    stylix.colorGeneration.polarity = "dark";
+    stylix.polarity = "dark";
     stylix.targets.nvf.enable = false;
+    stylix.fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font Mono";
+      };
+      sansSerif = {
+        package = pkgs.noto-fonts;
+        name = "Noto Sans";
+      };
+      serif = {
+        package = pkgs.noto-fonts;
+        name = "Noto Serif";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-color-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = config.myConfig.defaultPackages;
@@ -150,10 +168,10 @@ in {
         nerd-fonts.jetbrains-mono
       ];
       fontconfig = {
-        defaultFonts = {
-          serif = ["Liberation Serif"];
-          monospace = ["Fira Code Nerd Font" "FiraCode Nerd Font"];
-        };
+        # defaultFonts = {
+        #   serif = ["Liberation Serif"];
+        #   monospace = ["Fira Code Nerd Font" "FiraCode Nerd Font"];
+        # };
         hinting.autohint = true;
         antialias = true;
       };

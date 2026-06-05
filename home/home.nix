@@ -13,7 +13,7 @@
 
   stylix.enable = true;
   stylix.image = myConfig.wallpaper;
-  stylix.colorGeneration.scheme = "fidelity";
+  # stylix.colorGeneration.scheme = "fidelity";
 
   imports = [
     inputs.nvf.homeManagerModules.default
