@@ -27,13 +27,14 @@ in {
         enableFormat = true;
         enableTreesitter = true;
         enableExtraDiagnostics = true;
+        lua.enable = true;
 
         nix.enable = true;
         scala.enable = true;
         markdown = {
           enable = true;
           format = {
-            type = [ "prettierd" ];
+            type = ["prettierd"];
           };
         };
         css.enable = true;
@@ -43,7 +44,7 @@ in {
             crates-nvim.enable = true;
           };
           format.enable = true;
-          format.type = [ "rustfmt" ];
+          format.type = ["rustfmt"];
           lsp = {
             enable = true;
             opts = ''
@@ -62,17 +63,17 @@ in {
       formatter.conform-nvim = {
         enable = true;
         setupOpts.formatters_by_ft = {
-          python = [ "black" ];
-          htmlangular = [ "prettierd" ];
-          html = [ "prettierd" ];
-          typescript = [ "prettierd" ];
-          javascript = [ "prettierd" ];
-          json = [ "prettierd" ];
-          jsx = [ "prettierd" ];
-          tsx = [ "prettierd" ];
-          markdown = [ "prettierd" ];
-          md = [ "prettierd" ];
-          typescriptreact = [ "prettierd" ];
+          python = ["black"];
+          htmlangular = ["prettierd"];
+          html = ["prettierd"];
+          typescript = ["prettierd"];
+          javascript = ["prettierd"];
+          json = ["prettierd"];
+          jsx = ["prettierd"];
+          tsx = ["prettierd"];
+          markdown = ["prettierd"];
+          md = ["prettierd"];
+          typescriptreact = ["prettierd"];
         };
       };
 
@@ -169,102 +170,104 @@ in {
             })
           '';
 
-        servers = {
-          vtsls = {
-            root_dir =
-              lib.generators.mkLuaInline
-              /*
-              lua
-              */
-              ''
-                function(bufnr, on_dir)
-                    -- The project root is where the LSP can be started from
-                    -- As stated in the documentation above, this LSP supports monorepos and simple projects.
-                    -- We select then from the project root, which is identified by the presence of a package
-                    -- manager lock file.
-                    local isDenoProject = vim.fs.root(bufnr, {'deno.json', 'deno.jsonc'})
-                    if isDenoProject then
-                      return nil
-                    end
-                    local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
-                    -- Give the root markers equal priority by wrapping them in a table
-                    root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
-                      or vim.list_extend(root_markers, { '.git' })
-                    -- We fallback to the current working directory if no project root is found
-                    local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
+        servers =
+          {
+            vtsls = {
+              root_dir =
+                lib.generators.mkLuaInline
+                /*
+                lua
+                */
+                ''
+                  function(bufnr, on_dir)
+                      -- The project root is where the LSP can be started from
+                      -- As stated in the documentation above, this LSP supports monorepos and simple projects.
+                      -- We select then from the project root, which is identified by the presence of a package
+                      -- manager lock file.
+                      local isDenoProject = vim.fs.root(bufnr, {'deno.json', 'deno.jsonc'})
+                      if isDenoProject then
+                        return nil
+                      end
+                      local root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock' }
+                      -- Give the root markers equal priority by wrapping them in a table
+                      root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers, { '.git' } }
+                        or vim.list_extend(root_markers, { '.git' })
+                      -- We fallback to the current working directory if no project root is found
+                      local project_root = vim.fs.root(bufnr, root_markers) or vim.fn.getcwd()
 
-                    on_dir(project_root)
-                  end
-              '';
-            settings = {
-              vtsls = {
-                enableMoveToFileCodeAction = true;
-                autoUseWorkspaceTsdk = true;
-                experimental = {
-                  maxInlayHintLength = 30;
-                  completion = {
-                    enableServerSideFuzzyMatch = true;
+                      on_dir(project_root)
+                    end
+                '';
+              settings = {
+                vtsls = {
+                  enableMoveToFileCodeAction = true;
+                  autoUseWorkspaceTsdk = true;
+                  experimental = {
+                    maxInlayHintLength = 30;
+                    completion = {
+                      enableServerSideFuzzyMatch = true;
+                    };
+                  };
+                };
+                typescript = {
+                  inlayHints = {
+                    parameterNames = {enabled = "all";};
+                    parameterTypes = {enabled = true;};
+                    variableTypes = {enabled = true;};
+                    propertyDeclarationTypes = {enabled = true;};
+                    functionLikeReturnTypes = {enabled = true;};
+                    enumMemberValues = {enabled = true;};
+                  };
+                  updateImportsOnFileMove = {
+                    enabled = "always";
                   };
                 };
               };
-              typescript = {
-                inlayHints = {
-                  parameterNames = {enabled = "all";};
-                  parameterTypes = {enabled = true;};
-                  variableTypes = {enabled = true;};
-                  propertyDeclarationTypes = {enabled = true;};
-                  functionLikeReturnTypes = {enabled = true;};
-                  enumMemberValues = {enabled = true;};
-                };
-                updateImportsOnFileMove = {
-                  enabled = "always";
+            };
+            html = {
+              filetypes = [
+                "htmlangular"
+                "html"
+                "html.handlebars"
+              ];
+            };
+            pyright = {
+              filetypes = [
+                "python"
+              ];
+            };
+            jsonls = base-json-ls-settings;
+            ltex = {
+              filetypes = [
+                "bib"
+                "gitcommit"
+                "latex"
+                "mail"
+                "norg"
+                "org"
+                "pandoc"
+                "rst"
+                "tex"
+              ];
+              settings = {
+                ltex = {
+                  checkFrequency = "save";
+                  language = "en-GB";
                 };
               };
             };
-          };
-          html = {
-            filetypes = [
-              "htmlangular"
-              "html"
-              "html.handlebars"
-            ];
-          };
-          pyright = {
-            filetypes = [
-              "python"
-            ];
-          };
-          jsonls = base-json-ls-settings;
-          ltex = {
-            filetypes = [
-              "bib"
-              "gitcommit"
-              "latex"
-              "mail"
-              "norg"
-              "org"
-              "pandoc"
-              "rst"
-              "tex"
-            ];
-            settings = {
-              ltex = {
-                checkFrequency = "save";
-                language = "en-GB";
-              };
+          }
+          // lib.optionalAttrs myConfig.extras.deno.enable {
+            denols = {
+              root_markers = [
+                "deno.json"
+                "deno.jsonc"
+              ];
+              workspace_required = true;
+              single_file_support = false;
+              settings = {};
             };
           };
-        } // lib.optionalAttrs myConfig.extras.deno.enable {
-          denols = {
-            root_markers = [
-              "deno.json"
-              "deno.jsonc"
-            ];
-            workspace_required = true;
-            single_file_support = false;
-            settings = {};
-          };
-        };
       };
     };
   };
