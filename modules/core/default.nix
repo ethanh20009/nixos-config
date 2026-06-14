@@ -43,12 +43,13 @@
       ncdu
       nodejs
       vlc
+      antigravity-cli
+      kdePackages.okular
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
   imports = [
     ../ollama-cuda.nix
-    ../antigravity-cli.nix
     ../options.nix
   ];
 

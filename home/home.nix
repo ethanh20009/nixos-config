@@ -50,6 +50,11 @@
 
   programs.firefox.enable = true;
 
+  fonts.fontconfig = {
+    hinting = "full";
+    antialiasing = true;
+  };
+
   programs.rofi = {
     enable = true;
     font = lib.mkForce "Fira code 12";
