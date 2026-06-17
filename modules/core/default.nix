@@ -219,7 +219,7 @@ in {
       ensurePrinters = [
         {
           name = "Canon_MG5400_series";
-          deviceUri = "ipp://9C2E9D000000.local:631/ipp/printer";
+          deviceUri = "dnssd://Canon%20MG5400%20series._ipp._tcp.local/?uuid=00000000-0000-1000-8000-2C9EFC9C2E9D";
           model = "gutenprint.5.3://bjc-MG5400-series/expert";
         }
       ];
