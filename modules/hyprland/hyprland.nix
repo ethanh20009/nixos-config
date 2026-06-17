@@ -17,6 +17,10 @@
     home.file.".local/share/hypr/stubs".source = "${pkgs.hyprland}/share/hypr/stubs";
 
     xdg.configFile = {
+      "hypr/hyprland.lua".source =
+        config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/nixos-config/modules/hyprland/lua/hyprland.lua";
+
       "hypr/xdph.conf".text = ''
         screencopy {
           allow_token_by_default = true
@@ -64,20 +68,7 @@
           wallpaper = [[${myConfig.wallpaper}]],
         }
       '';
-    } // (lib.listToAttrs (map (name: {
-      name = "hypr/${name}.lua";
-      value = {
-        source = config.lib.file.mkOutOfStoreSymlink
-          "${config.home.homeDirectory}/nixos-config/modules/hyprland/lua/${name}.lua";
-      };
-    }) [
-      "hyprland"
-      "appearance"
-      "input"
-      "rules"
-      "keybinds"
-      "autostart"
-    ]));
+    };
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [

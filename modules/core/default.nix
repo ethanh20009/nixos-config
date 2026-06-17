@@ -45,6 +45,9 @@
       vlc
       antigravity-cli
       kdePackages.okular
+      # Printer management tools for Hyprland
+      system-config-printer # Graphical interface to manage printers
+      cups # Provides commands like 'lpstat', 'lpadmin'
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
@@ -137,7 +140,7 @@ in {
     users.users.ethan = {
       isNormalUser = true;
       description = "Ethan";
-      extraGroups = ["networkmanager" "wheel" "docker" "adbusers" "gamemode" "video" "render"];
+      extraGroups = ["networkmanager" "wheel" "docker" "adbusers" "gamemode" "video" "render" "lp" "scanner"];
       shell = pkgs.fish;
     };
 
@@ -201,6 +204,33 @@ in {
 
     services.upower.enable = true;
     virtualisation.docker.enable = true;
+
+    # 1. Enable the CUPS printing service
+    services.printing = {
+      enable = true;
+      openFirewall = true;
+      browsed.enable = false;
+      # Optional: Adds drivers for older Canon printers if driverless fails
+      drivers = [pkgs.gutenprint pkgs.cnijfilter2];
+    };
+
+    hardware.printers = {
+      ensureDefaultPrinter = "Canon_MG5400_series";
+      ensurePrinters = [
+        {
+          name = "Canon_MG5400_series";
+          deviceUri = "ipp://9C2E9D000000.local:631/ipp/printer";
+          model = "gutenprint.5.3://bjc-MG5400-series/expert";
+        }
+      ];
+    };
+
+    # 2. Enable Avahi for network printer discovery (mDNS/Bonjour)
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true; # Crucial for allowing discovery through the firewall
+    };
 
     system.stateVersion = "25.05";
   };
