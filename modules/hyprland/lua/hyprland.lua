@@ -4,6 +4,12 @@ local XDG = os.getenv("XDG_CONFIG_HOME") or (HOME .. "/.config")
 
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
+hl.config({
+	xwayland = {
+		force_zero_scaling = true,
+	},
+})
+
 package.path = package.path .. ";" .. PUBLIC .. "/?.lua" .. ";" .. XDG .. "/hypr" .. "/?.lua"
 
 require("appearance")
