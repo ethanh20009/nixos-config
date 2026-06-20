@@ -45,6 +45,7 @@
       vlc
       antigravity-cli
       kdePackages.okular
+      codex
       # Printer management tools for Hyprland
       system-config-printer # Graphical interface to manage printers
       cups # Provides commands like 'lpstat', 'lpadmin'
