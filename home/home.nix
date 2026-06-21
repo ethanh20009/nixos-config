@@ -197,7 +197,17 @@
   };
   home.shell.enableFishIntegration = true;
 
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    settings = {
+      gcloud = {
+        disabled = true;
+      };
+      nix_shell = {
+        format = "via [$symbol$state]($style) ";
+      };
+    };
+  };
 
   home.pointerCursor = {
     gtk.enable = true;
