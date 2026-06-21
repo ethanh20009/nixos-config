@@ -17,9 +17,10 @@
     home.file.".local/share/hypr/stubs".source = "${pkgs.hyprland}/share/hypr/stubs";
 
     xdg.configFile = {
-      "hypr/hyprland.lua".source =
-        config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/nixos-config/modules/hyprland/lua/hyprland.lua";
+      "hypr" = {
+        source = ./lua;
+        recursive = true;
+      };
 
       "hypr/xdph.conf".text = ''
         screencopy {
