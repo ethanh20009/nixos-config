@@ -23,6 +23,15 @@
 in {
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
+      luaConfigRC.rust-local-lsp = ''
+        if vim.fn.executable("rust-analyzer") == 1 then
+          local r = vim.g.rustaceanvim or {}
+          r.server = r.server or {}
+          r.server.cmd = { "rust-analyzer" }
+          vim.g.rustaceanvim = r
+        end
+      '';
+
       languages = {
         enableFormat = true;
         enableTreesitter = true;
@@ -50,9 +59,17 @@ in {
             opts = ''
               ['rust-analyzer'] = {
                 cargo = {allFeatures = true},
+                diagnostics = {
+                  disabled = {
+                    "proc-macro-disabled",
+                  },
+                },
                 checkOnSave = true,
                 procMacro = {
                   enable = true,
+                  ignored = {
+                    ["async-trait"] = {"async_trait"},
+                  },
                 },
               },
             '';
