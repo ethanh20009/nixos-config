@@ -69,16 +69,19 @@ in {
   environment.variables.LIBVA_DRIVER_NAME = "nvidia";
   environment.variables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
 
-  environment.systemPackages = [
-    inputs.audselect_rs.packages.${pkgs.system}.default
-    pkgs.hydra-check
-    pkgs.protonup-qt
-    pkgs.gamescope-wsi
-    pkgs.mangohud
-    pkgs.goverlay
-    pkgs.redisinsight
-    pkgs.lmstudio
-  ] ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
+  environment.systemPackages =
+    [
+      inputs.audselect_rs.packages.${pkgs.system}.default
+      pkgs.hydra-check
+      pkgs.protonup-qt
+      pkgs.gamescope-wsi
+      pkgs.mangohud
+      pkgs.goverlay
+      pkgs.redisinsight
+      pkgs.lmstudio
+      pkgs.opencode
+    ]
+    ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 
   programs.git = {
     enable = true;
@@ -125,11 +128,13 @@ in {
       # TODO: Remove when redisinsight is updated upstream to use a secure Node version.
       redisinsight = prev.redisinsight.overrideAttrs (oldAttrs: {
         nativeBuildInputs = (lib.filter (p: !(lib.hasPrefix "nodejs" (p.name or ""))) (oldAttrs.nativeBuildInputs or [])) ++ [final.nodejs_22 final.jq];
-        postPatch = (oldAttrs.postPatch or "") + ''
-          if [ -f package.json ]; then
-            jq 'del(.devEngines)' package.json > package.json.tmp && mv package.json.tmp package.json
-          fi
-        '';
+        postPatch =
+          (oldAttrs.postPatch or "")
+          + ''
+            if [ -f package.json ]; then
+              jq 'del(.devEngines)' package.json > package.json.tmp && mv package.json.tmp package.json
+            fi
+          '';
       });
     })
   ];

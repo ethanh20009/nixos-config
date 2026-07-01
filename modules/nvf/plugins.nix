@@ -37,6 +37,7 @@ in {
         nvf-pkgs.vimPlugins.vim-mustache-handlebars
         nvf-pkgs.vimPlugins.nvim-dap-lldb
         nvf-pkgs.vimPlugins.markdown-preview-nvim
+        nvf-pkgs.vimPlugins.rustaceanvim
       ];
 
       extraPlugins = {

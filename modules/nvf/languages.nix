@@ -47,34 +47,34 @@ in {
           };
         };
         css.enable = true;
-        rust = {
-          enable = true;
-          extensions = {
-            crates-nvim.enable = true;
-          };
-          format.enable = true;
-          format.type = ["rustfmt"];
-          lsp = {
-            enable = true;
-            opts = ''
-              ['rust-analyzer'] = {
-                cargo = {allFeatures = true},
-                diagnostics = {
-                  disabled = {
-                    "proc-macro-disabled",
-                  },
-                },
-                checkOnSave = true,
-                procMacro = {
-                  enable = true,
-                  ignored = {
-                    ["async-trait"] = {"async_trait"},
-                  },
-                },
-              },
-            '';
-          };
-        };
+        # rust = {
+        #   enable = true;
+        #   extensions = {
+        #     crates-nvim.enable = true;
+        #   };
+        #   format.enable = true;
+        #   format.type = ["rustfmt"];
+        #   lsp = {
+        #     enable = true;
+        #     opts = ''
+        #       ['rust-analyzer'] = {
+        #         cargo = {allFeatures = true},
+        #         diagnostics = {
+        #           disabled = {
+        #             "proc-macro-disabled",
+        #           },
+        #         },
+        #         checkOnSave = true,
+        #         procMacro = {
+        #           enable = true,
+        #           ignored = {
+        #             ["async-trait"] = {},
+        #           },
+        #         },
+        #       },
+        #     '';
+        #   };
+        # };
       };
 
       formatter.conform-nvim = {
