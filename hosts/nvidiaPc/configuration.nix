@@ -80,6 +80,7 @@ in {
       pkgs.redisinsight
       pkgs.lmstudio
       pkgs.opencode
+      pkgs.google-cloud-sdk
     ]
     ++ lib.optionals config.myConfig.nvibrant.enable [nvibrant_git];
 

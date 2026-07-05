@@ -24,12 +24,11 @@ in {
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
       luaConfigRC.rust-local-lsp = ''
-        if vim.fn.executable("rust-analyzer") == 1 then
-          local r = vim.g.rustaceanvim or {}
-          r.server = r.server or {}
-          r.server.cmd = { "rust-analyzer" }
-          vim.g.rustaceanvim = r
-        end
+        vim.api.nvim_create_autocmd("ColorScheme", {
+          callback = function()
+            vim.api.nvim_set_hl(0, "@lsp.type.unresolvedReference.rust", {})
+          end,
+        })
       '';
 
       languages = {
@@ -47,34 +46,46 @@ in {
           };
         };
         css.enable = true;
-        # rust = {
-        #   enable = true;
-        #   extensions = {
-        #     crates-nvim.enable = true;
-        #   };
-        #   format.enable = true;
-        #   format.type = ["rustfmt"];
-        #   lsp = {
-        #     enable = true;
-        #     opts = ''
-        #       ['rust-analyzer'] = {
-        #         cargo = {allFeatures = true},
-        #         diagnostics = {
-        #           disabled = {
-        #             "proc-macro-disabled",
-        #           },
-        #         },
-        #         checkOnSave = true,
-        #         procMacro = {
-        #           enable = true,
-        #           ignored = {
-        #             ["async-trait"] = {},
-        #           },
-        #         },
-        #       },
-        #     '';
-        #   };
-        # };
+        rust = {
+          enable = true;
+          extensions = {
+            crates-nvim.enable = true;
+          };
+          format.enable = true;
+          format.type = ["rustfmt"];
+          lsp = {
+            enable = true;
+            opts = ''
+              ['rust-analyzer'] = {
+                cargo = {allFeatures = true},
+                diagnostics = {
+                  enable = true,
+                  experimental = {
+                    enable = true, -- Catches even more micro-errors on the fly
+                  }
+                },
+                procMacro = {
+                  enable = true,
+                },
+                -- 2. Force RA to run build scripts (build.rs) so generated code tokens are tracked
+                cargo = {
+                  buildScripts = {
+                    enable = true,
+                  },
+                  -- If you use specific features, make sure they are turned on
+                  -- so the semantic tokenizer doesn't skip #[cfg(feature = "...")] blocks
+                  allFeatures = true,
+                },
+                -- 3. Cache Priming (Enabled by default, but double check it isn't disabled)
+                -- This forces RA to eagerly index the workspace on launch rather than waiting
+                -- for you to open specific modules.
+                cachePriming = {
+                  enable = true,
+                }
+              },
+            '';
+          };
+        };
       };
 
       formatter.conform-nvim = {
@@ -190,6 +201,13 @@ in {
         servers =
           {
             vtsls = {
+              filetypes = [
+                "javascript"
+                "javascriptreact"
+                "typescript"
+                "typescriptreact"
+                "htmlangular"
+              ];
               root_dir =
                 lib.generators.mkLuaInline
                 /*
@@ -246,6 +264,10 @@ in {
                 "htmlangular"
                 "html"
                 "html.handlebars"
+              ];
+              root_markers = [
+                "angular.json"
+                "package.json"
               ];
             };
             pyright = {
