@@ -59,33 +59,33 @@ in {
           lsp = {
             enable = true;
             opts = ''
-              ['rust-analyzer'] = {
-                cargo = {allFeatures = true},
+              ["rust-analyzer"] = {
+                cachePriming = {
+                  enable = true
+                },
+                cargo = {
+                  allFeatures = true,
+                  allTargets = true, -- 1. Tell RA to check all targets (lib, bin, tests)
+                  buildScripts = {
+                    enable = true,
+                    invocationStrategy = "per_workspace", -- 2. Match VS Code's build script invocation
+                  }
+                },
+                check = {
+                  command = "clippy",
+                  extraArgs = { "--no-deps" }
+                },
+                checkOnSave = true,
                 diagnostics = {
                   enable = true,
                   experimental = {
-                    enable = true, -- Catches even more micro-errors on the fly
+                    enable = false
                   }
                 },
                 procMacro = {
-                  enable = true,
-                },
-                -- 2. Force RA to run build scripts (build.rs) so generated code tokens are tracked
-                cargo = {
-                  buildScripts = {
-                    enable = true,
-                  },
-                  -- If you use specific features, make sure they are turned on
-                  -- so the semantic tokenizer doesn't skip #[cfg(feature = "...")] blocks
-                  allFeatures = true,
-                },
-                -- 3. Cache Priming (Enabled by default, but double check it isn't disabled)
-                -- This forces RA to eagerly index the workspace on launch rather than waiting
-                -- for you to open specific modules.
-                cachePriming = {
-                  enable = true,
+                  enable = true
                 }
-              },
+              }
             '';
           };
         };
