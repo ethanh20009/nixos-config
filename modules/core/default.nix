@@ -54,6 +54,7 @@
 in {
   imports = [
     ../ollama-cuda.nix
+    ../geforcenow.nix
     ../options.nix
   ];
 

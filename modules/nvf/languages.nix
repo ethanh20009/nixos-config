@@ -24,6 +24,9 @@ in {
   config = lib.mkIf cfg.enable {
     programs.nvf.settings.vim = {
       luaConfigRC.rust-local-lsp = ''
+        -- Clear it immediately in case the colorscheme has already loaded
+        vim.api.nvim_set_hl(0, "@lsp.type.unresolvedReference.rust", {})
+
         vim.api.nvim_create_autocmd("ColorScheme", {
           callback = function()
             vim.api.nvim_set_hl(0, "@lsp.type.unresolvedReference.rust", {})

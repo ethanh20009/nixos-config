@@ -36,6 +36,8 @@ in {
 
   networking.hostName = "nixos"; # Define your hostname.
 
+  services.flatpak.enable = true;
+
   # Nvidia stuff
   hardware.graphics = {
     enable = true;
@@ -155,6 +157,8 @@ in {
   };
 
   programs.ollama-cuda.enable = true;
+
+  modules.services.geforcenow.enable = true;
 
   services.openssh.enable = true;
 }
