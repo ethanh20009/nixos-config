@@ -31,6 +31,8 @@ in {
     };
   };
 
+  boot.kernelParams = ["pcie_aspm=off"];
+
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

@@ -104,7 +104,10 @@ in {
     environment.systemPackages = config.myConfig.defaultPackages;
 
     programs.gpu-screen-recorder.enable = true;
-    security.polkit.enable = true;
+    security = {
+      polkit.enable = true;
+      sudo.extraConfig = "Defaults pwfeedback";
+    };
 
     # Bluetooth
     services.blueman.enable = true;
