@@ -167,7 +167,6 @@ in {
             lazygit.configure = true;
           };
         };
-        diffview-nvim.enable = true;
         oil-nvim.enable = true;
 
         motion.flash-nvim = {

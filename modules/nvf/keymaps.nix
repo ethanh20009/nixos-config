@@ -103,7 +103,7 @@ in {
       }
       {
         key = "<leader>tt";
-        mode = [ "n" "t" ];
+        mode = ["n" "t"];
         silent = true;
         action = "<cmd>FloatermToggle<CR>";
         desc = "Toggle Floaterm";
@@ -165,29 +165,15 @@ in {
         key = "<leader>gv";
         mode = "n";
         silent = true;
-        action = "<cmd>DiffviewOpen<CR>";
-        desc = "Diffview";
-      }
-      {
-        key = "<leader>gd";
-        mode = "n";
-        action = "<cmd>DiffviewClose<CR>";
-        desc = "Diffview close";
+        action = "<CMD>CodeDiff<CR>";
+        desc = "Working Changes";
       }
       {
         key = "<leader>gm";
         mode = "n";
-        action = ''
-          function()
-            local file = io.popen("git merge-base HEAD master", "r")
-            if not file then return end
-            local output = file:read("*a"):gsub("[\n\r]$", "")
-            file:close()
-            vim.cmd(":DiffviewOpen --staged " .. output)
-          end
-        '';
-        lua = true;
-        desc = "Compare with branch";
+        silent = true;
+        action = "<CMD>CodeDiff master...<CR>";
+        desc = "PR Changes";
       }
       {
         key = "<leader>ud";
@@ -265,13 +251,13 @@ in {
       }
       {
         key = "<esc>";
-        mode = [ "n" "i" "v" ];
+        mode = ["n" "i" "v"];
         action = "<cmd>noh<CR><esc>";
         desc = "Clear highlight";
       }
       {
         key = "<MiddleMouse>";
-        mode = [ "n" "i" "v" ];
+        mode = ["n" "i" "v"];
         action = "<Nop>";
         desc = "Disable middle click paste";
       }

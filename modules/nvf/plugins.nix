@@ -39,6 +39,17 @@ in {
         nvf-pkgs.vimPlugins.markdown-preview-nvim
       ];
 
+      lazy.plugins = {
+        "codediff.nvim" = {
+          package = nvf-pkgs.vimPlugins.codediff-nvim;
+          setupModule = "codediff";
+          setupOpts = {
+            diff.compute_moves = true;
+            explorer.view_mode = "tree";
+          };
+        };
+      };
+
       extraPlugins = {
         grug-far = {
           package = pkgs.vimPlugins.grug-far-nvim;

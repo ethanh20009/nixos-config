@@ -196,6 +196,11 @@ in {
     programs.fish.enable = true;
     programs.hyprland.enable = true;
 
+    # GNOME Keyring & PAM integration for automatic unlocking on TTY login
+    services.gnome.gnome-keyring.enable = true;
+    security.pam.services.login.enableGnomeKeyring = true;
+    programs.seahorse.enable = true;
+
     programs.thunar.enable = true;
     programs.thunar.plugins = with pkgs.xfce; [
       thunar-archive-plugin
