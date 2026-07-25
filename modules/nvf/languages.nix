@@ -53,40 +53,47 @@ in {
           enable = true;
           extensions = {
             crates-nvim.enable = true;
+            rustaceanvim = {
+              enable = true;
+              setupOpts = {
+                server = {
+                  default_settings = {
+                    "rust-analyzer" = {
+                      cachePriming = {
+                        enable = true;
+                      };
+                      cargo = {
+                        allFeatures = true;
+                        allTargets = true;
+                        buildScripts = {
+                          enable = true;
+                          invocationStrategy = "per_workspace";
+                        };
+                      };
+                      check = {
+                        command = "clippy";
+                        extraArgs = ["--no-deps"];
+                      };
+                      checkOnSave = true;
+                      diagnostics = {
+                        enable = true;
+                        experimental = {
+                          enable = false;
+                        };
+                      };
+                      procMacro = {
+                        enable = true;
+                      };
+                    };
+                  };
+                };
+              };
+            };
           };
           format.enable = true;
           format.type = ["rustfmt"];
           lsp = {
-            enable = true;
-            opts = ''
-              ["rust-analyzer"] = {
-                cachePriming = {
-                  enable = true
-                },
-                cargo = {
-                  allFeatures = true,
-                  allTargets = true, -- 1. Tell RA to check all targets (lib, bin, tests)
-                  buildScripts = {
-                    enable = true,
-                    invocationStrategy = "per_workspace", -- 2. Match VS Code's build script invocation
-                  }
-                },
-                check = {
-                  command = "clippy",
-                  extraArgs = { "--no-deps" }
-                },
-                checkOnSave = true,
-                diagnostics = {
-                  enable = true,
-                  experimental = {
-                    enable = false
-                  }
-                },
-                procMacro = {
-                  enable = true
-                }
-              }
-            '';
+            enable = false;
           };
         };
       };
