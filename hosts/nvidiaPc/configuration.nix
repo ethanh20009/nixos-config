@@ -52,7 +52,7 @@ in {
     powerManagement.enable = true;
     nvidiaPersistenced = true;
     open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   systemd.services.nvidia-gpu-lock = {
@@ -131,16 +131,16 @@ in {
       # This overlay forces Node 22 and removes 'devEngines' from package.json which
       # causes modern npm to fail the build.
       # TODO: Remove when redisinsight is updated upstream to use a secure Node version.
-      redisinsight = prev.redisinsight.overrideAttrs (oldAttrs: {
-        nativeBuildInputs = (lib.filter (p: !(lib.hasPrefix "nodejs" (p.name or ""))) (oldAttrs.nativeBuildInputs or [])) ++ [final.nodejs_22 final.jq];
-        postPatch =
-          (oldAttrs.postPatch or "")
-          + ''
-            if [ -f package.json ]; then
-              jq 'del(.devEngines)' package.json > package.json.tmp && mv package.json.tmp package.json
-            fi
-          '';
-      });
+      # redisinsight = prev.redisinsight.overrideAttrs (oldAttrs: {
+      #   nativeBuildInputs = (lib.filter (p: !(lib.hasPrefix "nodejs" (p.name or ""))) (oldAttrs.nativeBuildInputs or [])) ++ [final.nodejs_22 final.jq];
+      #   postPatch =
+      #     (oldAttrs.postPatch or "")
+      #     + ''
+      #       if [ -f package.json ]; then
+      #         jq 'del(.devEngines)' package.json > package.json.tmp && mv package.json.tmp package.json
+      #       fi
+      #     '';
+      # });
     })
   ];
 
@@ -158,7 +158,7 @@ in {
     tex.enable = true;
   };
 
-  programs.ollama-cuda.enable = true;
+  programs.ollama-cuda.enable = false;
 
   modules.services.geforcenow.enable = true;
 

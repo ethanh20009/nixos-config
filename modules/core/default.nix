@@ -46,6 +46,7 @@
       antigravity-cli
       kdePackages.okular
       codex
+      fx
       # Printer management tools for Hyprland
       system-config-printer # Graphical interface to manage printers
       cups # Provides commands like 'lpstat', 'lpadmin'
@@ -117,7 +118,16 @@ in {
     };
 
     # Networking
-    networking.networkmanager.enable = true;
+    networking.networkmanager = {
+      enable = true;
+      settings = {
+        connectivity = {
+          uri = "http://nmcheck.gnome.org/check_network_status.txt";
+          response = "NetworkManager is online";
+          interval = 300;
+        };
+      };
+    };
 
     # Time and Locale
     time.timeZone = "Europe/London";
