@@ -2,7 +2,7 @@
   # Assign a shorthand for the Stylix generated palette
   # When using stylix.image, the generated colors are typically in config.stylix.generated.palette
   # If you were using stylix.base16Scheme, it would be config.lib.stylix.colors
-  stylixColors = config.stylix.generated.palette;
+  stylixColors = config.lib.stylix.colors;
 in {
   programs.hyprlock = {
     enable = true;

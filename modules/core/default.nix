@@ -79,6 +79,24 @@ in {
     nixpkgs.config.allowUnfree = true;
 
     stylix.image = config.myConfig.wallpaper;
+    stylix.base16Scheme = {
+      base00 = "1a1b26"; # Darker background (Tokyo Night Dark)
+      base01 = "16161e"; # Lighter background / status bars
+      base02 = "24283b"; # Selection background
+      base03 = "565f89";
+      base04 = "737aa2";
+      base05 = "c0caf5";
+      base06 = "a9b1d6";
+      base07 = "c0caf5";
+      base08 = "f7768e"; # Red (Error)
+      base09 = "ff9e64"; # Orange
+      base0A = "e0af68"; # Yellow (Warning)
+      base0B = "9ece6a"; # Green (Success)
+      base0C = "7dcfff"; # Cyan
+      base0D = "7aa2f7"; # Blue
+      base0E = "bb9af7"; # Magenta
+      base0F = "db4b4b"; # Dark Red
+    };
     stylix.enable = true;
     stylix.polarity = "dark";
     stylix.targets.nvf.enable = false;
