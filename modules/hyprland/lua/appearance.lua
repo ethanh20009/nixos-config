@@ -22,14 +22,17 @@ hl.config({
 		cm_auto_hdr = 1,
 	},
 	cursor = {
-		no_hardware_cursors = 0,
-		no_break_fs_vrr = 0,
+		no_hardware_cursors = true,
+		no_break_fs_vrr = true,
 		use_cpu_buffer = true,
 		min_refresh_rate = 50,
 	},
 	decoration = {
 		rounding = 10,
 	},
+  quirks = {
+    skip_non_kms_dmabuf_formats = true,
+  }
 })
 
 -- Animation curves

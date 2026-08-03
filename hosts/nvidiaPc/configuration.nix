@@ -52,7 +52,7 @@ in {
     powerManagement.enable = true;
     nvidiaPersistenced = true;
     open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   systemd.services.nvidia-gpu-lock = {
