@@ -14,7 +14,20 @@
       pavucontrol
       wl-clipboard
       gh
-      discord
+      ((discord.override {
+        commandLineArgs = "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland";
+      }).overrideAttrs (old: {
+        desktopItem = pkgs.makeDesktopItem {
+          name = "discord";
+          exec = "Discord --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland %U";
+          icon = "discord";
+          desktopName = "Discord";
+          genericName = old.meta.description;
+          categories = ["Network" "InstantMessaging"];
+          mimeTypes = ["x-scheme-handler/discord"];
+          startupWMClass = "discord";
+        };
+      }))
       brightnessctl
       postman
       brave

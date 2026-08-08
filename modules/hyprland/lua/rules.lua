@@ -75,9 +75,10 @@ hl.window_rule({ match = { float = false, workspace = "s[1]" }, border_size = 2 
 hl.window_rule({ match = { float = false, workspace = "s[1]" }, rounding = 10 })
 
 hl.window_rule({ match = { class = "steam_app.*" }, content = "game" })
+hl.window_rule({ match = { class = "bg3" }, content = "game" })
 hl.window_rule({ match = { title = "Terraria.*" }, content = "game" })
 hl.window_rule({ match = { class = "steam_app.*" }, immediate = true })
 hl.window_rule({ match = { class = "steam_app.*" }, idle_inhibit = "focus" })
 hl.window_rule({ match = { class = "steam_app_2001120" }, immediate = false })
 hl.window_rule({ match = { class = "steam_app_920210" }, immediate = false })
-hl.window_rule({ name = "BG3", match = { class = "steam_app_1086940" }, immediate = false })
+hl.window_rule({ name = "BG3", match = { class = "steam_app_1086940" }, immediate = true })
