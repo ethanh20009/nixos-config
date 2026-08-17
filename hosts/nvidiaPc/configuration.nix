@@ -52,7 +52,7 @@ in {
     powerManagement.enable = true;
     nvidiaPersistenced = true;
     open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   systemd.services.nvidia-gpu-lock = {
@@ -64,8 +64,10 @@ in {
     serviceConfig = {
       Type = "oneshot";
       User = "root";
+      ExecStartPre = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -lmc 5001,11201";
       ExecStart = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -lgc 2105,3105";
       ExecStop = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -rgc";
+      ExecStopPost = "${config.hardware.nvidia.package.bin}/bin/nvidia-smi -rmc";
       RemainAfterExit = true;
     };
   };
@@ -127,20 +129,11 @@ in {
     (final: prev: {
       btop = prev.btop.override {cudaSupport = true;};
 
-      # Fix redisinsight pulling in insecure/EOL Node 20.
-      # This overlay forces Node 22 and removes 'devEngines' from package.json which
-      # causes modern npm to fail the build.
-      # TODO: Remove when redisinsight is updated upstream to use a secure Node version.
-      # redisinsight = prev.redisinsight.overrideAttrs (oldAttrs: {
-      #   nativeBuildInputs = (lib.filter (p: !(lib.hasPrefix "nodejs" (p.name or ""))) (oldAttrs.nativeBuildInputs or [])) ++ [final.nodejs_22 final.jq];
-      #   postPatch =
-      #     (oldAttrs.postPatch or "")
-      #     + ''
-      #       if [ -f package.json ]; then
-      #         jq 'del(.devEngines)' package.json > package.json.tmp && mv package.json.tmp package.json
-      #       fi
-      #     '';
-      # });
+      # Pin redisinsight from working nixpkgs commit 549bd84d6279f9852cae6225e372cc67fb91a4c1 (v2.70.0)
+      redisinsight = (import inputs.nixpkgs-redisinsight {
+        system = final.system;
+        config.allowUnfree = true;
+      }).redisinsight;
     })
   ];
 

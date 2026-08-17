@@ -45,7 +45,7 @@ in {
         markdown = {
           enable = true;
           format = {
-            type = ["prettierd"];
+            type = ["prettier"];
           };
         };
         css.enable = true;
@@ -102,16 +102,16 @@ in {
         enable = true;
         setupOpts.formatters_by_ft = {
           python = ["black"];
-          htmlangular = ["prettierd"];
-          html = ["prettierd"];
-          typescript = ["prettierd"];
-          javascript = ["prettierd"];
-          json = ["prettierd"];
-          jsx = ["prettierd"];
-          tsx = ["prettierd"];
-          markdown = ["prettierd"];
-          md = ["prettierd"];
-          typescriptreact = ["prettierd"];
+          htmlangular = ["prettier"];
+          html = ["prettier"];
+          typescript = ["prettier"];
+          javascript = ["prettier"];
+          json = ["prettier"];
+          jsx = ["prettier"];
+          tsx = ["prettier"];
+          markdown = ["prettier"];
+          md = ["prettier"];
+          typescriptreact = ["prettier"];
         };
       };
 

@@ -29,7 +29,6 @@ in {
       ];
 
       startPlugins = [
-        nvf-pkgs.vimPlugins.alpha-nvim
         nvf-pkgs.vimPlugins.plenary-nvim
         nvf-pkgs.vimPlugins.vim-dadbod
         nvf-pkgs.vimPlugins.vim-dadbod-ui

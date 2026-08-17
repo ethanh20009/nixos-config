@@ -8,6 +8,11 @@
   cfg = myConfig.nvf;
 in {
   config = lib.mkIf cfg.enable {
+    programs.nvf.settings.vim.lazy.plugins.alpha-nvim = {
+      event = lib.mkForce null;
+      cmd = lib.mkForce null;
+      lazy = lib.mkForce false;
+    };
     programs.nvf.settings.vim.pluginRC.alpha =
       /*
       lua

@@ -1,38 +1,41 @@
 local nix = require("nix")
 
 hl.config({
-	dwindle = {
-		preserve_split = true,
-	},
-	general = {
-		allow_tearing = true,
-		col = {
-			inactive_border = "rgba(444444ff)",
-		},
-	},
-	misc = {
-		focus_on_activate = true,
-		enable_swallow = true,
-		swallow_regex = nix.terminal,
-		swallow_exception_regex = "npm test.*",
-		middle_click_paste = false,
-	},
-	render = {
-		direct_scanout = 0,
-		cm_auto_hdr = 1,
-    commit_timing_enabled = true
-	},
-	cursor = {
-		no_hardware_cursors = true,
-		no_break_fs_vrr = true,
-		min_refresh_rate = 48,
-	},
-	decoration = {
-		rounding = 10,
-	},
+  dwindle = {
+    preserve_split = true,
+  },
+  general = {
+    allow_tearing = true,
+    col = {
+      inactive_border = "rgba(444444ff)",
+    },
+  },
+  misc = {
+    focus_on_activate = true,
+    enable_swallow = false,
+    swallow_regex = nix.terminal,
+    swallow_exception_regex = "npm test.*",
+    middle_click_paste = false,
+  },
+  render = {
+    direct_scanout = 0,
+    cm_auto_hdr = 1,
+    -- commit_timing_enabled = true,
+  },
+  cursor = {
+    no_hardware_cursors = true,
+    no_break_fs_vrr = true,
+    min_refresh_rate = 48,
+  },
+  decoration = {
+    rounding = 10,
+    blur = {
+      passes = 2,
+    },
+  },
   quirks = {
     skip_non_kms_dmabuf_formats = true,
-  }
+  },
 })
 
 -- Animation curves
@@ -43,16 +46,16 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 2, bezier = "default
 hl.animation({ leaf = "windows", enabled = true, speed = 2, bezier = "default", style = "popin" })
 hl.animation({ leaf = "fade", enabled = true, speed = 2, bezier = "easeInOut" })
 hl.animation({
-	leaf = "specialWorkspaceIn",
-	enabled = true,
-	speed = 2,
-	bezier = "default",
-	style = "slidefadevert -100%",
+  leaf = "specialWorkspaceIn",
+  enabled = true,
+  speed = 2,
+  bezier = "default",
+  style = "slidefadevert -100%",
 })
 hl.animation({
-	leaf = "specialWorkspaceOut",
-	enabled = true,
-	speed = 2,
-	bezier = "default",
-	style = "slidefadevert -100%",
+  leaf = "specialWorkspaceOut",
+  enabled = true,
+  speed = 2,
+  bezier = "default",
+  style = "slidefadevert -100%",
 })
