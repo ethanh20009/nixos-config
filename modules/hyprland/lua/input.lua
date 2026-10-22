@@ -2,7 +2,6 @@ local nix = require("nix")
 
 hl.config({
   input = {
-    kb_options = "caps:swapescape",
     kb_layout = "gb",
     accel_profile = "flat",
   }

@@ -14,6 +14,18 @@
     mkdir -p $out/lib/firmware/edid
     cp ${./new-edid.bin} $out/lib/firmware/edid/msi-fourk.bin
   '';
+
+  # Patchelf 0.15.2 override to work around patchelf 0.19.2 bug causing nvidia-smi segfaults
+  # TODO: Remove this override once NixOS/nixpkgs#576397 reaches nixos-unstable
+  # Issue tracker: https://github.com/NixOS/nixpkgs/issues/576412
+  patchelf_0_15 = pkgs.patchelf.overrideAttrs (old: rec {
+    version = "0.15.2";
+    src = pkgs.fetchurl {
+      url = "https://github.com/NixOS/patchelf/releases/download/${version}/patchelf-${version}.tar.bz2";
+      hash = "sha256-F3RfVkFZyOIo/EEtplogSLhGxLa0Igt3y/IkFuAvLXw=";
+    };
+    doCheck = false;
+  });
 in {
   imports = [
     ./hardware-configuration.nix
@@ -52,7 +64,9 @@ in {
     powerManagement.enable = true;
     nvidiaPersistenced = true;
     open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.latest.overrideAttrs (old: {
+      nativeBuildInputs = [ patchelf_0_15 ] ++ old.nativeBuildInputs;
+    });
   };
 
   systemd.services.nvidia-gpu-lock = {

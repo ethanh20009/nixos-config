@@ -20,6 +20,7 @@ hl.config({
   render = {
     direct_scanout = 0,
     cm_auto_hdr = 1,
+    send_content_type = true,
     -- commit_timing_enabled = true,
   },
   cursor = {
@@ -34,6 +35,7 @@ hl.config({
     },
   },
   quirks = {
+    -- prefer_hdr = 1,
     skip_non_kms_dmabuf_formats = true,
   },
 })

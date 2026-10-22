@@ -123,7 +123,7 @@
     rainfrog
     devenv
     hyprshot
-    gcr
+    gcr_4
     seahorse
   ];
 

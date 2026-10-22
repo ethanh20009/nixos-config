@@ -15,9 +15,9 @@ local mon1_opts = {
 if prim.tenbit then
   mon1_opts.bitdepth = 10
 end
-if prim.hdr then
-  mon1_opts.cm = "hdr"
-end
+-- if prim.hdr then
+--   mon1_opts.cm = "hdr"
+-- end
 hl.monitor(mon1_opts)
 
 -- Configure Mon 2
@@ -67,6 +67,13 @@ for i = 0, 4 do
 end
 
 -- Window Rules
+hl.window_rule({
+  match = { class = "kitty" },
+  tile = true,
+  maximize = false,
+  suppress_event = "maximize",
+})
+
 hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, border_size = 0 })
 hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, rounding = 0 })
 hl.window_rule({ match = { float = false, workspace = "f[1]" }, border_size = 0 })

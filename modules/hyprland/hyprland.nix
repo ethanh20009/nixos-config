@@ -33,27 +33,22 @@
           monitors = {
             primary = {
               resolution = "${
-                if myConfig.hyprland.primaryMonitor."4k"
-                then "3840x2160"
-                else "2560x1440"
-              }",
+          if myConfig.hyprland.primaryMonitor."4k"
+          then "3840x2160"
+          else "2560x1440"
+        }",
               rr = ${toString myConfig.hyprland.primaryMonitor.rr},
               scale = ${
-                if myConfig.hyprland.primaryMonitor."4k"
-                then "1.5"
-                else "1"
-              },
+          if myConfig.hyprland.primaryMonitor."4k"
+          then "1.5"
+          else "1"
+        },
               vrr = ${toString myConfig.hyprland.primaryMonitor.vrr},
               tenbit = ${
-                if myConfig.hyprland.primaryMonitor.tenbit
-                then "true"
-                else "false"
-              },
-              hdr = ${
-                if myConfig.hyprland.primaryMonitor.hdr
-                then "true"
-                else "false"
-              },
+          if myConfig.hyprland.primaryMonitor.tenbit
+          then "true"
+          else "false"
+        },
             }
           },
           touchpadDevices = {
@@ -61,8 +56,12 @@
           },
           autostartApps = {
             ${lib.concatMapStringsSep ",\n            " (app: let
-              workspaceString = if app.special then "special" else toString app.workspace;
-            in ''"[[[workspace ${workspaceString} silent] ${app.name}]]"'') myConfig.hyprland.autostartApps}
+          workspaceString =
+            if app.special
+            then "special"
+            else toString app.workspace;
+        in ''"[[[workspace ${workspaceString} silent] ${app.name}]]"'')
+        myConfig.hyprland.autostartApps}
           },
           browser = [[${myConfig.browser}]],
           terminal = [[${myConfig.terminal}]],

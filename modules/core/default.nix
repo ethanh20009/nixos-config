@@ -15,19 +15,19 @@
       wl-clipboard
       gh
       ((discord.override {
-        commandLineArgs = "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland";
-      }).overrideAttrs (old: {
-        desktopItem = pkgs.makeDesktopItem {
-          name = "discord";
-          exec = "Discord --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland %U";
-          icon = "discord";
-          desktopName = "Discord";
-          genericName = old.meta.description;
-          categories = ["Network" "InstantMessaging"];
-          mimeTypes = ["x-scheme-handler/discord"];
-          startupWMClass = "discord";
-        };
-      }))
+          commandLineArgs = "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland";
+        }).overrideAttrs (old: {
+          desktopItem = pkgs.makeDesktopItem {
+            name = "discord";
+            exec = "Discord --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer --ozone-platform=wayland %U";
+            icon = "discord";
+            desktopName = "Discord";
+            genericName = old.meta.description;
+            categories = ["Network" "InstantMessaging"];
+            mimeTypes = ["x-scheme-handler/discord"];
+            startupWMClass = "discord";
+          };
+        }))
       brightnessctl
       postman
       brave
@@ -63,6 +63,7 @@
       # Printer management tools for Hyprland
       system-config-printer # Graphical interface to manage printers
       cups # Provides commands like 'lpstat', 'lpadmin'
+      networkmanagerapplet
     ]
     ++ lib.optional config.myConfig.extras.deno.enable pkgs.deno;
 in {
@@ -181,6 +182,30 @@ in {
       variant = "";
     };
     console.keyMap = "uk";
+
+    # Keyd hardware key remapping
+    services.keyd = {
+      enable = true;
+      keyboards = {
+        default = {
+          ids = ["*"];
+          settings = {
+            main = {
+              capslock = "escape";
+              esc = "capslock";
+            };
+          };
+        };
+      };
+    };
+
+    # Ensure palm rejection / disable-while-typing works with keyd virtual keyboard
+    environment.etc."libinput/local-overrides.quirks".text = ''
+      [Serial Keyboards]
+      MatchUdevType=keyboard
+      MatchName=keyd virtual keyboard
+      AttrKeyboardIntegration=internal
+    '';
 
     # User
     users.users.ethan = {
