@@ -18,13 +18,13 @@ hl.config({
     middle_click_paste = false,
   },
   render = {
-    direct_scanout = 0,
+    direct_scanout = 1,
     cm_auto_hdr = 1,
     send_content_type = true,
     -- commit_timing_enabled = true,
   },
   cursor = {
-    no_hardware_cursors = true,
+    no_hardware_cursors = false,
     no_break_fs_vrr = true,
     min_refresh_rate = 48,
   },

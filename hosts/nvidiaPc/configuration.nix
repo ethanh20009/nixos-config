@@ -95,10 +95,10 @@ in {
       pkgs.hydra-check
       pkgs.protonup-qt
       pkgs.gamescope-wsi
+      pkgs.file-roller
       pkgs.mangohud
       pkgs.goverlay
       pkgs.redisinsight
-      pkgs.lmstudio
       pkgs.opencode
       pkgs.google-cloud-sdk
     ]

@@ -161,6 +161,9 @@ in {
       };
     };
 
+    # Tailscale
+    services.tailscale.enable = true;
+
     # Time and Locale
     time.timeZone = "Europe/London";
     i18n.defaultLocale = "en_GB.UTF-8";

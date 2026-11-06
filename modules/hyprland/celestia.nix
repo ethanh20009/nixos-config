@@ -42,16 +42,14 @@ in {
       background.enabled = false;
       general = {
         idle = {
-          lockBeforeSleep = true;
-          inhibitWhenAudio = true;
+          lockBeforeSleep = false;
+          inhibitWhenAudio = false;
+          # Only define a display-off action; no lock or suspend timeout is configured.
           timeouts = [
             {
               timeout = 300;
-              idleAction = "lock";
-            }
-            {
-              timeout = 360;
-              idleAction = ["systemctl" "suspend"];
+              idleAction = "dpms off";
+              returnAction = "dpms on";
             }
           ];
         };
